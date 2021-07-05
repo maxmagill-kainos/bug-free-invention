@@ -1,0 +1,24 @@
+{
+  "name": "bug-free-invention",
+  "version": "1.0.0",
+  "description": "What could possibly go wrong?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxieMerge/bug-free-invention.git"
+  },
+  "keywords": [],
+  "author": "Max Magill <max.magill@kainos.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxieMerge/bug-free-invention/issues"
+  },
+  "homepage": "https://github.com/MaxieMerge/bug-free-invention#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
