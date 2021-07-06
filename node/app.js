@@ -1,22 +1,29 @@
 const { response } = require('express');
 const express = require('express') 
+const fetch = require('node-fetch')
 const app = express() 
- 
-app.get('/', function (req, res) { 
-   res.send('<h1>First message from Express</h1>') 
-   console.log('Request processed'); 
-}); 
 
-app.get('/job-roles', function(req,res){
-   res.send('<h1> job role page</h1>')
-   console.log('changed page');
-});
-/*
-app.get('/job-roles', async(req, res) => {
-   res.render('list-job-roles', {jobRoles: await jobData.getJobRoles()});
-})
-*/
+
+
+
+app.get('/', async function (req, res) { 
+   console.log('Request processed'); 
+   const response = await fetch('http://localhost:8080/api/demo/hello-world',{method:'GET',headers:{}})
+   const data = await response.text();
+   console.log(response)
+   res.send('<p>'+data+'</p>');
+}); 
  
+
+
 app.listen(7999, function() { 
    console.log('Express started') 
 });
+
+app.get('/fromc', async function (req, res) { 
+   console.log('Request processed'); 
+   const response = await fetch('http://localhost:8080/api/demo/hello-fromc',{method:'GET',headers:{}})
+   const data = await response.text();
+   console.log(response)
+   res.send('<p>'+data+'</p>');
+}); 
