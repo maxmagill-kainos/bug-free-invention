@@ -62,7 +62,7 @@ import java.util.List;
                 while(results.next()){
                     return results.getString("Job_Spec");
                 }
-                return "Incorrect Parameter";
+                return "https://www.google.com";
             }
             catch (Exception e){
                 e.printStackTrace();
