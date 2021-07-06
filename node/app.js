@@ -51,12 +51,13 @@ app.get('/JobsTable', async function (req, res) {
    console.log('Request processed'); 
    const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
    const data = await response.json();
-   console.log(response)
-   res.send(data);
+   console.log(data)
+   res.render('SpecTable',{data:await data});
 }); 
 
 app.get('/JobsSpec', async function (req, res) { 
    console.log('Request processed'); 
+   console.log('http://localhost:8080/api/jobs/jobSpec?JobID='+req.query.jobClicked);
    const response = await fetch('http://localhost:8080/api/jobs/jobSpec?JobID='+req.query.jobClicked,{method:'GET',headers:{}})
    const data = await response.text();
    res.redirect(data);
