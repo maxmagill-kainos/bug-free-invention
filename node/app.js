@@ -45,7 +45,9 @@ app.get('/apitest', async function (req, res) {
    const data = await response.text();
    console.log(response)
    res.send('<p>'+data+'</p>');
-}); 
+});
+
+
 
 
 
