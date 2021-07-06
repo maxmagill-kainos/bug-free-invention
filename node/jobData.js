@@ -1,3 +1,4 @@
+/*
 const mysql = require('mysql');
 const dbconfig = require('./dbconfig.json');
 const util = require ('util')
@@ -26,4 +27,4 @@ exports.getJobRoles = async () => {
     )
 }
 
-
+*/

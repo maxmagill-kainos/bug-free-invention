@@ -15,6 +15,13 @@ public class apiRoutesDemo {
         public ResponseEntity<String> get(){
             return ResponseEntity.ok("Hello World");
         }
+        
+/*
+        @GetMapping("/job-roles")
+        public ArrayList<Job> getJobRoles(){
+            ArrayList<Job
+        }
+*/
 
         @GetMapping("/JSONDemo")
         public ArrayList<Employee> demoJson(){
