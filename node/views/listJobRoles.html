@@ -1,0 +1,16 @@
+{% block content %}
+
+<h2>List of Job Roles</h2>
+{% if JobRoles and JobRoles.length > 0 %}
+{% set JobRoleRows = [] %}
+{% for JobRole in JobRoles %}
+{% set JobRolesRows = (JobRolesRows.push([{text: JobRole.Job_Title}]), JobRolesRows) %}
+{% endfor %}
+{{govukTable({
+    head: [ { text: "Role" }],
+    rows: JobRolesRows })
+}}
+{% else %}
+There are no employees.
+{% endif %}
+{% endblock %}

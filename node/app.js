@@ -7,9 +7,15 @@ app.get('/', function (req, res) {
    console.log('Request processed'); 
 }); 
 
+app.get('/job-roles', function(req,res){
+   res.send('<h1> job role page</h1>')
+   console.log('changed page');
+});
+/*
 app.get('/job-roles', async(req, res) => {
    res.render('list-job-roles', {jobRoles: await jobData.getJobRoles()});
 })
+*/
  
 app.listen(7999, function() { 
    console.log('Express started') 
