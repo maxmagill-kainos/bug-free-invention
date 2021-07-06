@@ -1,5 +1,9 @@
 package com.bug.free.invention.api.controllers;
 
+import com.bug.free.invention.api.classes.Job;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.cj.xdevapi.JsonArray;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +26,25 @@ import java.util.List;
             returnList.add(new Employee(1,"name","difjidsfj"));
             returnList.add(new Employee(2,"ijisdfjdsif","dsuifjhduisfhui"));
             return returnList;
-        }
+        };
+
         @GetMapping("/api/test")
-        public String getJobRoles(){
+        public List<Job> getJobRoles(){
             try{
 
                 Statement statement = DBConfig.getConnection().createStatement();
                 String dbQuery = "SELECT 'Job_ID','Capability_ID','Band_ID','Job_Title' FROM `Job` GROUP BY 'Capability_ID','Band_ID','Job_Title'";
                 ResultSet results = statement.executeQuery(dbQuery);
-                return results.toString();
+                List<Job> Jobs = new ArrayList<Job>();
+                
+                while(results.next()){
+                    Jobs.add(new Job(results.getInt("Job_ID"),results.getString("Job_Title"),
+                            results.getInt("Capability_ID"),results.getInt("Band_ID")));
+
+                }
+                Jobs.add(new Job(1,"Test Job",22,23));
+                Jobs.add(new Job(2,"Test Job2",23,24));
+                return Jobs;
             }
             catch (Exception e){
                 e.printStackTrace();
