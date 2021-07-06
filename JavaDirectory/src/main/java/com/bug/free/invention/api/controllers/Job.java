@@ -1,20 +1,20 @@
 package com.bug.free.invention.api.controllers;
 
 public class Job {
-    private byte id;
+    private int id;
     private String name, spec;
 
-    public Job(byte newID, String newName, String newSpec) {
+    public Job(int newID, String newName, String newSpec) {
         this.id = newID;
         this.name = newName;
         this.spec = newSpec;
     }
 
-    public byte getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(byte id) {
+    public void setId(int id) {
         this.id = id;
     }
 
