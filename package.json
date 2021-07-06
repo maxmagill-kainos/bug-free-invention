@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/MaxieMerge/bug-free-invention#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2"
   }
 }

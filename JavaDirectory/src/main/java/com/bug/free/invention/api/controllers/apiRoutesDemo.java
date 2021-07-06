@@ -24,5 +24,8 @@ public class apiRoutesDemo {
             return returnList;
         }
 
-
+    @GetMapping("/hello-fromc")
+    public ResponseEntity<String> getFromC(){
+        return ResponseEntity.ok("Hello from c");
+    }
 }
