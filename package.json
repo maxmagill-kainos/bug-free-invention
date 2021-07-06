@@ -2,10 +2,11 @@
   "name": "bug-free-invention",
   "version": "1.0.0",
   "description": "What could possibly go wrong?",
-  "main": "index.js",
+  "main": "node/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "app.js"
+    "start": "nodemon app.js",
+    "dev": "nodemon -e js,html,nj --watch app --ignore app/static/css --ignore app/static/js ./dev.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,10 @@
   "homepage": "https://github.com/MaxieMerge/bug-free-invention#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
-    "request": "^2.88.2"
+    "nodemon": "^2.0.9",
+    "nunjucks": "^3.2.3"
   }
 }
