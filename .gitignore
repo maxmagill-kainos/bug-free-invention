@@ -253,3 +253,4 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node,maven,java,intellij+all
 JavaDirectory/.DS_Store
+.DS_Store
