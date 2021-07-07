@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface Mapper {
 
-    @Select("SELECT * FROM Capability")
+    @Select("SELECT * FROM Capability;")
     List<Capabilities> getCapabilities();
+
+    @Select("SHOW TABLES;")
+    List<String> getTables();
 
 }

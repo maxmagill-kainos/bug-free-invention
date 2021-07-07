@@ -20,7 +20,8 @@ public class ApiApplication {
 		try {
 			Mapper mapper = session.getMapper(Mapper.class);
 			List<Capabilities> caps = mapper.getCapabilities();
-			System.out.println(caps);
+			List<String> tables = mapper.getTables();
+			System.out.println(tables);
 		}
 		finally {
 			session.close();

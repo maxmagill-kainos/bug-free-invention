@@ -10,4 +10,6 @@ public interface Mapper {
     @Select("SELECT * FROM Capability")
     List<Capabilities> getCapabilities();
 
+
+
 }

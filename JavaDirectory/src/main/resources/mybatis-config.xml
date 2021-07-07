@@ -16,6 +16,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper class="Mapper"/>
+        <mapper class="com.bug.free.invention.api.db.Mapper"/>
     </mappers>
 </configuration>
