@@ -254,3 +254,4 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,maven,java,intellij+all
 
 .DS_Store
+JavaDirectory/src/main/java/com/bug/free/invention/api/controllers/DBConfig.java
