@@ -1,17 +1,17 @@
-CREATE DATABASE teamC_Josh;
+CREATE DATABASE teamC_Max;
 
-USE teamC_Josh;
-
-CREATE TABLE Job_Family(
-    Job_Family_ID TINYINT PRIMARY KEY AUTO_INCREMENT,
-    Job_Family_Title varchar (40) NOT NULL
-);
+USE teamC_Max;
 
 CREATE TABLE Capability(
     Capability_ID TINYINT PRIMARY KEY AUTO_INCREMENT, 
-    Capability_Name varchar (40) NOT NULL, 
-    Job_Family_ID TINYINT,
-    FOREIGN KEY (`Job_Family_ID`) REFERENCES `Job_Family`(`Job_Family_ID`)
+    Capability_Name varchar (40) NOT NULL
+);
+
+CREATE TABLE Job_Family(
+    Job_Family_ID TINYINT PRIMARY KEY AUTO_INCREMENT,
+    Job_Family_Title varchar (40) NOT NULL,
+    Capability_ID TINYINT,
+    FOREIGN KEY (`Capability_ID`) REFERENCES `Capability`(`Capability_ID`)
 );
 
 CREATE TABLE Band(
@@ -28,8 +28,10 @@ CREATE TABLE Job(
     Job_Title varchar (50) NOT NULL,
     Job_Spec text NOT NULL,
     Band_ID TINYINT,
+    Job_Family_ID TINYINT,
     Capability_ID TINYINT,
     FOREIGN KEY (`Band_ID`) REFERENCES `Band`(`Band_ID`),
+    FOREIGN KEY (`Job_Family_ID`) REFERENCES `Job_Family`(`Job_Family_ID`),
     FOREIGN KEY (`Capability_ID`) REFERENCES `Capability`(`Capability_ID`)
 );
 
