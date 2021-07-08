@@ -255,3 +255,6 @@ dist
 
 .DS_Store
 JavaDirectory/src/main/java/com/bug/free/invention/api/controllers/DBConfig.java
+
+
+DBConfig.java
