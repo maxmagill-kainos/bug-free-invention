@@ -34,7 +34,8 @@ import java.util.List;
             try{
 
                 Statement statement = DBConfig.getConnection().createStatement();
-                String dbQuery = "SELECT 'Job_ID','Capability_ID','Band_ID','Job_Title' FROM `Job` GROUP BY 'Capability_ID','Band_ID','Job_Title'";
+                //'Job_ID','Capability_ID','Band_ID','Job_Title'
+                String dbQuery = "SELECT * FROM `Job` ";//"ROUP BY 'Capability_ID','Band_ID','Job_Title'";
                 ResultSet results = statement.executeQuery(dbQuery);
                 List<Job> Jobs = new ArrayList<Job>();
                 
@@ -70,5 +71,35 @@ import java.util.List;
             }
           return  "";
         };
+
+        @GetMapping("/PopulateJobSpecTable")
+        public String JobSpecPopulator(){
+
+            try {
+                Statement statement = DBConfig.getConnection().createStatement();
+                //'Job_ID','Capability_ID','Band_ID','Job_Title'
+                String QueryPopulator = "SELECT Job_ID,Job_Title,Band_Name,Capability_Name FROM Job INNER JOIN (Capability,Band) ON (Job.Band_ID = Band.Band_ID AND Job.Capability_ID = Capability.Capability_ID);";;//"ROUP BY 'Capability_ID','Band_ID','Job_Title'";
+                ResultSet results = statement.executeQuery(QueryPopulator);
+                String BaseString ="";
+                while(results.next()){
+                    String Capability = results.getString("Capability_Name");
+                    String Band = results.getString("Band_Name");
+                    String Title = results.getString("Job_Title");
+                    BaseString = "https://kainossoftwareltd.sharepoint.com/:b:/r/people/Job%20Specifications/" + Capability + "/Job profile - " + Title + " (" + Band + ").pdf";
+                    break;
+                }
+                return BaseString;
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                return "https://kainossoftwareltd.sharepoint.com/:b:/r/people/Job%20Specifications/";
+            }
+        };
+
+
+        @GetMapping("/WorkdayScraper")
+        public void WorkDayScraper(){
+            String test = "SELECT Job_Title,Capability_ID,Band_ID FROM Job JOIN ";
+        }
     }
 
