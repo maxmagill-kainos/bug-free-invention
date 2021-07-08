@@ -1,3 +1,9 @@
+<script>
+function PopupWithSummary(QuickSummary){
+    alert(QuickSummary);
+}
+</script>
+
 {%block table%}
 <table>
     <thead>
@@ -5,6 +11,7 @@
         <th>Job Title</th>
         <th>Capability</th>
         <th>Job Band</th>
+        <th> Spec Summary</th>
         
         </tr>
     </thead>
@@ -13,6 +20,7 @@
         <td>{{job.job_Title}}</td>
         <td>{{job.band_Name}}</td>
         <td>{{job.capability_Name}}</td>
+        <td>{{job.spec_Summary}}</td>
         <td> <a href="/JobsSpec?jobClicked={{job.job_ID}}"> View Job Spec</a> </td>
         </tr>
         {% endfor %}

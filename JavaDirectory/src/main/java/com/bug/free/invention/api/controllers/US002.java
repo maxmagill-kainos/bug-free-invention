@@ -36,13 +36,12 @@ import java.util.List;
 
                 Statement statement = DBConfig.getConnection().createStatement();
                 //'Job_ID','Capability_ID','Band_ID','Job_Title'
-                String dbQuery = "SELECT * FROM `Job` INNER JOIN(Capability,Band) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) ";//"ROUP BY 'Capability_ID','Band_ID','Job_Title'";
+                String dbQuery = "SELECT * FROM `Job` INNER JOIN(Capability,Band,JobSummary) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = Job.Job_ID) ";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
                 ResultSet results = statement.executeQuery(dbQuery);
 
                 
                 while(results.next()){
-                    Jobs.add(new Job(results.getInt("Job_ID"),results.getString("Job_Title"),results.getString("Capability_Name"),results.getString("Band_Name")));
-
+                    Jobs.add(new Job(results.getInt("Job_ID"),results.getString("Job_Title"),results.getString("Capability_Name"),results.getString("Band_Name"),results.getString("Summary_Text")));
                 }
                 return Jobs;
 
@@ -76,9 +75,5 @@ import java.util.List;
 
 
 
-        @GetMapping("/WorkdayScraper")
-        public void WorkDayScraper(){
-            String test = "SELECT Job_Title,Capability_ID,Band_ID FROM Job JOIN ";
-        }
-    }
+}
 

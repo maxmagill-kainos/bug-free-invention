@@ -8,6 +8,7 @@ public class Job {
     int Capability_ID;
     String Band_Name;
     String Capability_Name;
+    String Spec_Summary;
 
     public Job(int job_ID, String job_Title, String job_Spec, int band_ID, int capability_ID) {
         Job_ID = job_ID;
@@ -23,11 +24,12 @@ public class Job {
         Band_ID = band_ID;
         Capability_ID = capability_ID;
     }
-    public Job(int job_ID, String job_Title, String band_Name, String capability_Name) {
+    public Job(int job_ID, String job_Title, String band_Name, String capability_Name,String spec_Summary) {
         Job_ID = job_ID;
         Job_Title = job_Title;
         Band_Name = band_Name;
         Capability_Name = capability_Name;
+        Spec_Summary = spec_Summary;
     }
 
     public String getBand_Name() {
@@ -84,5 +86,13 @@ public class Job {
 
     public void setCapability_ID(int capability_ID) {
         Capability_ID = capability_ID;
+    }
+
+    public String getSpec_Summary() {
+        return Spec_Summary;
+    }
+
+    public void setSpec_Summary(String spec_Summary) {
+        Spec_Summary = spec_Summary;
     }
 }
