@@ -45,7 +45,7 @@ app.get('/apitest', async function (req, res) {
    const data = await response.text();
    console.log(response)
    res.send('<p>'+data+'</p>');
-}); 
+});
  
 app.get('/job-roles', async function(req, res){
    console.log("Request processed");
@@ -69,8 +69,6 @@ app.get('/JobsSpec', async function (req, res) {
    const data = await response.text();
    res.redirect(data);
 }); 
-
-
 
 app.get('/fromc', async function (req, res) { 
    console.log('Request processed'); 
