@@ -1,18 +1,18 @@
 {%block table%}
-<p>{{ data }}</p>
 <table>
     <thead>
         <tr>
         <th>Job Title</th>
-        <th>Job Band</th>
         <th>Capability</th>
+        <th>Job Band</th>
+        
         </tr>
     </thead>
     {% for job in data %}
         <tr>
         <td>{{job.job_Title}}</td>
-        <td>{{job.band_ID}}</td>
-        <td>{{job.capability_ID}}</td>
+        <td>{{job.band_Name}}</td>
+        <td>{{job.capability_Name}}</td>
         <td> <a href="/JobsSpec?jobClicked={{job.job_ID}}"> View Job Spec</a> </td>
         </tr>
         {% endfor %}

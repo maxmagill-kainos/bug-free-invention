@@ -31,26 +31,27 @@ import java.util.List;
 
         @GetMapping("/jobRoles")
         public List<Job> getJobRoles(){
+            List<Job> Jobs = new ArrayList<Job>();
             try{
 
                 Statement statement = DBConfig.getConnection().createStatement();
                 //'Job_ID','Capability_ID','Band_ID','Job_Title'
-                String dbQuery = "SELECT * FROM `Job` ";//"ROUP BY 'Capability_ID','Band_ID','Job_Title'";
+                String dbQuery = "SELECT * FROM `Job` INNER JOIN(Capability,Band) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) ";//"ROUP BY 'Capability_ID','Band_ID','Job_Title'";
                 ResultSet results = statement.executeQuery(dbQuery);
-                List<Job> Jobs = new ArrayList<Job>();
+
                 
                 while(results.next()){
-                    Jobs.add(new Job(results.getInt("Job_ID"),results.getString("Job_Title"),
-                            results.getInt("Capability_ID"),results.getInt("Band_ID")));
+                    Jobs.add(new Job(results.getInt("Job_ID"),results.getString("Job_Title"),results.getString("Capability_Name"),results.getString("Band_Name")));
 
                 }
-                Jobs.add(new Job(1,"Test Job",22,23));
-                Jobs.add(new Job(2,"Test Job2",23,24));
                 return Jobs;
+
             }
             catch (Exception e){
                 e.printStackTrace();
-                return null;
+                Jobs.add(new Job(1,"Test Job",22,23));
+                Jobs.add(new Job(2,"Test Job2",23,24));
+                return Jobs;
             }
         };
         @GetMapping("/jobSpec")
