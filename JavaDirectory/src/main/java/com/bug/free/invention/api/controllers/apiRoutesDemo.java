@@ -28,4 +28,11 @@ public class apiRoutesDemo {
     public ResponseEntity<String> getFromC(){
         return ResponseEntity.ok("Hello from c");
     }
+
+    @GetMapping("/bands")
+    public ArrayList<Band> getBandResp(){
+            ArrayList<Band> returnList = new ArrayList<>();
+            returnList.add(new Band(1, "Trainee", 1, "training", "skills etc.","entry level things"));
+            return returnList;
+    }
 }

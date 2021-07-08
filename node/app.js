@@ -47,6 +47,14 @@ app.get('/apitest', async function (req, res) {
    res.send('<p>'+data+'</p>');
 }); 
 
+app.get('/bands', async function(req, res){
+   console.log("Request processed");
+   const response = await fetch('http://localhost:8080/api/demo/bands', {method: 'GET', headers:{}})
+   const data = await response.text();
+   console.log(response);
+   res.send('<p>'+data+'</p>')
+   });
+
 
 
 app.get('/fromc', async function (req, res) { 
