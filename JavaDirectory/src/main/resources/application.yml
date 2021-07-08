@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    drive-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://localhost:3306/sys?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://62.254.63.52:3306/teamC_Josh?serverTimezone=UTC&characterEncoding=UTF-8
+    username: teamCadmin
+    password: "teampassword"
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    general-ddl: true
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: create

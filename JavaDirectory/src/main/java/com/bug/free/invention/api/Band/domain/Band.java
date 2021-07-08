@@ -1,14 +1,30 @@
-package com.bug.free.invention.api.controllers;
+package com.bug.free.invention.api.Band.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.Objects;
 
+@Entity
+//@Table(value = "Band")
 public class Band {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int bandId;
+//    @Column(value = "Band_Name")
     String bandName;
+//    @Column(value = "Band_Level")
     int bandLevel;
+//    @Column(value = "Band_Training")
     String bandTraining;
+//    @Column(value = "Band_Competencies")
     String bandCompetencies;
+//    @Column(value = "Band_Responsibilites")
     String bandResponsibilities;
 
     public Band(int bandId, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
