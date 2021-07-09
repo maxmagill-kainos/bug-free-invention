@@ -1,6 +1,6 @@
-CREATE DATABASE teamC_Max;
+CREATE DATABASE teamC_Josh;
 
-USE teamC_Max;
+USE teamC_Josh;
 
 CREATE TABLE Capability(
     Capability_ID TINYINT PRIMARY KEY AUTO_INCREMENT, 

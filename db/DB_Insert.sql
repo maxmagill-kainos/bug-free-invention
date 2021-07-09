@@ -117,7 +117,7 @@ INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALU
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant​​​​​​​", "", 4, 11, 3);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant​​​​​​​", "", 5, 11, 3);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant​​​​​​​", "", 6, 11, 3);
-INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant", "", 7, 11, 3)
+INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant", "", 7, 11, 3);
 
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Digital Advisory Consultant", "", 5, 12, 3);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Digital Advisory Consultant", "", 6, 12, 3);

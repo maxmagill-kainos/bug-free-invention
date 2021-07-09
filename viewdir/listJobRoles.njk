@@ -1,0 +1,47 @@
+<!doctype html>
+{% extends 'layout-template.njk'%}
+
+{% block content %}
+<html lang="en">
+    <title>Kainos - Job List</title> 
+        <div class="container">
+            <div class="row">
+                <div class = "col-sm">
+                    <h1>List of Job Roles</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <table id="myTable" class="table highlight stripped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Job Title</th>
+                                <th scope="col">Capability Name</th>
+                                <th scope="col">Band Name</th>
+                                <th scope="col">Band Level</th>
+                                <th scope="col">Family Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for role in jobData %}
+                                <tr>
+                                <td>{{role.job_Title}}</td>
+                                <td>{{role.capability_name}}</td>
+                                <td>{{role.band_Name}}</td>
+                                <td>{{role.band_Level}}</td>
+                                <td>{{role.family_Name}}</td>
+                            </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>
+
+
+
+{% endblock%}

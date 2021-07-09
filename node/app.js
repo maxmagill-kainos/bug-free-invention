@@ -1,4 +1,4 @@
-const { response } = require('express');
+const { response, json } = require('express');
 const express = require('express') 
 const session = require('express-session')
 const fetch = require('node-fetch')
@@ -30,38 +30,25 @@ app.set('view engine', 'njk');
 
 app.get('/', function(req, res){
    session_variables = req.session;
-   if(session_variables.email){
-      console.log("Email: " + session_variables.email);
-      res.render('index', { email : session_variables.email});
+   if(session_variables.Employee_ID){
+      res.render('index', { Employee_ID : session_variables.Employee_ID, is_Admin : session_variables.is_Admin});
    }
    else{
       res.render('login');
    }
 })
 
-app.get('/apitest', async function (req, res) { 
-   console.log('Request processed'); 
-   const response = await fetch('http://localhost:8080/api/demo/hello-world',{method:'GET',headers:{}})
-   const data = await response.text();
-   console.log(response)
-   res.send('<p>'+data+'</p>');
+app.get('/index', function (req, res) { 
+   res.redirect('/')
 }); 
- 
-app.get('/job-roles', async function(req, res){
-   console.log("Request processed");
-   const response = await fetch('http://localhost:8080/api/demo/job-roles', {method: 'GET', headers:{}})
-   const data = await response.text();
-   console.log(response);
-   res.send('<p>'+data+'</p>')
-});
 
 app.get('/JobsTable', async function (req, res) { 
    console.log('Request processed'); 
    const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
    const data = await response.json();
-   console.log(response)
-   res.send(data);
-}); 
+   res.render('listJobRoles', {jobData: data});
+});
+
 
 app.get('/JobsSpec', async function (req, res) { 
    console.log('Request processed'); 
@@ -71,30 +58,24 @@ app.get('/JobsSpec', async function (req, res) {
 }); 
 
 
-
-app.get('/fromc', async function (req, res) { 
-   console.log('Request processed'); 
-   const response = await fetch('http://localhost:8080/api/demo/hello-fromc',{method:'GET',headers:{}})
-   const data = await response.text();
-   console.log(response)
-   res.send('<p>'+data+'</p>');
-}); 
-
-
-app.get('/index', function (req, res) { 
-   res.redirect('/')
-}); 
-
-app.post('/login', function (req, res) { 
+app.post('/login', async function (req, res) { 
    session_variables = req.session;
-   if(req.body.email == "test" && encrypt(req.body.password) == encrypt("password")){
-      session_variables.email = req.body.email;
-      res.redirect('index')
+   const rawResponse = await fetch('http://localhost:8080/api/login/AuthLogin', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({Email: req.body.email, Password: encrypt(req.body.password)})
+  })
+  const responseData = await rawResponse.json()
+
+   if(responseData.Employee_ID){
+      session_variables.Employee_ID = responseData.Employee_ID;
+      session_variables.is_Admin = responseData.is_Admin;
+      res.redirect('index');
    }
    else{
-      res.render('login', { error : "Incorrect Email or Password"});
+      res.render('login', { error : responseData.response});
    }
-}); 
+});
 
 app.get('/logout', function(req, res){
    req.session.destroy(function(err) {
