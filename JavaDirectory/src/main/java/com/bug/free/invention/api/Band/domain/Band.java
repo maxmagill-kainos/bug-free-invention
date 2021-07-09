@@ -1,6 +1,6 @@
 package com.bug.free.invention.api.Band.domain;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -10,22 +10,24 @@ import javax.persistence.GenerationType;
 import java.util.Objects;
 
 @Entity
-//@Table(value = "Band")
+@Table(value = "Band")
 public class Band {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int bandId;
-//    @Column(value = "Band_Name")
+    @Column(value = "Band_Name")
     String bandName;
-//    @Column(value = "Band_Level")
+    @Column(value = "Band_Level")
     int bandLevel;
-//    @Column(value = "Band_Training")
+    @Column(value = "Band_Training")
     String bandTraining;
-//    @Column(value = "Band_Competencies")
+    @Column(value = "Band_Competencies")
     String bandCompetencies;
-//    @Column(value = "Band_Responsibilites")
+    @Column(value = "Band_Responsibilites")
     String bandResponsibilities;
+
+    public Band() {}
 
     public Band(int bandId, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
         this.bandId = bandId;

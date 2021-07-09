@@ -2,61 +2,62 @@ package com.bug.free.invention.api.Band.bandService;
 
 import com.bug.free.invention.api.Band.domain.Band;
 import com.bug.free.invention.api.Band.domain.BandRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class GetBandLevelService implements BandRepository {
+public class GetBandLevelService {
+    private final BandRepository repository;
 
-    private final String conn;
-    @Autowired
-    private BandRepository repository;
-
-    public GetBandLevelService(String conn) {
-        this.conn = conn;
+    public GetBandLevelService(BandRepository repository) {
+        this.repository = repository;
     }
 
-    @Override
     public List<Band> findAll() {
         return (List<Band>) repository.findAll();
     }
 
-    public Band getLevelById(int bandId) throws SQLException {
-        try (Connection connection = DriverManager.getConnection(conn)) {
-            PreparedStatement statement = connection.prepareStatement("Select * from Band where id = ?");
-            statement.setInt(1, bandId);
-            ResultSet resultSet = statement.executeQuery();
-            Collection<Band> phonesFromResultSet = getBandFromResultSet(resultSet);
-            return phonesFromResultSet.iterator().next();
-        } catch (SQLException e) {
-            throw new SQLException("Band by bandId not found");
-        }
+    public Optional<Band> getLevelById(int bandId) throws SQLException {
+        return repository.getLevelById(bandId);
     }
-//    @Override
-//    public Band getLevelById(int bandId) throws SQLException {
-//        return repository.getLevelById(bandId);
+
+    public List<Band> getLevelByName(String bandName) throws SQLException {
+        return repository.findAll()
+                .stream()
+                .filter(band -> band.getBandName().toLowerCase().contains(bandName.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+//    private final String conn;
+//    public GetBandLevelService(String conn) {
+//        this.conn = conn;
 //    }
 
-    public Band getLevelByName(String bandName) throws SQLException {
-        try (Connection connection = DriverManager.getConnection(conn)) {
-            PreparedStatement statement = connection.prepareStatement("Select * from Band where id = ?");
-            statement.setString(2, bandName);
-            ResultSet resultSet = statement.executeQuery();
-            Collection<Band> phonesFromResultSet = getBandFromResultSet(resultSet);
-            return phonesFromResultSet.iterator().next();
-        } catch (SQLException e) {
-            throw new SQLException("Band by bandName not found");
-        }
-    }
+//    public Band getLevelById(int bandId) throws SQLException {
+//        try (Connection connection = DriverManager.getConnection(conn)) {
+//            PreparedStatement statement = connection.prepareStatement("Select * from Band where id = ?");
+//            statement.setInt(1, bandId);
+//            ResultSet resultSet = statement.executeQuery();
+//            Collection<Band> phonesFromResultSet = getBandFromResultSet(resultSet);
+//            return phonesFromResultSet.iterator().next();
+//        } catch (SQLException e) {
+//            throw new SQLException("Band by bandId not found");
+//        }
+//    }
 
-//    @Override
 //    public Band getLevelByName(String bandName) throws SQLException {
-//        return repository.getLevelByName(bandName);
+//        try (Connection connection = DriverManager.getConnection(conn)) {
+//            PreparedStatement statement = connection.prepareStatement("Select * from Band where id = ?");
+//            statement.setString(2, bandName);
+//            ResultSet resultSet = statement.executeQuery();
+//            Collection<Band> phonesFromResultSet = getBandFromResultSet(resultSet);
+//            return phonesFromResultSet.iterator().next();
+//        } catch (SQLException e) {
+//            throw new SQLException("Band by bandName not found");
+//        }
 //    }
 
     private static Collection<Band> getBandFromResultSet(ResultSet resultSet) throws SQLException {
