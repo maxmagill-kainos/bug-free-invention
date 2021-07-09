@@ -2,18 +2,13 @@ package com.bug.free.invention.api.controllers;
 
 import com.bug.free.invention.api.classes.Job;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mysql.cj.xdevapi.JsonArray;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +23,31 @@ import java.util.List;
             returnList.add(new Employee(2,"ijisdfjdsif","dsuifjhduisfhui"));
             return returnList;
         };
+
+    @PostMapping(value = "/submitJobSpec", consumes = "application/json", produces = "application/json")
+    public String JobSpecSubmit(@RequestBody ObjectNode objectNode) {
+    String JobSpec = objectNode.get("JobSpec").asText();
+    int JobID = objectNode.get("JobID").asInt();
+    System.out.println(JobSpec);
+        System.out.println(JobID);
+        try{
+            String dbQuery = "UPDATE`JobSummary` SET Summary_Text = ? WHERE `Job_ID`=?;";
+            Connection DatabaseConnection = DBConfig.getConnection();
+            PreparedStatement SubmitSpecForJob = DatabaseConnection.prepareStatement(dbQuery);
+            SubmitSpecForJob.setString(1,JobSpec);
+            SubmitSpecForJob.setInt(2,JobID);
+            if(SubmitSpecForJob.executeUpdate()==1) {
+                return "Submitted";
+            }
+            else{
+                return "not submitted";
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return "Unsuccessful String submit";
+        }
+    };
 
         @GetMapping("/jobRoles")
         public List<Job> getJobRoles(){

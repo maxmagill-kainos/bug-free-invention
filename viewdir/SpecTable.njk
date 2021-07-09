@@ -16,13 +16,22 @@ function PopupWithSummary(QuickSummary){
         </tr>
     </thead>
     {% for job in data %}
+    <form action="/SubmitSpecForJob" method ="POST">
         <tr>
         <td>{{job.job_Title}}</td>
         <td>{{job.band_Name}}</td>
         <td>{{job.capability_Name}}</td>
         <td>{{job.spec_Summary}}</td>
-        <td> <a href="/JobsSpec?jobClicked={{job.job_ID}}"> View Job Spec</a> </td>
+        <td>
+        <input type="text" name="SpecSummaryInput" value="{{job.spec_Summary}}">
+        <input name="JobID" value="{{job.job_ID}}" type="hidden">
+        </td>
+        <td>
+        <input type="submit" value="Submit New Job Summary">
+        </td>
+        <td> <a href="/JobsSpec?jobClicked={{job.job_ID}}"> View Main Job Spec</a> </td>
         </tr>
+        </form>
         {% endfor %}
     
 </table>

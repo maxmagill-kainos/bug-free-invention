@@ -96,6 +96,17 @@ app.post('/login', function (req, res) {
       res.render('login', { error : "Incorrect Email or Password"});
    }
 }); 
+app.post('/SubmitSpecForJob',async function(req,res){
+   console.log(req.body)
+   let JSONSubmitObject ={
+      JobSpec : req.body.SpecSummaryInput,
+      JobID : parseInt(req.body.JobID)
+
+   }
+   console.log(JSON.stringify(JSONSubmitObject));
+   const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
+   console.log(PostCallToJava.json())
+})
 
 app.get('/logout', function(req, res){
    req.session.destroy(function(err) {
