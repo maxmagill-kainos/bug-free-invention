@@ -6,6 +6,3 @@ cache:
 
 before_install:
   - cd JavaDirectory/
-
-install:
-  - mvn install
