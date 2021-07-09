@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class DBConfig {
-    private  static String Username ="" ;
-    private static String Password = "";
+    private  static String Username = "";
+    private static String Password = "" ;
     private static String host = "";
     private static String DatabaseID = "teamC_Josh";
     public DBConfig(){
     }
-    public  void DBInit(){
+    public static void DBInit(){
         if(System.getenv("BUGFREEDBUSERNAME") != null){
             Username = System.getenv("BUGFREEDBUSERNAME");
             Password = System.getenv("BUGFREEDBPASSWORD");
@@ -22,6 +22,7 @@ public class DBConfig {
         return DatabaseID;
     }
     public static Connection getConnection(){
+        DBInit();
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false", Username, Password);
             return conn;
