@@ -1,7 +1,7 @@
 use teamC_Josh;
 
 INSERT INTO Capability(Capability_Name) VALUES ("Artificial Intelligence");
-INSERT INTO Capability(Capability_Name) VALUES ("Buisness Development & Marketing");
+INSERT INTO Capability(Capability_Name) VALUES ("Business Development & Marketing");
 INSERT INTO Capability(Capability_Name) VALUES ("Product");
 INSERT INTO Capability(Capability_Name) VALUES ("Cyber Security");
 INSERT INTO Capability(Capability_Name) VALUES ("Data and Analytics");
@@ -32,8 +32,8 @@ INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Artificial Inte
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Artificial Intelligence (AI) Engineering", 1);
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Data Science", 1);
 
-INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Practise Manager", "", 7, 1, 1);
-INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Practise Lead", "", 8, 1, 1);
+INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Practice Manager", "", 7, 1, 1);
+INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Practice Lead", "", 8, 1, 1);
 
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Trainee AI Engineer", "", 2, 2, 1);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Associate AI Engineer", "", 3, 2, 1);
@@ -47,13 +47,13 @@ INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALU
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Senior Data Scientist", "", 4, 3, 1);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Consultant Data Scientist", "", 5, 3, 1);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Data Science Manager", "", 6, 3, 1);
-INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Prinicple Data Scientist", "", 7, 3, 1);
+INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Principal Data Scientist", "", 7, 3, 1);
 
 
 -- Buisness Devleopment
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Strategy and Planning", 2);
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Business Development", 2);
-INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Client Managment", 2);
+INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Client Management", 2);
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Partners", 2);
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Bid Production", 2);
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Inside Sales", 2);
@@ -61,7 +61,7 @@ INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Marketing - Bus
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Marketing - Martech", 2);
 
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Global Head of Marketing", "", 8, 3, 2);
-INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Businsess Lead Development", "", 8, 3, 2);
+INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Business Lead Development", "", 8, 3, 2);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Account Lead", "", 8, 3, 2);
 
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Business Development Associate", "", 3, 4, 2);
@@ -117,7 +117,7 @@ INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALU
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant​​​​​​​", "", 4, 11, 3);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant​​​​​​​", "", 5, 11, 3);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant​​​​​​​", "", 6, 11, 3);
-INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant", "", 7, 11, 3)
+INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Product Consultant", "", 7, 11, 3);
 
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Digital Advisory Consultant", "", 5, 12, 3);
 INSERT INTO Job(Job_Title, Job_Spec, Band_ID, Job_Family_ID, Capability_ID) VALUES ("Digital Advisory Consultant", "", 6, 12, 3);
@@ -166,3 +166,5 @@ INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Platform Archit
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Platform Specialists", 9);
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Cloud Migration", 9);
 INSERT INTO Job_Family(Job_Family_Title, Capability_ID) VALUES ("Systems Support", 9);
+
+
