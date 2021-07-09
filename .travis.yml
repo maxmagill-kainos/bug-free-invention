@@ -1,5 +1,2 @@
 language: java
 jdk: openjdk14
-
-before_install:
-  -cd JavaDirectory
