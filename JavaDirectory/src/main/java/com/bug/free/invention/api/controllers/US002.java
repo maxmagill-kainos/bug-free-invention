@@ -1,19 +1,13 @@
 package com.bug.free.invention.api.controllers;
 
 import com.bug.free.invention.api.classes.Job;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.cj.xdevapi.JsonArray;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,22 +23,46 @@ import java.util.List;
             return returnList;
         };
 
-        @GetMapping("/jobRoles")
+/*    @GetMapping("/jobCapability")
+    public String  getJobCapability(){
+        System.out.println("Attempting connection");
+        try{
+            Statement statement = DBConfig.getConnection().createStatement();
+            String dbQuery = "SELECT Job.Job_Title, Capability.Capability_Name FROM Job JOIN Capability ON(Job.Capability_ID = Capability.Capability_ID);";
+            ResultSet results = statement.executeQuery(dbQuery);
+            JSONObject return_json= new JSONObject();
+            int i = 0;
+            while(results.next()) {
+                String job_title = results.getString("Job_Title");
+                String capability_name = results.getString("Capability_Name");
+                JSONObject tempJson = new JSONObject("{\"job_title\": \"" + job_title + "\", \"capability_name\": \""+ capability_name+ "\"}");
+                return_json.put(String.valueOf(i), tempJson);
+                i++;
+            }
+            return return_json.toString();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }*/
+
+        @GetMapping("/jobRoles") //US001
         public List<Job> getJobRoles(){
+            System.out.println("Attempting connection");
             try{
 
                 Statement statement = DBConfig.getConnection().createStatement();
-                String dbQuery = "SELECT 'Job_ID','Capability_ID','Band_ID','Job_Title' FROM `Job` GROUP BY 'Capability_ID','Band_ID','Job_Title'";
+                String dbQuery = "SELECT Job.Job_ID, Job.Job_Title, Job.Band_ID, Capability.Capability_ID, Capability.Capability_Name, Band.Band_Name, Band.Band_Level, Job_Family.Job_Family_Title FROM Job JOIN Capability ON(Job.Capability_ID = Capability.Capability_ID) JOIN Band ON(Job.Band_ID = Band.Band_ID) JOIN Job_Family ON(Job.Job_Family_ID = Job_Family.Job_Family_ID);";
                 ResultSet results = statement.executeQuery(dbQuery);
                 List<Job> Jobs = new ArrayList<Job>();
                 
                 while(results.next()){
                     Jobs.add(new Job(results.getInt("Job_ID"),results.getString("Job_Title"),
-                            results.getInt("Capability_ID"),results.getInt("Band_ID")));
+                            results.getInt("Capability_ID"),results.getInt("Band_ID"), results.getString("Capability_Name"),
+                            results.getString("Band_Name"), results.getInt("Band_Level"), results.getString("Job_Family_Title")));
 
                 }
-                Jobs.add(new Job(1,"Test Job",22,23));
-                Jobs.add(new Job(2,"Test Job2",23,24));
                 return Jobs;
             }
             catch (Exception e){

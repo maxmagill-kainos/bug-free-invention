@@ -1,4 +1,4 @@
-REATE DATABASE teamC_Josh;
+CREATE DATABASE teamC_Josh;
 
 USE teamC_Josh;
 
