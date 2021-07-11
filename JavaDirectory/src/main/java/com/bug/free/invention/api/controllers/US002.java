@@ -28,14 +28,14 @@ import java.util.List;
         System.out.println("Attempting connection");
         try{
             Statement statement = DBConfig.getConnection().createStatement();
-            String dbQuery = "SELECT Job.Job_Title, Capability.Capability_Name FROM Job JOIN Capability ON(Job.Capability_ID = Capability.Capability_ID);";
+            String dbQuery = "SELECT Job.Job_Title, Capability.capabilityName FROM Job JOIN Capability ON(Job.capabilityID = Capability.capabilityID);";
             ResultSet results = statement.executeQuery(dbQuery);
             JSONObject return_json= new JSONObject();
             int i = 0;
             while(results.next()) {
                 String job_title = results.getString("Job_Title");
-                String capability_name = results.getString("Capability_Name");
-                JSONObject tempJson = new JSONObject("{\"job_title\": \"" + job_title + "\", \"capability_name\": \""+ capability_name+ "\"}");
+                String capabilityname = results.getString("capabilityName");
+                JSONObject tempJson = new JSONObject("{\"job_title\": \"" + job_title + "\", \"capabilityname\": \""+ capabilityname+ "\"}");
                 return_json.put(String.valueOf(i), tempJson);
                 i++;
             }
@@ -53,14 +53,14 @@ import java.util.List;
             try{
 
                 Statement statement = DBConfig.getConnection().createStatement();
-                String dbQuery = "SELECT Job.Job_ID, Job.Job_Title, Job.Band_ID, Capability.Capability_ID, Capability.Capability_Name, Band.Band_Name, Band.Band_Level, Job_Family.Job_Family_Title FROM Job JOIN Capability ON(Job.Capability_ID = Capability.Capability_ID) JOIN Band ON(Job.Band_ID = Band.Band_ID) JOIN Job_Family ON(Job.Job_Family_ID = Job_Family.Job_Family_ID);";
+                String dbQuery = "SELECT Job.jobID, Job.jobTitle, Job.bandID, Capability.capabilityID, Capability.capabilityName, Band.bandName, Band.bandLevel, Job_Family.jobFamilyTitle FROM Job JOIN Capability ON(Job.capabilityID = Capability.capabilityID) JOIN Band ON(Job.bandID = Band.bandID) JOIN Job_Family ON(Job.jobFamilyID = Job_Family.jobFamilyID);";
                 ResultSet results = statement.executeQuery(dbQuery);
                 List<Job> Jobs = new ArrayList<Job>();
                 
                 while(results.next()){
-                    Jobs.add(new Job(results.getInt("Job_ID"),results.getString("Job_Title"),
-                            results.getInt("Capability_ID"),results.getInt("Band_ID"), results.getString("Capability_Name"),
-                            results.getString("Band_Name"), results.getInt("Band_Level"), results.getString("Job_Family_Title")));
+                    Jobs.add(new Job(results.getInt("jobID"),results.getString("jobTitle"),
+                            results.getInt("capabilityID"),results.getInt("bandID"), results.getString("capabilityName"),
+                            results.getString("bandName"), results.getInt("bandLevel"), results.getString("jobFamilyTitle")));
 
                 }
                 return Jobs;
@@ -72,13 +72,13 @@ import java.util.List;
         };
         @GetMapping("/jobSpec")
         public String getJobSpecLink(@RequestParam Integer JobID){
-            String dbQuery = "SELECT 'Job_Spec' FROM `Job` WHERE 'Job_ID' = ?;";
+            String dbQuery = "SELECT 'jobSpec' FROM `Job` WHERE 'jobID' = ?;";
             try(Connection DatabaseConnection = DBConfig.getConnection()){
                 PreparedStatement FindJobSpecById = DatabaseConnection.prepareStatement(dbQuery);
                 FindJobSpecById.setInt(1,JobID);
                 ResultSet results = FindJobSpecById.executeQuery();
                 while(results.next()){
-                    return results.getString("Job_Spec");
+                    return results.getString("jobSpec");
                 }
                 return "https://www.google.com";
             }

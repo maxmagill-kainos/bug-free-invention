@@ -1,109 +1,109 @@
 package com.bug.free.invention.api.classes;
 
 public class Job {
-    int Job_ID;
-    String Job_Title;
-    String Job_Spec;
-    int Band_ID;
-    int Capability_ID;
-    String capability_Name;
-    String band_Name;
-    String family_Name;
-    int band_Level;
+    int jobID;
+    String jobTitle;
+    String jobSpec;
+    int bandId;
+    int capabilityId;
+    String capabilityName;
+    String bandName;
+    String familyName;
+    int bandLevel;
 
-    public Job(int job_ID, String job_Title, String job_Spec, int band_ID, int capability_ID, String capability_Name) {
-        Job_ID = job_ID;
-        Job_Title = job_Title;
-        Job_Spec = job_Spec;
-        Band_ID = band_ID;
-        Capability_ID = capability_ID;
-        this.capability_Name = capability_Name;
+    public Job(int jobID, String jobTitle, String jobSpec, int bandId, int capabilityId, String capabilityName) {
+        this.jobID = jobID;
+        this.jobTitle = jobTitle;
+        this.jobSpec = jobSpec;
+        this.bandId = bandId;
+        this.capabilityId = capabilityId;
+        this.capabilityName = capabilityName;
     }
 
-    public Job(int job_ID, String job_Title, int band_ID, int capability_ID, String capability_Name, String band_Name, int band_Level, String family_Name) {
-        Job_ID = job_ID;
-        Job_Title = job_Title;
-        Band_ID = band_ID;
-        Capability_ID = capability_ID;
-        this.capability_Name = capability_Name;
-        this.band_Name = band_Name;
-        this.band_Level = band_Level;
-        this.family_Name = family_Name;
+    public Job(int jobID, String jobTitle, int bandId, int capabilityId, String capabilityName, String bandName, int bandLevel, String familyName) {
+        this.jobID = jobID;
+        this.jobTitle = jobTitle;
+        this.bandId = bandId;
+        this.capabilityId = capabilityId;
+        this.capabilityName = capabilityName;
+        this.bandName = bandName;
+        this.bandLevel = bandLevel;
+        this.familyName = familyName;
     }
 
     public int getJob_ID() {
-        return Job_ID;
+        return jobID;
     }
 
     public void setJob_ID(int job_ID) {
-        Job_ID = job_ID;
+        jobID = job_ID;
     }
 
     public String getJob_Title() {
-        return Job_Title;
+        return jobTitle;
     }
 
-    public void setJob_Title(String job_Title) {
-        Job_Title = job_Title;
+    public void setJob_Title(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public String getJob_Spec() {
-        return Job_Spec;
+        return jobSpec;
     }
 
-    public void setJob_Spec(String job_Spec) {
-        Job_Spec = job_Spec;
+    public void setJob_Spec(String jobSpec) {
+        this.jobSpec = jobSpec;
     }
 
     public int getBand_ID() {
-        return Band_ID;
+        return bandId;
     }
 
-    public void setBand_ID(int band_ID) {
-        Band_ID = band_ID;
+    public void setBand_ID(int bandId) {
+        this.bandId = bandId;
     }
 
     public int getCapability_ID() {
-        return Capability_ID;
+        return capabilityId;
     }
 
-    public void setCapability_ID(int capability_ID) {
-        Capability_ID = capability_ID;
+    public void setCapability_ID(int capabilityId) {
+        this.capabilityId = capabilityId;
     }
 
-    public void setCapability_name(String capability_name) { this.capability_Name = capability_name; }
+    public void setCapability_name(String capabilityName) { this.capabilityName = capabilityName; }
 
-    public String getCapability_name() { return capability_Name; }
+    public String getCapability_name() { return capabilityName; }
 
     public String getCapability_Name() {
-        return capability_Name;
+        return capabilityName;
     }
 
-    public void setCapability_Name(String capability_Name) {
-        this.capability_Name = capability_Name;
+    public void setCapability_Name(String capabilityName) {
+        this.capabilityName = capabilityName;
     }
 
     public String getBand_Name() {
-        return band_Name;
+        return bandName;
     }
 
-    public void setBand_Name(String band_Name) {
-        this.band_Name = band_Name;
+    public void setBand_Name(String bandName) {
+        this.bandName = bandName;
     }
 
     public String getFamily_Name() {
-        return family_Name;
+        return familyName;
     }
 
-    public void setFamily_Name(String family_Name) {
-        this.family_Name = family_Name;
+    public void setFamily_Name(String familyName) {
+        this.familyName = familyName;
     }
 
     public int getBand_Level() {
-        return band_Level;
+        return bandLevel;
     }
 
-    public void setBand_Level(int band_Level) {
-        this.band_Level = band_Level;
+    public void setBand_Level(int bandLevel) {
+        this.bandLevel = bandLevel;
     }
 }
