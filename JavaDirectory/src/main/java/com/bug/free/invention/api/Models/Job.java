@@ -1,7 +1,11 @@
-package com.bug.free.invention.api.classes;
+package com.bug.free.invention.api.Models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Job {
-    int Job_ID;
+    @Id int Job_ID;
     String Job_Title;
     String Job_Spec;
     int Band_ID;
@@ -30,6 +34,14 @@ public class Job {
         Band_Name = band_Name;
         Capability_Name = capability_Name;
         Spec_Summary = spec_Summary;
+    }
+    public Job(int job_ID, String job_Title, String band_Name, String capability_Name,String spec_Summary,String job_Spec) {
+        Job_ID = job_ID;
+        Job_Title = job_Title;
+        Band_Name = band_Name;
+        Capability_Name = capability_Name;
+        Spec_Summary = spec_Summary;
+        Job_Spec = job_Spec;
     }
 
     public String getBand_Name() {
@@ -94,5 +106,19 @@ public class Job {
 
     public void setSpec_Summary(String spec_Summary) {
         Spec_Summary = spec_Summary;
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "Job_ID=" + Job_ID +
+                ", Job_Title='" + Job_Title + '\'' +
+                ", Job_Spec='" + Job_Spec + '\'' +
+                ", Band_ID=" + Band_ID +
+                ", Capability_ID=" + Capability_ID +
+                ", Band_Name='" + Band_Name + '\'' +
+                ", Capability_Name='" + Capability_Name + '\'' +
+                ", Spec_Summary='" + Spec_Summary + '\'' +
+                '}';
     }
 }

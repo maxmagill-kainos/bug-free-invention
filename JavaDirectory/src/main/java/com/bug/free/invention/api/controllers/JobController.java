@@ -1,20 +1,24 @@
 package com.bug.free.invention.api.controllers;
 
-import com.bug.free.invention.api.classes.Job;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.bug.free.invention.api.Models.Job;
+import com.bug.free.invention.api.Services.JobService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.mysql.cj.xdevapi.JsonArray;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
     @RequestMapping("/api/jobs")
-    public class US002 {
+    public class JobController {
+
+    @Autowired
+    private JobService JobService;
 
     @GetMapping("/JSONDemo")
     public List<Employee> demoJson() {
@@ -64,21 +68,12 @@ import java.util.List;
 
     @GetMapping("/jobRoles")
     public List<Job> getJobRoles() {
-        List<Job> Jobs = new ArrayList<Job>();
         try {
-
-            Statement statement = DBConfig.getConnection().createStatement();
-            //'Job_ID','Capability_ID','Band_ID','Job_Title'
-            String dbQuery = "SELECT * FROM `Job` INNER JOIN(Capability,Band,JobSummary) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = Job.Job_ID) ";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
-            ResultSet results = statement.executeQuery(dbQuery);
-
-
-            while (results.next()) {
-                Jobs.add(new Job(results.getInt("Job_ID"), results.getString("Job_Title"), results.getString("Capability_Name"), results.getString("Band_Name"), results.getString("Summary_Text")));
-            }
-            return Jobs;
+            List<Job> Jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
+            return  Jobs;
 
         } catch (Exception e) {
+            List<Job> Jobs = new ArrayList<Job>();
             e.printStackTrace();
             Jobs.add(new Job(1, "Test Job", 22, 23));
             Jobs.add(new Job(2, "Test Job2", 23, 24));
@@ -86,33 +81,14 @@ import java.util.List;
         }
     }
 
-    ;
 
     @GetMapping("/jobSpec")
     public String getJobSpecLink(@RequestParam Integer JobID) {
         try {
-
-
-            String dbQuery = "SELECT `Job_Spec` FROM `Job` WHERE `Job_ID` = ?;";
-            try (Connection DatabaseConnection = DBConfig.getConnection()) {
-                PreparedStatement FindJobSpecById = DatabaseConnection.prepareStatement(dbQuery);
-                FindJobSpecById.setInt(1, JobID);
-                ResultSet results = FindJobSpecById.executeQuery();
-                while (results.next()) {
-                    return results.getString("Job_Spec");
-                }
-                return "https://www.google.com";
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-            return "";
+            return JobService.GetJobSpecLink(JobID);
         } catch (Exception e) {
-            return "";
+            return "www.kainos.com";
         }
-
-
-
     }
 
 
