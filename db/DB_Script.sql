@@ -2,7 +2,7 @@ CREATE DATABASE teamC_Josh;
 
 USE teamC_Josh;
 
-CREATE TABLE Capability(
+CREATE TABLE capability(
     capabilityID TINYINT PRIMARY KEY AUTOINCREMENT, 
     capabilityName varchar (40) NOT NULL
 );
@@ -35,7 +35,7 @@ CREATE TABLE job(
     FOREIGN KEY (`capabilityID`) REFERENCES `capability`(`capabilityID`)
 );
 
-CREATE TABLE Employee(
+CREATE TABLE employee(
     employeeID SMALLINT PRIMARY KEY AUTOINCREMENT,
     fName varchar (40) NOT NULL,
     lName varchar (40) NOT NULL,
