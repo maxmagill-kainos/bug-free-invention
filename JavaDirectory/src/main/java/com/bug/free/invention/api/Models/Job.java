@@ -13,7 +13,7 @@ public class Job {
     String Band_Name;
     String Capability_Name;
     String Spec_Summary;
-
+    public Job(){};
     public Job(int job_ID, String job_Title, String job_Spec, int band_ID, int capability_ID) {
         Job_ID = job_ID;
         Job_Title = job_Title;
