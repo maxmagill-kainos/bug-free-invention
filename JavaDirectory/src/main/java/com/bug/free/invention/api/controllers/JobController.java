@@ -87,7 +87,7 @@ import java.util.stream.StreamSupport;
         try {
             return JobService.GetJobSpecLink(JobID);
         } catch (Exception e) {
-            return "www.kainos.com";
+            return "https://www.kainos.com";
         }
     }
 

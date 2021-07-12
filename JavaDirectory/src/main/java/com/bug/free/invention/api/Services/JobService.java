@@ -3,6 +3,8 @@ package com.bug.free.invention.api.Services;
 import com.bug.free.invention.api.Models.Job;
 import com.bug.free.invention.api.controllers.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class JobService {
@@ -17,11 +20,14 @@ public class JobService {
     @Autowired
     private JobRepository repository;
 
-    public void populateJobRoles() {
+
+    void populateJobRoles() {
         try {
             List<Job> Jobs = new ArrayList<>();
             List<Job> savedJobs = new ArrayList<>();
             Statement statement = DBConfig.getConnection().createStatement();
+            System.out.println(DBConfig.url);
+
             //'Job_ID','Capability_ID','Band_ID','Job_Title'
             String dbQuery = "SELECT * FROM `Job` INNER JOIN(Capability,Band,JobSummary) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = Job.Job_ID) ";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
             ResultSet results = statement.executeQuery(dbQuery);
@@ -33,15 +39,17 @@ public class JobService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+       // return args -> {};
     }
 
     public String GetJobSpecLink(Integer JobID){
+         populateJobRoles();
          return  repository.findById(JobID).get().getJob_Spec();
 
     };
 
     public Iterable<Job> retrieveAllJobRoles(){
-        populateJobRoles();
+        //populateJobRoles();
         return repository.findAll();
     }
 }
