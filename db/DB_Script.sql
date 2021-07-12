@@ -2,46 +2,46 @@ CREATE DATABASE teamC_Josh;
 
 USE teamC_Josh;
 
-CREATE TABLE Capability(
-    Capability_ID TINYINT PRIMARY KEY AUTO_INCREMENT, 
-    Capability_Name varchar (40) NOT NULL
+CREATE TABLE capability(
+    capabilityID TINYINT PRIMARY KEY AUTOINCREMENT, 
+    capabilityName varchar (40) NOT NULL
 );
 
-CREATE TABLE Job_Family(
-    Job_Family_ID TINYINT PRIMARY KEY AUTO_INCREMENT,
-    Job_Family_Title varchar (40) NOT NULL,
-    Capability_ID TINYINT,
-    FOREIGN KEY (`Capability_ID`) REFERENCES `Capability`(`Capability_ID`)
+CREATE TABLE jobFamily(
+    jobFamilyID TINYINT PRIMARY KEY AUTOINCREMENT,
+    jobFamilyTitle varchar (40) NOT NULL,
+    capabilityID TINYINT,
+    FOREIGN KEY (`capabilityID`) REFERENCES `capability`(`capabilityID`)
 );
 
-CREATE TABLE Band(
-    Band_ID TINYINT PRIMARY KEY AUTO_INCREMENT,
-    Band_Name varchar (40), 
-    Band_Level TINYINT NOT NULL, 
-    Band_Training text, 
-    Band_Competencies text, 
-    Band_Responsibilites text
+CREATE TABLE band(
+    bandID TINYINT PRIMARY KEY AUTOINCREMENT,
+    bandName varchar (40), 
+    bandLevel TINYINT NOT NULL, 
+    bandTraining text, 
+    bandCompetencies text, 
+    bandResponsibilites text
 );
 
-CREATE TABLE Job(
-    Job_ID SMALLINT PRIMARY KEY AUTO_INCREMENT,
-    Job_Title varchar (50) NOT NULL,
-    Job_Spec text NOT NULL,
-    Band_ID TINYINT,
-    Job_Family_ID TINYINT,
-    Capability_ID TINYINT,
-    FOREIGN KEY (`Band_ID`) REFERENCES `Band`(`Band_ID`),
-    FOREIGN KEY (`Job_Family_ID`) REFERENCES `Job_Family`(`Job_Family_ID`),
-    FOREIGN KEY (`Capability_ID`) REFERENCES `Capability`(`Capability_ID`)
+CREATE TABLE job(
+    jobID SMALLINT PRIMARY KEY AUTOINCREMENT,
+    jobTitle varchar (50) NOT NULL,
+    jobSpec text NOT NULL,
+    bandID TINYINT,
+    jobFamilyID TINYINT,
+    capabilityID TINYINT,
+    FOREIGN KEY (`bandID`) REFERENCES `band`(`bandID`),
+    FOREIGN KEY (`jobFamilyID`) REFERENCES `jobFamily`(`jobFamilyID`),
+    FOREIGN KEY (`capabilityID`) REFERENCES `capability`(`capabilityID`)
 );
 
-CREATE TABLE Employee(
-    Employee_ID SMALLINT PRIMARY KEY AUTO_INCREMENT,
-    F_Name varchar (40) NOT NULL,
-    L_Name varchar (40) NOT NULL,
-    Username varchar (40) NOT NULL,
-    User_Password varchar (60) NOT NULL,
-    is_Admin boolean NOT NULL, 
-    Job_ID SMALLINT NOT NULL, 
-    FOREIGN KEY (`Job_ID`) REFERENCES `Job`(`Job_ID`)
+CREATE TABLE employee(
+    employeeID SMALLINT PRIMARY KEY AUTOINCREMENT,
+    fName varchar (40) NOT NULL,
+    lName varchar (40) NOT NULL,
+    username varchar (40) NOT NULL,
+    userPassword varchar (60) NOT NULL,
+    isAdmin boolean NOT NULL, 
+    jobID SMALLINT NOT NULL, 
+    FOREIGN KEY (`jobID`) REFERENCES `job`(`jobID`)
 );

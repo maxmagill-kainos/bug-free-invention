@@ -14,14 +14,14 @@ public class US024 {
     @PostMapping(value = "/AuthLogin", consumes = "application/json")
     public String validateLogin(@RequestBody String authDetails){
         JSONObject userDetails = new JSONObject(authDetails);
-        String dbQuery = "SELECT `Employee_ID`,`is_Admin` FROM `Employee` WHERE `Username` = ? AND `User_Password` = ? LIMIT 1;";
+        String dbQuery = "SELECT `employeeID`,`isAdmin` FROM `Employee` WHERE `Username` = ? AND `userPassword` = ? LIMIT 1;";
         try(Connection DatabaseConnection = DBConfig.getConnection()){
             PreparedStatement validateUserLogin = DatabaseConnection.prepareStatement(dbQuery);
             validateUserLogin.setString(1, String.valueOf(userDetails.get("Email")));
             validateUserLogin.setString(2, String.valueOf(userDetails.get("Password")));
             ResultSet results = validateUserLogin.executeQuery();
             while(results.next()){
-                return "{\"Employee_ID\": \"" + results.getString("Employee_ID") + "\", \"is_Admin\": \""+ results.getString("is_Admin")+ "\"}";
+                return "{\"employeeID\": \"" + results.getString("employeeID") + "\", \"isAdmin\": \""+ results.getString("isAdmin")+ "\"}";
             }
         }
         catch (Exception e){
@@ -29,5 +29,5 @@ public class US024 {
 
         }
         return "{\"response\": \"Incorrect Username or Password\"}";
-    };
+    }
 }
