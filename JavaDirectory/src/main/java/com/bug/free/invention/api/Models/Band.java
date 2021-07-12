@@ -1,4 +1,4 @@
-package com.bug.free.invention.api.Band.domain;
+package com.bug.free.invention.api.Models;
 
 import javax.persistence.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -15,7 +15,8 @@ public class Band {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int bandId;
+    @Column(value = "Band_ID")
+    int bandID;
     @Column(value = "Band_Name")
     String bandName;
     @Column(value = "Band_Level")
@@ -29,8 +30,8 @@ public class Band {
 
     public Band() {}
 
-    public Band(int bandId, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
-        this.bandId = bandId;
+    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
+        this.bandID = bandID;
         this.bandName = bandName;
         this.bandLevel = bandLevel;
         this.bandTraining = bandTraining;
@@ -38,12 +39,12 @@ public class Band {
         this.bandResponsibilities = bandResponsibilities;
     }
 
-    public int getBandId() {
-        return bandId;
+    public int getBandID() {
+        return bandID;
     }
 
-    public void setBandId(int bandId) {
-        this.bandId = bandId;
+    public void setBandID(int bandID) {
+        this.bandID = bandID;
     }
 
     public String getBandName() {
@@ -91,18 +92,18 @@ public class Band {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Band band = (Band) o;
-        return bandId == band.bandId && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilities, band.bandResponsibilities);
+        return bandID == band.bandID && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilities, band.bandResponsibilities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bandId, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilities);
+        return Objects.hash(bandID, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilities);
     }
 
     @Override
     public String toString() {
         return "Band{" +
-                "bandId=" + bandId +
+                "bandId=" + bandID +
                 ", bandName='" + bandName + '\'' +
                 ", bandLevel=" + bandLevel +
                 ", bandTraining='" + bandTraining + '\'' +
