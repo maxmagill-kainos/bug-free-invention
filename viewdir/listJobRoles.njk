@@ -24,12 +24,12 @@
                         </thead>
                         <tbody>
                             {% for role in jobData %}
-                                <tr>
-                                <td>{{role.job_Title}}</td>
-                                <td>{{role.capability_name}}</td>
-                                <td>{{role.band_Name}}</td>
-                                <td>{{role.band_Level}}</td>
-                                <td>{{role.family_Name}}</td>
+                                <tr id ="{{role.job_ID}}">
+                                <td id ="jobTitleCell{{role.job_ID}}">{{role.job_Title}}</td>
+                                <td id ="jobCapabilityCell{{role.job_ID}}">{{role.capability_name}}</td>
+                                <td id ="jobBandNameCell{{role.job_ID}}">{{role.band_Name}}</td>
+                                <td id ="jobBandLevelCell{{role.job_ID}}">{{role.band_Level}}</td>
+                                <td id ="jobFamilyNameCell{{role.job_ID}}">{{role.family_Name}}</td>
                             </tr>
                                 {% endfor %}
                         </tbody>
