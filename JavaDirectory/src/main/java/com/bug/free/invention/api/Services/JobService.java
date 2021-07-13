@@ -49,7 +49,7 @@ public class JobService {
     };
 
     public Iterable<Job> retrieveAllJobRoles(){
-        //populateJobRoles();
+        populateJobRoles();
         return repository.findAll();
     }
 }
