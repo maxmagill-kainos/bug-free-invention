@@ -18,7 +18,7 @@ public class FunctionalTest {
     protected final static String browserVersion = System.getProperty(BROWSER_VERSION);
 
     @BeforeEach
-    public static void setUp() {
+    public void setUp() {
         WebDriverManager.chromedriver().browserVersion(browserVersion).setup();
         driver =  new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -30,7 +30,7 @@ public class FunctionalTest {
     }
 
     @AfterEach
-    public static void tearDown() {
-        driver.close();
+    public void tearDown() {
+        //driver.close();
     }
 }
