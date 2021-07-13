@@ -1,6 +1,9 @@
 package com.bug.free.invention.api.controllers;
 
+import com.bug.free.invention.api.Models.Employee;
+import com.bug.free.invention.api.Models.IncorrectPermissonException;
 import com.bug.free.invention.api.Models.Job;
+import com.bug.free.invention.api.Services.EmployeeService;
 import com.bug.free.invention.api.Services.JobService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -19,6 +21,7 @@ import java.util.stream.StreamSupport;
 
     @Autowired
     private JobService JobService;
+    private EmployeeService EmployeeService;
 
     @GetMapping("/JSONDemo")
     public List<Employee> demoJson() {
@@ -33,12 +36,18 @@ import java.util.stream.StreamSupport;
     @PostMapping(value = "/submitJobSpec", consumes = "application/json", produces = "application/json")
     public String JobSpecSubmit(@RequestBody ObjectNode objectNode) {
         try {
+            String UniqueIdentifier = objectNode.get("UniqueIdentifier").asText();
+            int EmployeeID = objectNode.get("employeeID").asInt();
+            if(!EmployeeService.IsEmployeeValidAdmin(UniqueIdentifier,EmployeeID)){
+                return "False Login";
+            };
+
             String JobSpec = objectNode.get("JobSpec").asText();
             System.out.println(JobSpec);
             if (JobSpec.matches("[a-zA-Z ]+") == false) {
                 return "Invalid String";
             }
-            ;
+
             int JobID = objectNode.get("JobID").asInt();
             System.out.println(JobSpec);
             System.out.println(JobID);
@@ -58,13 +67,13 @@ import java.util.stream.StreamSupport;
                 e.printStackTrace();
                 return "Unsuccessful String submit";
             }
-        } catch (NullPointerException IncorrectParameter) {
+        }
+        catch (NullPointerException IncorrectParameter) {
             return "Unsuccessful String submit";
 
         }
-    }
 
-    ;
+    }
 
     @GetMapping("/jobRoles")
     public List<Job> getJobRoles() {

@@ -100,7 +100,8 @@ app.post('/SubmitSpecForJob',async function(req,res){
    console.log(req.body)
    let JSONSubmitObject ={
       JobSpec : req.body.SpecSummaryInput,
-      JobID : parseInt(req.body.JobID)
+      JobID : parseInt(req.body.JobID),
+      UniqueIdentifier: session_variables.UniqueIdentifier
 
    }
    console.log(JSON.stringify(JSONSubmitObject));

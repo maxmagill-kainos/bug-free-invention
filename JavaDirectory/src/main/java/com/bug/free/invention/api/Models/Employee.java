@@ -1,14 +1,30 @@
-package com.bug.free.invention.api.controllers;
-
+package com.bug.free.invention.api.Models;
+import java.util.UUID;
 public class Employee {
     int id;
     String name ;
     String address ;
+    String UUID;
+    boolean isAdmin;
 
     public Employee(int id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
+    }
+    public Employee(int id, String name,String UUID,boolean isAdmin) {
+        this.id = id;
+        this.name = name;
+        this.UUID = UUID;
+        this.isAdmin = isAdmin;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
     public int getId() {
