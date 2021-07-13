@@ -30,8 +30,8 @@ app.set('view engine', 'njk');
 
 app.get('/', function(req, res){
    session_variables = req.session;
-   if(session_variables.Employee_ID){
-      res.render('index', { Employee_ID : session_variables.Employee_ID, is_Admin : session_variables.is_Admin});
+   if(session_variables.employeeID){
+      res.render('index', { employeeID : session_variables.employeeID, isAdmin : session_variables.isAdmin});
    }
    else{
       res.render('login');
@@ -46,6 +46,7 @@ app.get('/JobsTable', async function (req, res) {
    console.log('Request processed'); 
    const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
    const data = await response.json();
+   console.log(data);
    res.render('listJobRoles', {jobData: data});
 });
 
@@ -67,9 +68,9 @@ app.post('/login', async function (req, res) {
   })
   const responseData = await rawResponse.json()
 
-   if(responseData.Employee_ID){
-      session_variables.Employee_ID = responseData.Employee_ID;
-      session_variables.is_Admin = responseData.is_Admin;
+   if(responseData.employeeID){
+      session_variables.employeeID = responseData.employeeID;
+      session_variables.isAdmin = responseData.isAdmin;
       res.redirect('index');
    }
    else{

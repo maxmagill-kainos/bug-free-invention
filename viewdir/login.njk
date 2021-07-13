@@ -21,12 +21,12 @@
           {% endblock %}
           {% if error %}
             <center>
-              <p class="red-text text-lighten-2">{{ error }}</p>
+              <p id="errorMessage" class="red-text text-lighten-2">{{ error }}</p>
             </center>
           {% endif %}
           <form action="/login" method="POST">
             <div class="input-field">
-              <input type="text" id="email" name="email" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">
+              <input type="text" id="username" name="email" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">
               <label for="email">Email</label>
             </div>
             <div class="input-field">
@@ -34,7 +34,7 @@
               <label for="password">Password</label>
             </div>
             <center>
-              <button class="btn waves-effect waves-light" type="submit" style="background-color: #61A83F">Login<i class="material-icons right">send</i>
+              <button id="submitButton" class="btn waves-effect waves-light" type="submit" style="background-color: #61A83F">Login<i class="material-icons right">send</i>
               </center>
             </button>
           </form>
