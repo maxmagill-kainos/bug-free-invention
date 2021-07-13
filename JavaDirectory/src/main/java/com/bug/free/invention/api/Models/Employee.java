@@ -1,7 +1,11 @@
 package com.bug.free.invention.api.Models;
+import javax.persistence.Id;
+
+import javax.persistence.Entity;
 import java.util.UUID;
+@Entity
 public class Employee {
-    int id;
+    @Id int id;
     String name ;
     String address ;
     String UUID;
