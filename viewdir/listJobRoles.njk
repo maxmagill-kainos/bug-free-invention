@@ -32,7 +32,7 @@
                                 <td id="jobBandLevelCell{{role.jobID}}">{{role.bandLevel}}</td>
                                 <td id="jobFamilyNameCell{{role.jobID}}">{{role.familyName}}</td>
                                 {% if isAdmin != 0%}
-                                <td><i class="material-icons grey-text text-lighten-1" style="font-size: 25px" onclick="editRole({{role.jobID}})">edit</i></td>
+                                <td id="edit{{role.jobID}}"><i class="material-icons grey-text text-lighten-1" style="font-size: 25px" onclick="editRole({{role.jobID}})">edit</i></td>
                                 {% endif %}
                             </tr>
                                 {% endfor %}
@@ -50,7 +50,17 @@
 <script>
 function editRole(roleID){
     var jobTitle = document.getElementById("jobTitleCell" + roleID);
-    jobTitle.innerText = "Test";
+    var capabilityName = document.getElementById("jobCapabilityCell" + roleID);
+    var bandName = document.getElementById("jobBandNameCell" + roleID);
+    var bandLevel = document.getElementById("jobBandLevelCell" + roleID);
+    var familyName = document.getElementById("jobFamilyNameCell" + roleID);
+    var edit = document.getElementById("edit" +roleID);
+    jobTitle.innerHTML = '<input type="text" value="'+ jobTitle.innerText +'" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+    capabilityName.innerHTML = '<input type="text" value="'+ capabilityName.innerText +'" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+    bandName.innerHTML = '<input type="text" value="'+ bandName.innerText +'" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+    bandLevel.innerHTML = '<input type="text" value="'+ bandLevel.innerText +'" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+    familyName.innerHTML = '<input type="text" value="'+ familyName.innerText +'" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+    edit.innerHTML = '<a class="waves-effect waves-light btn" style="background-color: #61A83F">Confirm</a>'
 }
 
 </script>

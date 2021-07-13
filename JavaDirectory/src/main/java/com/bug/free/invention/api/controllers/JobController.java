@@ -16,20 +16,7 @@ import java.util.stream.StreamSupport;
 @RestController
     @RequestMapping("/api/jobs")
     public class JobController {
-
-    @Autowired
-    private JobService JobService;
-
-    @GetMapping("/JSONDemo")
-    public List<Employee> demoJson() {
-        List<Employee> returnList = new ArrayList<Employee>();
-        returnList.add(new Employee(1, "name", "difjidsfj"));
-        returnList.add(new Employee(2, "ijisdfjdsif", "dsuifjhduisfhui"));
-        return returnList;
-    }
-
-    ;
-
+        
     @PostMapping(value = "/submitJobSpec", consumes = "application/json", produces = "application/json")
     public String JobSpecSubmit(@RequestBody ObjectNode objectNode) {
         try {
