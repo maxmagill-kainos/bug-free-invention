@@ -53,7 +53,7 @@ import java.util.List;
             try{
 
                 Statement statement = DBConfig.getConnection().createStatement();
-                String dbQuery = "SELECT Job.jobID, Job.jobTitle, Job.bandID, Capability.capabilityID, Capability.capabilityName, Band.bandName, Band.bandLevel, Job_Family.jobFamilyTitle FROM Job JOIN Capability ON(Job.capabilityID = Capability.capabilityID) JOIN Band ON(Job.bandID = Band.bandID) JOIN Job_Family ON(Job.jobFamilyID = Job_Family.jobFamilyID);";
+                String dbQuery = "SELECT job.jobID, job.jobTitle, job.bandID, capability.capabilityID, capability.capabilityName, band.bandName, band.bandLevel, jobFamily.jobFamilyTitle FROM job JOIN capability ON(job.capabilityID = capability.capabilityID) JOIN band ON(job.bandID = band.bandID) JOIN jobFamily ON(job.jobFamilyID = jobFamily.jobFamilyID);";
                 ResultSet results = statement.executeQuery(dbQuery);
                 List<Job> Jobs = new ArrayList<Job>();
                 
