@@ -75,21 +75,19 @@ import java.util.stream.StreamSupport;
         } catch (Exception e) {
             List<Job> Jobs = new ArrayList<Job>();
             e.printStackTrace();
-            Jobs.add(new Job(1, "Test Job", 22, 23));
-            Jobs.add(new Job(2, "Test Job2", 23, 24));
             return Jobs;
         }
     }
 
 
-    @GetMapping("/jobSpec")
+/*    @GetMapping("/jobSpec")
     public String getJobSpecLink(@RequestParam Integer JobID) {
         try {
             return JobService.GetJobSpecLink(JobID);
         } catch (Exception e) {
             return "https://www.kainos.com";
         }
-    }
+    }*/
 
 
 }

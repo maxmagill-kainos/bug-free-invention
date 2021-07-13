@@ -5,120 +5,124 @@ import javax.persistence.Id;
 
 @Entity
 public class Job {
-    @Id int Job_ID;
-    String Job_Title;
-    String Job_Spec;
-    int Band_ID;
-    int Capability_ID;
-    String Band_Name;
-    String Capability_Name;
-    String Spec_Summary;
+    @Id int jobID;
+    String jobTitle;
+    //String jobSpec;
+    int bandID;
+    int capabilityID;
+    String bandName;
+    String capabilityName;
+    int bandlevel;
+    //String specSummary;
+    String familyName;
+
     public Job(){};
-    public Job(int job_ID, String job_Title, String job_Spec, int band_ID, int capability_ID) {
-        Job_ID = job_ID;
-        Job_Title = job_Title;
-        Job_Spec = job_Spec;
-        Band_ID = band_ID;
-        Capability_ID = capability_ID;
+    public Job(int jobID, String jobTitle, int bandID, String bandName, int bandLevel, int capabilityID, String capabilityName, String familyName) {
+        this.jobID = jobID;
+        this.jobTitle = jobTitle;
+
+        this.bandID = bandID;
+        this.bandName = bandName;
+        this.bandlevel = bandLevel;
+
+        this.capabilityID = capabilityID;
+        this.capabilityName = capabilityName;
+
+        this.familyName = familyName;
     }
 
-    public Job(int job_ID, String job_Title, int band_ID, int capability_ID) {
-        Job_ID = job_ID;
-        Job_Title = job_Title;
-        Band_ID = band_ID;
-        Capability_ID = capability_ID;
-    }
-    public Job(int job_ID, String job_Title, String band_Name, String capability_Name,String spec_Summary) {
-        Job_ID = job_ID;
-        Job_Title = job_Title;
-        Band_Name = band_Name;
-        Capability_Name = capability_Name;
-        Spec_Summary = spec_Summary;
-    }
-    public Job(int job_ID, String job_Title, String band_Name, String capability_Name,String spec_Summary,String job_Spec) {
-        Job_ID = job_ID;
-        Job_Title = job_Title;
-        Band_Name = band_Name;
-        Capability_Name = capability_Name;
-        Spec_Summary = spec_Summary;
-        Job_Spec = job_Spec;
+    public String getBandName() {
+        return bandName;
     }
 
-    public String getBand_Name() {
-        return Band_Name;
+    public void setBandName(String bandName) {
+        this.bandName = bandName;
     }
 
-    public void setBand_Name(String band_Name) {
-        Band_Name = band_Name;
+    public String getCapabilityName() {
+        return capabilityName;
     }
 
-    public String getCapability_Name() {
-        return Capability_Name;
+    public void setCapabilityName(String capabilityName) {
+        this.capabilityName = capabilityName;
     }
 
-    public void setCapability_Name(String capability_Name) {
-        Capability_Name = capability_Name;
+    public int getJobID() {
+        return jobID;
     }
 
-    public int getJob_ID() {
-        return Job_ID;
+    public void setJobID(int jobID) {
+        this.jobID = jobID;
     }
 
-    public void setJob_ID(int job_ID) {
-        Job_ID = job_ID;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public String getJob_Title() {
-        return Job_Title;
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
-    public void setJob_Title(String job_Title) {
-        Job_Title = job_Title;
+//    public String getJob_Spec() {
+//        return jobSpec;
+//    }
+
+//    public void setJob_Spec(String jobSpec) {
+//        this.jobSpec = jobSpec;
+//    }
+
+    public int getBandID() {
+        return bandID;
     }
 
-    public String getJob_Spec() {
-        return Job_Spec;
+    public void setBandID(int bandID) {
+        this.bandID = bandID;
     }
 
-    public void setJob_Spec(String job_Spec) {
-        Job_Spec = job_Spec;
+    public int getCapabilityID() {
+        return capabilityID;
     }
 
-    public int getBand_ID() {
-        return Band_ID;
+    public void setCapabilityID(int capabilityID) {
+        this.capabilityID = capabilityID;
     }
 
-    public void setBand_ID(int band_ID) {
-        Band_ID = band_ID;
+    public int getBandLevel() {
+        return bandlevel;
     }
 
-    public int getCapability_ID() {
-        return Capability_ID;
+    public void setBandLevel(int bandlevel) {
+        this.bandlevel = bandlevel;
     }
 
-    public void setCapability_ID(int capability_ID) {
-        Capability_ID = capability_ID;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public String getSpec_Summary() {
-        return Spec_Summary;
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
-    public void setSpec_Summary(String spec_Summary) {
-        Spec_Summary = spec_Summary;
-    }
+    //    public String getSpec_Summary() {
+//        return specSummary;
+//    }
+
+//    public void setSpec_Summary(String specSummary) {
+//        this.specSummary = specSummary;
+//    }
 
     @Override
     public String toString() {
         return "Job{" +
-                "Job_ID=" + Job_ID +
-                ", Job_Title='" + Job_Title + '\'' +
-                ", Job_Spec='" + Job_Spec + '\'' +
-                ", Band_ID=" + Band_ID +
-                ", Capability_ID=" + Capability_ID +
-                ", Band_Name='" + Band_Name + '\'' +
-                ", Capability_Name='" + Capability_Name + '\'' +
-                ", Spec_Summary='" + Spec_Summary + '\'' +
+                "jobID=" + jobID +
+                ", jobTitle='" + jobTitle + '\'' +
+//                ", jobSpec='" + jobSpec + '\'' +
+                ", bandID=" + bandID +
+                ", capabilityID=" + capabilityID +
+                ", bandName='" + bandName + '\'' +
+                ", capabilityName='" + capabilityName + '\'' +
+//                ", specSummary='" + specSummary + '\'' +
                 '}';
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
+import java.sql.SQLOutput;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +30,17 @@ public class JobService {
             System.out.println(DBConfig.url);
 
             //'Job_ID','Capability_ID','Band_ID','Job_Title'
-            String dbQuery = "SELECT * FROM Job INNER JOIN(Capability,Band,JobSummary) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = Job.Job_ID);";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
+            String dbQuery = "SELECT job.* , band.* , capability.* , jobFamily.* FROM job INNER JOIN(capability,band,jobFamily) ON (job.bandID = band.bandID) and (job.capabilityID = capability.capabilityID) and (job.jobFamilyID = jobFamily.jobFamilyID);";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
             ResultSet results = statement.executeQuery(dbQuery);
             while (results.next()) {
-                Jobs.add(new Job(results.getInt("Job_ID"), results.getString("Job_Title"), results.getString("Capability_Name"), results.getString("Band_Name"), results.getString("Summary_Text"),results.getString("Job_Spec")));
+                Jobs.add(new Job(Integer.parseInt(results.getString("jobID")),
+                        results.getString("jobTitle"),
+                        Integer.parseInt(results.getString("bandID")),
+                        results.getString("bandName"),
+                        Integer.parseInt(results.getString("bandLevel")),
+                        Integer.parseInt(results.getString("capabilityID")),
+                        results.getString("capabilityName"),
+                        results.getString("jobFamilyTitle")));
             }
             Iterable<Job> itrJobs = repository.saveAll(Jobs);
             itrJobs.forEach(savedJobs::add);
@@ -42,11 +50,11 @@ public class JobService {
        // return args -> {};
     }
 
-    public String GetJobSpecLink(Integer JobID){
-         populateJobRoles();
-         return  repository.findById(JobID).get().getJob_Spec();
-
-    };
+//    public String GetJobSpecLink(Integer JobID){
+//         populateJobRoles();
+//         return  repository.findById(JobID).get().getJob_Spec();
+//
+//    };
 
     public Iterable<Job> retrieveAllJobRoles(){
         populateJobRoles();

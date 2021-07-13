@@ -47,7 +47,7 @@ app.get('/JobsTable', async function (req, res) {
    const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
    const data = await response.json();
    console.log(data);
-   res.render('listJobRoles', {jobData: data});
+   res.render('listJobRoles', {jobData: data , isAdmin: session_variables.isAdmin});
 });
 
 

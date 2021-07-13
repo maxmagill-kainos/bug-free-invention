@@ -3,6 +3,7 @@
 
 {% block content %}
 <html lang="en">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Kainos - Job List</title> 
         <div class="container">
             <div class="row">
@@ -24,12 +25,15 @@
                         </thead>
                         <tbody>
                             {% for role in jobData %}
-                                <tr>
-                                <td>{{role.job_Title}}</td>
-                                <td>{{role.capability_name}}</td>
-                                <td>{{role.band_Name}}</td>
-                                <td>{{role.band_Level}}</td>
-                                <td>{{role.family_Name}}</td>
+                                <tr id="{{role.jobID}}">
+                                <td id="jobTitleCell{{role.jobID}}">{{role.jobTitle}}</td>
+                                <td id="jobCapabilityCell{{role.jobID}}">{{role.capabilityName}}</td>
+                                <td id="jobBandNameCell{{role.jobID}}">{{role.bandName}}</td>
+                                <td id="jobBandLevelCell{{role.jobID}}">{{role.bandLevel}}</td>
+                                <td id="jobFamilyNameCell{{role.jobID}}">{{role.familyName}}</td>
+                                {% if isAdmin != 0%}
+                                <td><i class="material-icons grey-text text-lighten-1" style="font-size: 25px" onclick="editRole({{role.jobID}})">edit</i></td>
+                                {% endif %}
                             </tr>
                                 {% endfor %}
                         </tbody>
@@ -41,6 +45,16 @@
 
     </body>
 </html>
+
+{% if isAdmin != 0%}
+<script>
+function editRole(roleID){
+    var jobTitle = document.getElementById("jobTitleCell" + roleID);
+    jobTitle.innerText = "Test";
+}
+
+</script>
+{% endif %}
 
 
 
