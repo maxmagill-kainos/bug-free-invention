@@ -254,6 +254,3 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,maven,java,intellij+all
 
 .DS_Store
-
-
-DBConfig.java
