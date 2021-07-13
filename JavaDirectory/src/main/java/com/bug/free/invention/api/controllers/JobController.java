@@ -1,8 +1,7 @@
 package com.bug.free.invention.api.controllers;
 
 import com.bug.free.invention.api.Models.Employee;
-import com.bug.free.invention.api.Models.IncorrectPermissonException;
-import com.bug.free.invention.api.Models.Job;
+import com.bug.free.invention.api.Models.job;
 import com.bug.free.invention.api.Services.EmployeeService;
 import com.bug.free.invention.api.Services.JobService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -76,17 +75,17 @@ import java.util.stream.StreamSupport;
     }
 
     @GetMapping("/jobRoles")
-    public List<Job> getJobRoles() {
+    public List<job> getJobRoles() {
         try {
-            List<Job> Jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
-            return  Jobs;
+            List<job> jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
+            return jobs;
 
         } catch (Exception e) {
-            List<Job> Jobs = new ArrayList<Job>();
+            List<job> jobs = new ArrayList<job>();
             e.printStackTrace();
-            Jobs.add(new Job(1, "Test Job", 22, 23));
-            Jobs.add(new Job(2, "Test Job2", 23, 24));
-            return Jobs;
+            jobs.add(new job(1, "Test job", 22, 23));
+            jobs.add(new job(2, "Test Job2", 23, 24));
+            return jobs;
         }
     }
 
