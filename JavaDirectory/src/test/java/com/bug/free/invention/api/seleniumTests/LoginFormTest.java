@@ -3,7 +3,8 @@ package com.bug.free.invention.api.seleniumTests;
 import com.bug.free.invention.framework.FunctionalTest;
 import com.bug.free.invention.pages.IndexPage;
 import com.bug.free.invention.pages.LoginPage;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 import java.util.concurrent.TimeUnit;
 
