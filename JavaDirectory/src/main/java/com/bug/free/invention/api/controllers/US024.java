@@ -14,7 +14,7 @@ public class US024 {
     @PostMapping(value = "/AuthLogin", consumes = "application/json")
     public String validateLogin(@RequestBody String authDetails){
         JSONObject userDetails = new JSONObject(authDetails);
-        String dbQuery = "SELECT `employeeID`,`isAdmin` FROM `Employee` WHERE `Username` = ? AND `userPassword` = ? LIMIT 1;";
+        String dbQuery = "SELECT `employeeID`,`isAdmin` FROM `employee` WHERE `username` = ? AND `userPassword` = ? LIMIT 1;";
         try(Connection DatabaseConnection = DBConfig.getConnection()){
             PreparedStatement validateUserLogin = DatabaseConnection.prepareStatement(dbQuery);
             validateUserLogin.setString(1, String.valueOf(userDetails.get("Email")));
