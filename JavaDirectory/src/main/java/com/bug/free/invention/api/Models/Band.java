@@ -10,34 +10,33 @@ import javax.persistence.GenerationType;
 import java.util.Objects;
 
 @Entity
-@Table(value = "Band")
+@Table(value = "band")
 public class Band {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(value = "Band_ID")
+    @Column(value = "bandID")
     int bandID;
-    @Column(value = "Band_Name")
+    @Column(value = "bandName")
     String bandName;
-    @Column(value = "Band_Level")
+    @Column(value = "bandLevel")
     int bandLevel;
-    @Column(value = "Band_Training")
+    @Column(value = "bandTraining")
     String bandTraining;
-    @Column(value = "Band_Competencies")
+    @Column(value = "bandCompetencies")
     String bandCompetencies;
-    @Column(value = "Band_Responsibilites")
+    @Column(value = "bandResponsibilites")
     String bandResponsibilities;
 
     public Band() {}
 
-    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
-        this.bandID = bandID;
-        this.bandName = bandName;
-        this.bandLevel = bandLevel;
-        this.bandTraining = bandTraining;
-        this.bandCompetencies = bandCompetencies;
-        this.bandResponsibilities = bandResponsibilities;
-    }
+//    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
+//        this.bandID = bandID;
+//        this.bandName = bandName;
+//        this.bandLevel = bandLevel;
+//        this.bandTraining = bandTraining;
+//        this.bandCompetencies = bandCompetencies;
+//        this.bandResponsibilities = bandResponsibilities;
+//    }
 
     public int getBandID() {
         return bandID;

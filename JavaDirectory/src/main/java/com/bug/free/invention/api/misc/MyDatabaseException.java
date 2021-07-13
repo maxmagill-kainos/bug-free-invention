@@ -1,11 +1,11 @@
-package com.bug.free.invention.api.Band;
+package com.bug.free.invention.api.misc;
 
-public class MyDBExc extends Exception {
-    public MyDBExc(String message) {
+public class MyDatabaseException extends Exception {
+    public MyDatabaseException(String message) {
         super(message);
     }
 
-    public MyDBExc(String message, Throwable cause) {
+    public MyDatabaseException(String message, Throwable cause) {
         super(message, cause);
     }
 }
