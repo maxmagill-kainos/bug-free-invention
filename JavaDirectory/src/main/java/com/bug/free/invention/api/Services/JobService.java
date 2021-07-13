@@ -29,7 +29,7 @@ public class JobService {
             System.out.println(DBConfig.url);
 
             //'Job_ID','Capability_ID','Band_ID','Job_Title'
-            String dbQuery = "SELECT * FROM `Job` INNER JOIN(Capability,Band,JobSummary) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = Job.Job_ID) ";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
+            String dbQuery = "SELECT * FROM Job INNER JOIN(Capability,Band,JobSummary) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = Job.Job_ID);";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
             ResultSet results = statement.executeQuery(dbQuery);
             while (results.next()) {
                 Jobs.add(new Job(results.getInt("Job_ID"), results.getString("Job_Title"), results.getString("Capability_Name"), results.getString("Band_Name"), results.getString("Summary_Text"),results.getString("Job_Spec")));

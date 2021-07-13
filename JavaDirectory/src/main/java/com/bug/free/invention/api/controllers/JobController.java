@@ -43,7 +43,7 @@ import java.util.stream.StreamSupport;
             System.out.println(JobSpec);
             System.out.println(JobID);
             try {
-                String dbQuery = "UPDATE`JobSummary` SET Summary_Text = ? WHERE `Job_ID`=?;";
+                String dbQuery = "UPDATE JobSummary SET Summary_Text = ? WHERE `Job_ID`=?;";
                 Connection DatabaseConnection = DBConfig.getConnection();
                 PreparedStatement SubmitSpecForJob = DatabaseConnection.prepareStatement(dbQuery);
                 SubmitSpecForJob.setString(1, JobSpec);
