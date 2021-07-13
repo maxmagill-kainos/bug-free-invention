@@ -16,7 +16,10 @@ import java.util.stream.StreamSupport;
 @RestController
     @RequestMapping("/api/jobs")
     public class JobController {
-        
+
+    @Autowired
+    private JobService JobService;
+
     @PostMapping(value = "/submitJobSpec", consumes = "application/json", produces = "application/json")
     public String JobSpecSubmit(@RequestBody ObjectNode objectNode) {
         try {

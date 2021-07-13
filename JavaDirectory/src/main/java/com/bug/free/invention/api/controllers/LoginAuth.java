@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 @RestController
 @RequestMapping("/api/login")
-public class US024 {
+public class LoginAuth {
 
     @PostMapping(value = "/AuthLogin", consumes = "application/json")
     public String validateLogin(@RequestBody String authDetails){
