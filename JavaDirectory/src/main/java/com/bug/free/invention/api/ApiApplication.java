@@ -12,6 +12,5 @@ public class ApiApplication {
 		} catch (Exception E) {
 			E.printStackTrace();
 		}
-
 	}
 }

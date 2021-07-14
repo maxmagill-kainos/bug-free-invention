@@ -1,8 +1,9 @@
 package com.bug.free.invention.api.controllers;
-import javax.xml.crypto.Data;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 public class DBConfig {
     private  static String Username = "";
     private static String Password = "" ;
@@ -10,18 +11,9 @@ public class DBConfig {
     private static String DatabaseID = "";
     public static String url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
     public DBConfig(){
-    }
-    public static void DBInit(){
-        if(System.getenv("BUGFREEDBUSERNAME") != null){
-            Username = System.getenv("BUGFREEDBUSERNAME");
-            Password = System.getenv("BUGFREEDBPASSWORD");
-            host = System.getenv("BUGFREEDBHOST");
 
-        }
     }
-    private String getDatabaseName(){
-        return DatabaseID;
-    }
+
     public static Connection getConnection(){
         try{
             Connection conn = DriverManager.getConnection(url, Username, Password);
