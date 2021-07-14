@@ -1,20 +1,42 @@
 package com.bug.free.invention.api.Models;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.util.Objects;
 
 @Entity
-@Table(name = "band")
-public class band {
-    @OneToOne(mappedBy = "bandID")
-    @Id int bandID;
-    private String bandName;
-    private int bandLevel;
-    private String bandTraining;
-    private String bandCompetencies;
-    private String bandResponsibilites;
+@Table(value = "band")
+public class Band {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(value = "bandID")
+    int bandID;
+    @Column(value = "bandName")
+    String bandName;
+    @Column(value = "bandLevel")
+    int bandLevel;
+    @Column(value = "bandTraining")
+    String bandTraining;
+    @Column(value = "bandCompetencies")
+    String bandCompetencies;
+    @Column(value = "bandResponsibilites")
+    String bandResponsibilities;
+
+    public Band() {}
+
+//    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
+//        this.bandID = bandID;
+//        this.bandName = bandName;
+//        this.bandLevel = bandLevel;
+//        this.bandTraining = bandTraining;
+//        this.bandCompetencies = bandCompetencies;
+//        this.bandResponsibilities = bandResponsibilities;
+//    }
 
     public int getBandID() {
         return bandID;
@@ -56,11 +78,36 @@ public class band {
         this.bandCompetencies = bandCompetencies;
     }
 
-    public String getBandResponsibilites() {
-        return bandResponsibilites;
+    public String getBandResponsibilities() {
+        return bandResponsibilities;
     }
 
-    public void setBandResponsibilites(String bandResponsibilites) {
-        this.bandResponsibilites = bandResponsibilites;
+    public void setBandResponsibilities(String bandResponsibilities) {
+        this.bandResponsibilities = bandResponsibilities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Band band = (Band) o;
+        return bandID == band.bandID && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilities, band.bandResponsibilities);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bandID, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilities);
+    }
+
+    @Override
+    public String toString() {
+        return "Band{" +
+                "bandId=" + bandID +
+                ", bandName='" + bandName + '\'' +
+                ", bandLevel=" + bandLevel +
+                ", bandTraining='" + bandTraining + '\'' +
+                ", bandCompetencies='" + bandCompetencies + '\'' +
+                ", bandResponsibilities='" + bandResponsibilities + '\'' +
+                '}';
     }
 }
