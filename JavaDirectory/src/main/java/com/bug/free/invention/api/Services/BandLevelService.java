@@ -1,6 +1,7 @@
 package com.bug.free.invention.api.Services;
 
 import com.bug.free.invention.api.Models.Band;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;

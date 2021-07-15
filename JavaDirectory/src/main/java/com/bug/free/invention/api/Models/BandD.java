@@ -9,11 +9,11 @@ import javax.persistence.GenerationType;
 import java.util.Objects;
 
 @Table(value = "band")
-public class Band {
+public class BandD {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(value = "bandID")
-    Integer bandID;
+    int bandID;
     @Column(value = "bandName")
     String bandName;
     @Column(value = "bandLevel")
@@ -24,10 +24,8 @@ public class Band {
     String bandCompetencies;
     @Column(value = "bandResponsibilites")
     String bandResponsibilites;
-
-//    public Band() {}
-
-    public Band(Integer bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
+    public BandD() {}
+    public BandD(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
         this.bandID = bandID;
         this.bandName = bandName;
         this.bandLevel = bandLevel;
@@ -35,12 +33,10 @@ public class Band {
         this.bandCompetencies = bandCompetencies;
         this.bandResponsibilites = bandResponsibilites;
     }
-
-    public Integer getBandID() {
+    public int getBandID() {
         return bandID;
     }
-
-    public void setBandID(Integer bandID) {
+    public void setBandID(int bandID) {
         this.bandID = bandID;
     }
     public String getBandName() {
@@ -67,11 +63,9 @@ public class Band {
     public void setBandCompetencies(String bandCompetencies) {
         this.bandCompetencies = bandCompetencies;
     }
-
     public String getBandResponsibilites() {
         return bandResponsibilites;
     }
-
     public void setBandResponsibilities(String bandResponsibilites) {
         this.bandResponsibilites = bandResponsibilites;
     }
@@ -79,8 +73,8 @@ public class Band {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Band band = (Band) o;
-        return bandID == band.bandID && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilites, band.bandResponsibilites);
+        BandD bandD = (BandD) o;
+        return bandID == bandD.bandID && bandLevel == bandD.bandLevel && Objects.equals(bandName, bandD.bandName) && Objects.equals(bandTraining, bandD.bandTraining) && Objects.equals(bandCompetencies, bandD.bandCompetencies) && Objects.equals(bandResponsibilites, bandD.bandResponsibilites);
     }
     @Override
     public int hashCode() {

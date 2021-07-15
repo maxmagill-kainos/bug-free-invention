@@ -63,6 +63,13 @@ app.get('/JobsTable', async function (req, res) {
    res.render('SpecTable',{data:await data});
 }); 
 
+app.get('/bands', async function(req, res){
+   console.log("Request processed");
+   const response = await fetch('http://localhost:8080/api/demo/bands', {method: 'GET', headers:{}})
+   const data = await response.text();
+   console.log(response);
+   res.send('<p>'+data+'</p>')
+   });
 app.get('/JobsSpec', async function (req, res) { 
    console.log('Request processed'); 
    console.log('http://localhost:8080/api/jobs/jobSpec?JobID='+req.query.jobClicked);
@@ -70,6 +77,8 @@ app.get('/JobsSpec', async function (req, res) {
    const data = await response.text();
    res.redirect(data);
 }); 
+
+
 
 app.get('/fromc', async function (req, res) { 
    console.log('Request processed'); 
@@ -94,17 +103,24 @@ app.post('/login', function (req, res) {
       res.render('login', { error : "Incorrect Email or Password"});
    }
 }); 
-app.post('/SubmitSpecForJob',async function(req,res){
+
+function SubmitSpecForJob(req,res){
    console.log(req.body)
    let JSONSubmitObject ={
       JobSpec : req.body.SpecSummaryInput,
-      JobID : parseInt(req.body.JobID)
+      JobID : parseInt(req.body.JobID),
+      UniqueIdentifier: session_variables.UniqueIdentifier
 
    }
    console.log(JSON.stringify(JSONSubmitObject));
    const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
    console.log(PostCallToJava.json())
-})
+}
+
+app.post('/SubmitSpecForJob',async function(req,res){
+   SubmitSpecForJob(req,res);
+}
+
 
 app.get('/logout', function(req, res){
    req.session.destroy(function(err) {

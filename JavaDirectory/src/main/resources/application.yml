@@ -2,9 +2,9 @@ spring:
   datasource:
     drive-class-name: com.mysql.cj.jdbc.Driver
 #          url: jdbc:mysql://localhost:3306/sys?serverTimezone=UTC&characterEncoding=UTF-8
-    url: jdbc:mysql://academy2020.cpc8rvmbbd9k.eu-west-2.rds.amazonaws.com/teamC_Josh?serverTimezone=UTC&characterEncoding=UTF-8
-    username: teamCadmin
-    password: "teampassword"
+    url: jdbc:mysql://academy2020.cpc8rvmbbd9k.eu-west-2.rds.amazonaws.com/teamCteam_Colm?serverTimezone=UTC&characterEncoding=UTF-8
+    username: Colm
+    password: "tempPwd!"
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

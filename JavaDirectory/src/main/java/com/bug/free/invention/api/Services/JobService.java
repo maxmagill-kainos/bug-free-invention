@@ -1,9 +1,8 @@
 package com.bug.free.invention.api.Services;
 
-import com.bug.free.invention.api.Models.Job;
+import com.bug.free.invention.api.Models.job;
 import com.bug.free.invention.api.controllers.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -16,31 +15,56 @@ public class JobService {
     //Load From Database
     @Autowired
     private JobRepository repository;
+    @Autowired
+    private BandService bandService;
+    @Autowired
+    private CapabilityService capabilityService;
 
-    public void populateJobRoles() {
+    void populateJobRoles() {
         try {
-            List<Job> Jobs = new ArrayList<>();
-            List<Job> savedJobs = new ArrayList<>();
+            List<job> jobs = new ArrayList<>();
+            List<job> savedJobs = new ArrayList<>();
             Statement statement = DBConfig.getConnection().createStatement();
+            System.out.println(DBConfig.url);
+            String dbQuerys = "Show tables";
+            ResultSet res = statement.executeQuery(dbQuerys);
+            while (res.next()){
+                System.out.println(res.getString(1));
+            }
+            String dbQuery = "SELECT * FROM job";
+
+
             //'Job_ID','Capability_ID','Band_ID','Job_Title'
-            String dbQuery = "SELECT * FROM `Job` INNER JOIN(Capability,Band,JobSummary) ON (Job.Band_ID = Band.Band_ID) and (Job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = Job.Job_ID) ";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
+            //String dbQuery = "SELECT * FROM `job` JOIN(Capability,Band,JobSummary) ON (job.Band_ID = Band.Band_ID) and (job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = job.Job_ID);";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
+            //String dbQuery = "SELECT * FROM job JOIN capability AS C ON job.capabilityID = C.capabilityID JOIN band AS B ON job.bandID = B.bandID JOIN jobSummary AS JS ON JS.jobID = job.jobID;";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
             ResultSet results = statement.executeQuery(dbQuery);
             while (results.next()) {
-                Jobs.add(new Job(results.getInt("Job_ID"), results.getString("Job_Title"), results.getString("Capability_Name"), results.getString("Band_Name"), results.getString("Summary_Text"),results.getString("Job_Spec")));
+                job TempJob = new job(results.getInt("jobID"), results.getString("jobTitle"),results.getString("jobSpec"),results.getInt("jobFamilyID"),results.getInt("bandID"),results.getInt("capabilityID"));// results.getString(8), results.getString(10), results.getString(16),results.getString(3)));
+               /* if(bandRepository.findById(results.getInt("bandID")).isPresent()){
+                    TempJob.setBand(bandRepository.findById(results.getInt("bandID")).get());
+                };
+                if(capabilityRepository.findById(results.getInt("capabilityID")).isPresent()) {
+                    TempJob.setCapability(capabilityRepository.findById(results.getInt("capabilityID")).get());
+                };*/
+                jobs.add(TempJob);
+
             }
-            Iterable<Job> itrJobs = repository.saveAll(Jobs);
+            Iterable<job> itrJobs = repository.saveAll(jobs);
             itrJobs.forEach(savedJobs::add);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+       // return args -> {};
     }
 
     public String GetJobSpecLink(Integer JobID){
-         return  repository.findById(JobID).get().getJob_Spec();
+         populateJobRoles();
+         return  repository.findById(JobID).get().getJobSpec();
 
     };
 
-    public Iterable<Job> retrieveAllJobRoles(){
+    public Iterable<job> retrieveAllJobRoles(){
         populateJobRoles();
         return repository.findAll();
     }
