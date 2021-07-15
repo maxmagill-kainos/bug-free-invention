@@ -1,9 +1,3 @@
-
-
-
-
-
-
 CREATE TABLE capability(
     capabilityID TINYINT PRIMARY KEY AUTO_INCREMENT,
     capabilityName varchar (40) NOT NULL
@@ -52,5 +46,6 @@ CREATE TABLE employee(
     userPassword varchar (60) NOT NULL,
     isAdmin boolean NOT NULL,
     jobID SMALLINT NOT NULL,
+    uniqueID varchar(255),
     FOREIGN KEY (`jobID`) REFERENCES `job`(`jobID`)
 );

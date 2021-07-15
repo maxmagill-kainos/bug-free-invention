@@ -8,12 +8,13 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(value = "capability")
 
 public class capability {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(value = "capabilityID")
-    @Id int capabilityID;
+    int capabilityID;
     @Column(value = "capabilityName")
     private String capabilityName;
-
+    public capability() {}
     public capability(int capabilityID, String capabilityName) {
         this.capabilityID = capabilityID;
         this.capabilityName = capabilityName;

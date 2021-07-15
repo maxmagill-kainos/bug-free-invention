@@ -17,13 +17,7 @@ public class apiRoutesDemo {
             return ResponseEntity.ok("Hello World");
         }
 
-        @GetMapping("/JSONDemo")
-        public ArrayList<Employee> demoJson(){
-            ArrayList<Employee> returnList = new ArrayList<>();
-            returnList.add(new Employee(1,"name","difjidsfj"));
-            returnList.add(new Employee(2,"ijisdfjdsif","dsuifjhduisfhui"));
-            return returnList;
-        }
+
 
     @GetMapping("/hello-fromc")
     public ResponseEntity<String> getFromC(){

@@ -16,9 +16,9 @@ public class JobService {
     @Autowired
     private JobRepository repository;
     @Autowired
-    private BandRepository bandRepository;
+    private BandService bandService;
     @Autowired
-    private CapabilityRepository capabilityRepository;
+    private CapabilityService capabilityService;
 
     void populateJobRoles() {
         try {

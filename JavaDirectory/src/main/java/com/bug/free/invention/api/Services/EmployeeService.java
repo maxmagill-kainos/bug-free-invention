@@ -1,8 +1,10 @@
 package com.bug.free.invention.api.Services;
 
+import com.bug.free.invention.api.Models.Band;
 import com.bug.free.invention.api.Models.Employee;
 import com.bug.free.invention.api.Models.IncorrectPermissonException;
 import com.bug.free.invention.api.controllers.DBConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -10,9 +12,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class EmployeeService {
-
+    @Autowired
     private EmployeeRepository repository;
 
 
@@ -25,7 +30,7 @@ public class EmployeeService {
             validateUserLogin.setString(2, password);
             ResultSet results = validateUserLogin.executeQuery();
             while(results.next()){
-                repository.save(new Employee(results.getInt("employeeID"),results.getString("fName").concat(results.getString("lName")),
+                repository.save(new Employee(results.getInt("employeeID"),results.getString("fName"),results.getString("lName"),
                         results.getString("uniqueID"),results.getBoolean("isAdmin")));
                 return "{\"employeeID\": \"" + results.getString("employeeID") + "\", \"isAdmin\": \""+ results.getString("isAdmin")+ "\"}";
             }
@@ -37,18 +42,14 @@ public class EmployeeService {
     public boolean IsEmployeeValidAdmin(String UniqueIdentifier,Integer EmployeeID){
         try{
             Employee EmployeeToCheck ;
-            if(repository.findById(EmployeeID).isPresent()) {
+            EmployeeToCheck = repository.findById(EmployeeID).get();
 
-                EmployeeToCheck = repository.findById(EmployeeID).get();
-            }
-            else{
-                return false;
-            }
 
-            if(EmployeeToCheck.getUUID() == UniqueIdentifier && EmployeeToCheck.isAdmin()){
+            if(EmployeeToCheck.getUUID().equals(UniqueIdentifier) && EmployeeToCheck.isAdmin()==true){
                 return true;
             }
             else {
+                System.out.println(EmployeeToCheck.toString());
                 throw new IncorrectPermissonException("invalid login");
             }
 

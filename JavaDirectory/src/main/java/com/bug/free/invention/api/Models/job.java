@@ -24,7 +24,7 @@ public class job {
     int capabilityID = 1;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
-    private band intband;
+    private Band intband;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private capability intcapability;
@@ -100,11 +100,11 @@ public class job {
         this.capabilityID = capabilityID;
     }
 
-    public band getIntband() {
+    public Band getIntband() {
         return intband;
     }
 
-    public void setIntband(band intband) {
+    public void setIntband(Band intband) {
         this.intband = intband;
     }
 
@@ -114,6 +114,19 @@ public class job {
 
     public void setIntcapability(capability intcapability) {
         this.intcapability = intcapability;
+    }
+
+    @Override
+    public String toString() {
+        return "job{" +
+                "jobID=" + jobID +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", jobSpec='" + jobSpec + '\'' +
+                ", jobFamilyID=" + jobFamilyID +
+                ", bandID=" + bandID +
+                ", capabilityID=" + capabilityID +
+                ", band_Name=" + intband.getBandName()+
+                '}';
     }
 }
 

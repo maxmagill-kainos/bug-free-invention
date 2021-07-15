@@ -1,34 +1,38 @@
 package com.bug.free.invention.api.Models;
-import javax.persistence.Id;
 
-import javax.persistence.Entity;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.util.Objects;
 import java.util.UUID;
-@Entity
+
+@Table(value = "employee")
 public class Employee {
-    @Id int id;
-    String name ;
-    String address ;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(value = "employeeID")
+    int id;
+    @Column(value = "fName")
+    String firstName ;
+    @Column(value = "lName")
+    String lastName;
+    @Column(value = "uniqueID")
     String UUID;
+    @Column(value = "isAdmin")
     boolean isAdmin;
 
-    public Employee(int id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
+    public Employee() {
     }
-    public Employee(int id, String name,String UUID,boolean isAdmin) {
+
+    public Employee(int id, String firstName, String lastName, String UUID, boolean isAdmin) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.UUID = UUID;
         this.isAdmin = isAdmin;
-    }
-
-    public String getUUID() {
-        return UUID;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
     }
 
     public int getId() {
@@ -39,28 +43,46 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + this.id +
-                ", name='" + this.name + '\'' +
-                ", address='" + this.address + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", UUID='" + UUID + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 }
