@@ -15,18 +15,29 @@ public class BandLevelService {
     }
 
     public List<Band> getAllBands() {
-//        List<Band> band = new ArrayList<Band>();
-//        repository.findAll().forEach(band1 -> band.add(band1));
-//        return band;
-        return repository.findAll();
+        List<Band> band = new ArrayList<Band>();
+        repository.findAll().forEach(band1 -> band.add(band1));
+        return band;
     }
 
-    public Optional<Integer> getBandLevelByBandID(int bandID) throws SQLException {
-        return repository.findBandLevelByBandID(bandID);
+    public Optional<Integer> getBandLevelByBandID(Integer bandID) throws SQLException {
+        if (bandID == null) {
+            throw new IllegalArgumentException("bandID can not be null");
+        } else
+            return repository.findBandLevelByBandID(bandID)
+                    .map(band -> band.getBandLevel());
     }
 
-    public Optional<Band> getBandLevelByBandName(String bandName) throws SQLException {
-        return repository.findBandLevelByBandName(bandName);
+    public Optional<Integer> getBandLevelByBandName(String bandName) throws SQLException {
+        if (bandName == null) {
+            throw new IllegalArgumentException("bandName can not be null");
+        } else
+        return repository.findBandLevelByBandName(bandName)
+                .map(band -> band.getBandLevel());
     }
 
+
+//    public void deleteBandByBandID(int bandID) {
+//            repository.deleteBandByBandID(bandID);
+//    }
 }

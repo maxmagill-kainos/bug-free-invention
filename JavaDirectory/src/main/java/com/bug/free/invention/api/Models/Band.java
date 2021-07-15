@@ -4,18 +4,16 @@ import javax.persistence.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.Objects;
 
-@Entity
 @Table(value = "band")
 public class Band {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(value = "bandID")
-    int bandID;
+    Integer bandID;
     @Column(value = "bandName")
     String bandName;
     @Column(value = "bandLevel")
@@ -25,24 +23,24 @@ public class Band {
     @Column(value = "bandCompetencies")
     String bandCompetencies;
     @Column(value = "bandResponsibilites")
-    String bandResponsibilities;
+    String bandResponsibilites;
 
-    public Band() {}
+//    public Band() {}
 
-//    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
-//        this.bandID = bandID;
-//        this.bandName = bandName;
-//        this.bandLevel = bandLevel;
-//        this.bandTraining = bandTraining;
-//        this.bandCompetencies = bandCompetencies;
-//        this.bandResponsibilities = bandResponsibilities;
-//    }
+    public Band(Integer bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
+        this.bandID = bandID;
+        this.bandName = bandName;
+        this.bandLevel = bandLevel;
+        this.bandTraining = bandTraining;
+        this.bandCompetencies = bandCompetencies;
+        this.bandResponsibilites = bandResponsibilites;
+    }
 
-    public int getBandID() {
+    public Integer getBandID() {
         return bandID;
     }
 
-    public void setBandID(int bandID) {
+    public void setBandID(Integer bandID) {
         this.bandID = bandID;
     }
 
@@ -78,12 +76,12 @@ public class Band {
         this.bandCompetencies = bandCompetencies;
     }
 
-    public String getBandResponsibilities() {
-        return bandResponsibilities;
+    public String getBandResponsibilites() {
+        return bandResponsibilites;
     }
 
-    public void setBandResponsibilities(String bandResponsibilities) {
-        this.bandResponsibilities = bandResponsibilities;
+    public void setBandResponsibilities(String bandResponsibilites) {
+        this.bandResponsibilites = bandResponsibilites;
     }
 
     @Override
@@ -91,12 +89,12 @@ public class Band {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Band band = (Band) o;
-        return bandID == band.bandID && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilities, band.bandResponsibilities);
+        return bandID == band.bandID && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilites, band.bandResponsibilites);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bandID, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilities);
+        return Objects.hash(bandID, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilites);
     }
 
     @Override
@@ -107,7 +105,7 @@ public class Band {
                 ", bandLevel=" + bandLevel +
                 ", bandTraining='" + bandTraining + '\'' +
                 ", bandCompetencies='" + bandCompetencies + '\'' +
-                ", bandResponsibilities='" + bandResponsibilities + '\'' +
+                ", bandResponsibilities='" + bandResponsibilites + '\'' +
                 '}';
     }
 }
