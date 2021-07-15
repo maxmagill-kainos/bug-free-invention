@@ -97,6 +97,8 @@ app.post('/login', function (req, res) {
    session_variables = req.session;
    if(req.body.email == "test" && encrypt(req.body.password) == encrypt("password")){
       session_variables.email = req.body.email;
+      session_variables.employeeID =2;//for testing only
+      session_variables.UniqueIdentifier = "uhsdiufh8h3r487hifd";//for testing onyl
       res.redirect('index')
    }
    else{
@@ -109,7 +111,8 @@ async function SubmitSpecForJob(req,res){
    let JSONSubmitObject ={
       JobSpec : req.body.SpecSummaryInput,
       JobID : parseInt(req.body.JobID),
-      UniqueIdentifier: session_variables.UniqueIdentifier
+      UniqueIdentifier: session_variables.UniqueIdentifier,
+      employeeID:session_variables.employeeID,
    };
    console.log(JSON.stringify(JSONSubmitObject));
    const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
