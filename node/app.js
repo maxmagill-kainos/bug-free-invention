@@ -45,9 +45,31 @@ app.get('/apitest', async function (req, res) {
    const data = await response.text();
    console.log(response)
    res.send('<p>'+data+'</p>');
+});
+ 
+app.get('/job-roles', async function(req, res){
+   console.log("Request processed");
+   const response = await fetch('http://localhost:8080/api/demo/job-roles', {method: 'GET', headers:{}})
+   const data = await response.text();
+   console.log(response);
+   res.send('<p>'+data+'</p>')
+});
+
+app.get('/JobsTable', async function (req, res) { 
+   console.log('Request processed'); 
+   const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
+   const data = await response.json();
+   console.log(data)
+   res.render('SpecTable',{data:await data});
 }); 
 
-
+app.get('/JobsSpec', async function (req, res) { 
+   console.log('Request processed'); 
+   console.log('http://localhost:8080/api/jobs/jobSpec?JobID='+req.query.jobClicked);
+   const response = await fetch('http://localhost:8080/api/jobs/jobSpec?JobID='+req.query.jobClicked,{method:'GET',headers:{}})
+   const data = await response.text();
+   res.redirect(data);
+}); 
 
 app.get('/fromc', async function (req, res) { 
    console.log('Request processed'); 
@@ -72,6 +94,17 @@ app.post('/login', function (req, res) {
       res.render('login', { error : "Incorrect Email or Password"});
    }
 }); 
+app.post('/SubmitSpecForJob',async function(req,res){
+   console.log(req.body)
+   let JSONSubmitObject ={
+      JobSpec : req.body.SpecSummaryInput,
+      JobID : parseInt(req.body.JobID)
+
+   }
+   console.log(JSON.stringify(JSONSubmitObject));
+   const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
+   console.log(PostCallToJava.json())
+})
 
 app.get('/logout', function(req, res){
    req.session.destroy(function(err) {
