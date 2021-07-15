@@ -64,6 +64,7 @@ public class JobService {
         if(HasRunBefore == false){
             populateJobRoles();
         }
+        System.out.println(repository.findById(JobID).get().getJobSpec());
          return  repository.findById(JobID).get().getJobSpec();
 
     };

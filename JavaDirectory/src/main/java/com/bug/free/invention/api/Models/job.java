@@ -45,6 +45,14 @@ public class job {
         this.jobFamilyID = jobFamilyID;
 
     }
+    public job(int jobID, String jobTitle, String jobSpec, int jobFamilyID, int bandID, int capabilityID) {
+        this.jobID = jobID;
+        this.jobTitle = jobTitle;
+        this.jobSpec = jobSpec;
+        this.jobFamilyID = jobFamilyID;
+        this.bandID = bandID;
+        this.capabilityID = capabilityID;
+    }
 
     public int getJobID() {
         return jobID;
@@ -78,14 +86,7 @@ public class job {
         this.jobFamilyID = jobFamilyID;
     }
 
-    public job(int jobID, String jobTitle, String jobSpec, int jobFamilyID, int bandID, int capabilityID) {
-        this.jobID = jobID;
-        this.jobTitle = jobTitle;
-        this.jobSpec = jobSpec;
-        this.jobFamilyID = jobFamilyID;
-        this.bandID = bandID;
-        this.capabilityID = capabilityID;
-    }
+
 
     public int getBandID() {
         return bandID;
