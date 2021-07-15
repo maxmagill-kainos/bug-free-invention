@@ -7,8 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConfig {
-    private  static String Username = "";
-    private static String Password = "" ;
+    private  static String Username = "tCadmin";
+    private static String Password = "teamCpassword" ;
     private static String host = "";
     private static String DatabaseID = "teamCteam_Josh";
     public static String url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
@@ -36,8 +36,8 @@ public class DBConfig {
     }
     public static boolean ProdMode(){
         DatabaseID = "teamCteam_Josh";
-        Username = "";
-        Password = "";
+        Username = "tCadmin";
+        Password = "teamCpassword";
         url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
         return true;
     };
