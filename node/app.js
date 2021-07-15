@@ -104,14 +104,13 @@ app.post('/login', function (req, res) {
    }
 }); 
 
-function SubmitSpecForJob(req,res){
+async function SubmitSpecForJob(req,res){
    console.log(req.body)
    let JSONSubmitObject ={
       JobSpec : req.body.SpecSummaryInput,
       JobID : parseInt(req.body.JobID),
       UniqueIdentifier: session_variables.UniqueIdentifier
-
-   }
+   };
    console.log(JSON.stringify(JSONSubmitObject));
    const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
    console.log(PostCallToJava.json())
@@ -119,7 +118,7 @@ function SubmitSpecForJob(req,res){
 
 app.post('/SubmitSpecForJob',async function(req,res){
    SubmitSpecForJob(req,res);
-}
+});
 
 
 app.get('/logout', function(req, res){
