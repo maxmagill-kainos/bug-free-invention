@@ -16,7 +16,7 @@ public class DBConfig {
 
     public static Connection getConnection(){
         try{
-            Connection conn = DriverManager.getConnection("jdbc:mysql://"+ host + "/YOURDB?useSSL=false", Username, Password);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://"+ host + "/teamCteam_Josh?useSSL=false", Username, Password);
             return conn;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
