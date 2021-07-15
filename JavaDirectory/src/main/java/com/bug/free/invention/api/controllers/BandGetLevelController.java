@@ -1,53 +1,55 @@
-package com.bug.free.invention.api.Band.bandController;
+package com.bug.free.invention.api.controllers;
 
-import com.bug.free.invention.api.Band.bandService.GetBandLevelService;
-import com.bug.free.invention.api.Band.domain.Band;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.bug.free.invention.api.Models.Band;
+import com.bug.free.invention.api.Services.BandLevelService;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/bandLevel")
 public class BandGetLevelController {
-    @Autowired
-    private final GetBandLevelService service;
 
-    public BandGetLevelController(GetBandLevelService service) {
+    private final BandLevelService service;
+
+    public BandGetLevelController(BandLevelService service) {
         this.service = service;
     }
 
-
     @GetMapping
-    public Object findAll(@RequestParam Optional<Integer> bandId,
-                          @RequestParam Optional<String> bandName) throws SQLException {
-        if (bandId.isPresent()) {
-            return service.getLevelById(bandId.get());
-        } else if (bandName.isPresent()) {
-            return service.getLevelByName(bandName.get());
-        } else {
-            return service.findAll();
-        }
+    public List<Band> findAll() {
+        return service.getAllBands();
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<?> getBandLevelById(@RequestParam int bandId) throws SQLException {
-        return service.
-                getLevelById(bandId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{id}")
+    public Integer getBandLevelByBandID(@PathVariable int bandID) throws SQLException {
+        return service.getBandLevelByBandID(bandID).get();
     }
 
-    @GetMapping("/name")
-    public ResponseEntity<?> getBandLevelByName(@RequestParam String bandName) throws SQLException {
-        List<Band> bands = service.getLevelByName(bandName);
-        bands.forEach(System.out::println);
-        return null;
-    }
+//    @GetMapping("/id")
+//    public ResponseEntity<?> getBandLevelById(@RequestParam int bandID) throws SQLException {
+//        return service.
+//                getBandLevelByBandID(bandID)
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+//    }
+//    @GetMapping("/bands")
+//    public Object findAll(@RequestParam Optional<Integer> bandID,
+//                          @RequestParam Optional<String> bandName) throws SQLException {
+//        if (bandID.isPresent()) {
+//            return service.getBandLevelByBandID(bandID.get());
+//        } else if (bandName.isPresent()) {
+//            return service.getBandLevelByBandName(bandName.get());
+//        } else {
+//            return service.getAllBands();
+//        }
+//    }
+//    @GetMapping("/name")
+//    public ResponseEntity<?> getBandLevelByName(@RequestParam String bandName) throws SQLException {
+//        List<Band> bands = service.getLevelByName(bandName);
+//        bands.forEach(System.out::println);
+//        return null;
+//    }
+
 }

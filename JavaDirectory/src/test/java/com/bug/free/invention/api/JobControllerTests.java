@@ -32,7 +32,7 @@ public class JobControllerTests {
     public void setup() {
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
         restTemplate.exchange(createURLWithPort("/students"), HttpMethod.POST, entity, String.class);
-        DBConfig.TestMode();
+        //DBConfig.TestMode();
     }
 
 
