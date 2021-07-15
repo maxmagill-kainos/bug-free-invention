@@ -1,13 +1,7 @@
 package com.bug.free.invention.api.controllers;
 
-import com.bug.free.invention.api.Models.Employee;
-import com.bug.free.invention.api.Models.Band;
-import com.bug.free.invention.api.Models.job;
-import com.bug.free.invention.api.Models.capability;
-import com.bug.free.invention.api.Services.CapabilityService;
-import com.bug.free.invention.api.Services.EmployeeService;
-import com.bug.free.invention.api.Services.BandService;
-import com.bug.free.invention.api.Services.JobService;
+import com.bug.free.invention.api.Models.*;
+import com.bug.free.invention.api.Services.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
@@ -31,6 +25,8 @@ import java.util.stream.StreamSupport;
     private BandService bandService;
     @Autowired
     private CapabilityService capabilityService;
+    @Autowired
+    private JobSummaryService summaryService;
 
 
 
@@ -64,6 +60,7 @@ import java.util.stream.StreamSupport;
                 int ReturnedValueInsert = SubmitSpecForJob.executeUpdate();
                 if (ReturnedValueInsert == 1) {
                     System.out.println("Accepted");
+                    summaryService.populateJobSummary();
                     return "Submitted";
                 } else {
                     System.out.println(ReturnedValueInsert);
@@ -89,12 +86,26 @@ import java.util.stream.StreamSupport;
             List<Band> bands = StreamSupport.stream(bandService.getAllBands().spliterator(),false).collect(Collectors.toList());
             List<capability> capabilities = StreamSupport.stream(capabilityService.retrieveAllCapabilites().spliterator(),false).collect(Collectors.toList());
             List<job> jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
+            List<jobSummary> summaries= StreamSupport.stream(summaryService.retrieveAllJobSummaries().spliterator(),false).collect(Collectors.toList());
             //stream method abandoned
             for(job jobobj : jobs){
                 Band foundBand = bands.stream().filter(a -> a.getBandID() == jobobj.getBandID()).collect(Collectors.toList()).get(0);
                 capability foundCapability = capabilities.stream().filter(a -> a.getCapabilityID() == jobobj.getCapabilityID()).collect(Collectors.toList()).get(0);
-                jobobj.setIntband(foundBand);
-                jobobj.setIntcapability(foundCapability);
+                System.out.println("Trying to Match "+jobobj.getJobID());
+                jobSummary foundSummary = summaries.stream().filter(a -> a.getJobID() == jobobj.getJobID()).collect(Collectors.toList()).get(0);
+                System.out.println(foundSummary);
+                try {
+                    jobobj.setIntband(foundBand);
+
+                }
+                catch (Exception e) {
+                }
+                try {
+                    jobobj.setIntcapability(foundCapability);
+                }catch (Exception e){}
+                try {
+                    jobobj.setIntJobSummary(foundSummary);
+                }catch (Exception e){}
             }
 
 

@@ -28,6 +28,9 @@ public class job {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private capability intcapability;
+    @Transient
+    private jobSummary intJobSummary;
+
 
 
 
@@ -114,6 +117,14 @@ public class job {
 
     public void setIntcapability(capability intcapability) {
         this.intcapability = intcapability;
+    }
+
+    public jobSummary getIntJobSummary() {
+        return intJobSummary;
+    }
+
+    public void setIntJobSummary(jobSummary intJobSummary) {
+        this.intJobSummary = intJobSummary;
     }
 
     @Override

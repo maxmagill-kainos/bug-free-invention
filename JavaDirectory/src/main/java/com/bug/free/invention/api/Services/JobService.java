@@ -20,6 +20,7 @@ public class JobService {
     @Autowired
     private CapabilityService capabilityService;
 
+    private boolean HasRunBefore = false;
     void populateJobRoles() {
         try {
             List<job> jobs = new ArrayList<>();
@@ -51,6 +52,7 @@ public class JobService {
             }
             Iterable<job> itrJobs = repository.saveAll(jobs);
             itrJobs.forEach(savedJobs::add);
+            HasRunBefore = true;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,13 +61,17 @@ public class JobService {
     }
 
     public String GetJobSpecLink(Integer JobID){
-         populateJobRoles();
+        if(HasRunBefore == false){
+            populateJobRoles();
+        }
          return  repository.findById(JobID).get().getJobSpec();
 
     };
 
     public Iterable<job> retrieveAllJobRoles(){
-        populateJobRoles();
+        if(HasRunBefore == false){
+            populateJobRoles();
+        }
         return repository.findAll();
     }
 }
