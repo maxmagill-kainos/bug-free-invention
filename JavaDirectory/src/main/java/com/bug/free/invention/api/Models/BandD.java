@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import java.util.Objects;
 
 @Table(value = "band")
-public class Band {
+public class BandD {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(value = "bandID")
@@ -24,8 +24,8 @@ public class Band {
     String bandCompetencies;
     @Column(value = "bandResponsibilites")
     String bandResponsibilites;
-    public Band() {}
-    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
+    public BandD() {}
+    public BandD(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
         this.bandID = bandID;
         this.bandName = bandName;
         this.bandLevel = bandLevel;

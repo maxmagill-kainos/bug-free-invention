@@ -1,20 +1,21 @@
 package com.bug.free.invention.api.Services;
 
-import com.bug.free.invention.api.Models.band;
+import com.bug.free.invention.api.Models.Band;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+@Repository
+public interface BandRepository extends CrudRepository<Band, Integer> {
 
 
-public interface BandRepository extends CrudRepository<band, Integer> {
+      Optional<Integer> findBandLevelByBandID(int bandID) throws SQLException;
 
-    List<band> findAll();
+      Optional<Band> findBandLevelByBandName(String bandName) throws SQLException;
 
-//    @Query("SELECT bandLevel from Band WHERE bandID = ?1")
-    Optional<Integer> findBandLevelByBandID(int bandID) throws SQLException;
 
-    Optional<band> findBandLevelByBandName(String bandName) throws SQLException;
+    
 
 }
