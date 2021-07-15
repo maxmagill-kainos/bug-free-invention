@@ -1,5 +1,5 @@
 package com.bug.free.invention.api.controllers;
-import org.springframework.http.RequestEntity;
+import com.bug.free.invention.api.Models.BandD;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +27,12 @@ public class apiRoutesDemo {
     @GetMapping("/hello-fromc")
     public ResponseEntity<String> getFromC(){
         return ResponseEntity.ok("Hello from c");
+    }
+
+    @GetMapping("/bands")
+    public ArrayList<BandD> getBandResp(){
+            ArrayList<BandD> returnList = new ArrayList<>();
+            returnList.add(new BandD(1, "Trainee", 1, "training", "skills etc.","entry level things"));
+            return returnList;
     }
 }

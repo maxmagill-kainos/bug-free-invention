@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/demo")
 public class PostRoutesDemo {
 
-        @PostMapping("/new-data")
-        public String addUser(@RequestBody String name){
-            return "Your name is " + name;
-        }
+    @PostMapping("/new-data")
+    public String addUser(@RequestBody String name){
+        return "Your name is " + name;
+    }
 
     @PostMapping(value = "/createEmployee", consumes = "application/json", produces = "application/json")
     public void createEmployee(@RequestBody Employee Employee) {
