@@ -1,27 +1,26 @@
 package com.bug.free.invention.api.controllers;
 
-import com.bug.free.invention.api.Models.Band;
-import com.bug.free.invention.api.Services.BandLevelService;
+import com.bug.free.invention.api.Models.band;
+import com.bug.free.invention.api.Services.BandService;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/bandLevel")
 public class BandGetLevelController {
-    private final BandLevelService service;
+    private final BandService service;
 
-    public BandGetLevelController(BandLevelService service) {
+    public BandGetLevelController(BandService service) {
         this.service = service;
     }
 
     @GetMapping
-    public List<Band> findAll() {
+    public List<band> findAll() {
         return service.getAllBands();
     }
 
@@ -39,15 +38,15 @@ public class BandGetLevelController {
 //    }
 
     @GetMapping("/BandDemo")
-    public List<Band> getJobRoles() {
+    public List<band> getJobRoles() {
         try {
-            List<Band> Bands = StreamSupport.stream(service.getAllBands().spliterator(),false).collect(Collectors.toList());
-            return  Bands;
+            List<band> bands = StreamSupport.stream(service.getAllBands().spliterator(),false).collect(Collectors.toList());
+            return bands;
 
         } catch (Exception e) {
-            List<Band> Bands = new ArrayList<Band>();
+            List<band> bands = new ArrayList<band>();
             e.printStackTrace();
-            return Bands;
+            return bands;
         }
     }
 //    @GetMapping("/bands")

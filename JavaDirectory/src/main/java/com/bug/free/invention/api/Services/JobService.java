@@ -15,7 +15,10 @@ public class JobService {
     //Load From Database
     @Autowired
     private JobRepository repository;
-
+    @Autowired
+    private BandRepository bandRepository;
+    @Autowired
+    private CapabilityRepository capabilityRepository;
 
     void populateJobRoles() {
         try {
@@ -28,19 +31,27 @@ public class JobService {
             while (res.next()){
                 System.out.println(res.getString(1));
             }
+            String dbQuery = "SELECT * FROM job";
 
 
             //'Job_ID','Capability_ID','Band_ID','Job_Title'
             //String dbQuery = "SELECT * FROM `job` JOIN(Capability,Band,JobSummary) ON (job.Band_ID = Band.Band_ID) and (job.Capability_ID = Capability.Capability_ID) and (JobSummary.Job_ID = job.Job_ID);";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
-            String dbQuery = "SELECT * FROM job JOIN capability AS C ON job.capabilityID = C.capabilityID JOIN band AS B ON job.bandID = B.bandID JOIN jobSummary AS JS ON JS.jobID = job.jobID;";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
+            //String dbQuery = "SELECT * FROM job JOIN capability AS C ON job.capabilityID = C.capabilityID JOIN band AS B ON job.bandID = B.bandID JOIN jobSummary AS JS ON JS.jobID = job.jobID;";//"GROUP BY 'Capability_ID','Band_ID','Job_Title'";
             ResultSet results = statement.executeQuery(dbQuery);
             while (results.next()) {
-                System.out.println(results.getInt(1));
-                jobs.add(new job(results.getInt(1), results.getString(2), results.getString(8), results.getString(10), results.getString(16),results.getString(3)));
-                jobs.add(new job());
+                job TempJob = new job(results.getInt("jobID"), results.getString("jobTitle"),results.getString("jobSpec"),results.getInt("jobFamilyID"),results.getInt("bandID"),results.getInt("capabilityID"));// results.getString(8), results.getString(10), results.getString(16),results.getString(3)));
+               /* if(bandRepository.findById(results.getInt("bandID")).isPresent()){
+                    TempJob.setBand(bandRepository.findById(results.getInt("bandID")).get());
+                };
+                if(capabilityRepository.findById(results.getInt("capabilityID")).isPresent()) {
+                    TempJob.setCapability(capabilityRepository.findById(results.getInt("capabilityID")).get());
+                };*/
+                jobs.add(TempJob);
+
             }
             Iterable<job> itrJobs = repository.saveAll(jobs);
             itrJobs.forEach(savedJobs::add);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

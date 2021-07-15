@@ -1,53 +1,46 @@
 package com.bug.free.invention.api.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "job")
 public class job {
-    @Id int jobID;
+    @Column(name = "jobID")
+    @Id
+    int jobID;
+    @Column(name = "jobTitle")
     String jobTitle;
+    @Column(name = "jobSpec")
     String jobSpec;
-    @OneToOne(targetEntity = band.class,mappedBy = "bandID")
-    int bandID;
-    @OneToOne(targetEntity = capability.class,mappedBy = "capabilityID")
-    int capabilityID;
-    String bandName;
-    String capabilityName;
-    String summaryText;
-    public job(){};
-    public job(int jobID, String jobTitle, String jobSpec, int bandID, int capabilityID) {
+    @Column(name = "jobFamilyID")
+    int jobFamilyID;
+    @Column(name = "bandID")
+    int bandID = 1;
+    @Column(name = "capabilityID")
+    int capabilityID = 1;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private band intband;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private capability intcapability;
+
+
+
+
+    public job() {
+
+    };
+    public job(int jobID, String jobTitle, String jobSpec, int jobFamilyID) {
         this.jobID = jobID;
         this.jobTitle = jobTitle;
         this.jobSpec = jobSpec;
-        this.bandID = bandID;
-        this.capabilityID = capabilityID;
-    }
+        this.jobFamilyID = jobFamilyID;
 
-    public job(int jobID, String jobTitle, int bandID, int capabilityID) {
-        this.jobID = jobID;
-        this.jobTitle = jobTitle;
-
-        this.bandID = bandID;
-        this.capabilityID = capabilityID;
-    }
-    public job(int job_ID, String job_Title, String bandName, String capabilityName, String summaryText) {
-        this.jobID = job_ID;
-        this.jobTitle = job_Title;
-        this.bandName = bandName;
-        this.capabilityName = capabilityName;
-        this.summaryText = summaryText;
-    }
-    public job(int job_ID, String job_Title, String bandName, String capabilityName, String summaryText, String job_Spec) {
-        this.jobID = job_ID;
-        this.jobTitle = job_Title;
-        this.bandName = bandName;
-        this.capabilityName = capabilityName;
-        this.summaryText = summaryText;
-        this.jobSpec = job_Spec;
     }
 
     public int getJobID() {
@@ -74,6 +67,23 @@ public class job {
         this.jobSpec = jobSpec;
     }
 
+    public int getJobFamilyID() {
+        return jobFamilyID;
+    }
+
+    public void setJobFamilyID(int jobFamilyID) {
+        this.jobFamilyID = jobFamilyID;
+    }
+
+    public job(int jobID, String jobTitle, String jobSpec, int jobFamilyID, int bandID, int capabilityID) {
+        this.jobID = jobID;
+        this.jobTitle = jobTitle;
+        this.jobSpec = jobSpec;
+        this.jobFamilyID = jobFamilyID;
+        this.bandID = bandID;
+        this.capabilityID = capabilityID;
+    }
+
     public int getBandID() {
         return bandID;
     }
@@ -90,42 +100,20 @@ public class job {
         this.capabilityID = capabilityID;
     }
 
-    public String getbandName() {
-        return bandName;
+    public band getIntband() {
+        return intband;
     }
 
-    public void setbandName(String bandName) {
-        this.bandName = bandName;
+    public void setIntband(band intband) {
+        this.intband = intband;
     }
 
-    public String getCapabilityName() {
-        return capabilityName;
+    public capability getIntcapability() {
+        return intcapability;
     }
 
-    public void setCapabilityName(String capabilityName) {
-        this.capabilityName = capabilityName;
-    }
-
-    public String getSummaryText() {
-        return summaryText;
-    }
-
-    public void setSummaryText(String summaryText) {
-        this.summaryText = summaryText;
-    }
-
-    @Override
-    public String toString() {
-        return "job{" +
-                "jobID=" + jobID +
-                ", jobTitle='" + jobTitle + '\'' +
-                ", jobSpec='" + jobSpec + '\'' +
-                ", bandID=" + bandID +
-                ", capabilityID=" + capabilityID +
-                ", bandName='" + bandName + '\'' +
-                ", capabilityName='" + capabilityName + '\'' +
-                ", summaryText='" + summaryText + '\'' +
-                '}';
+    public void setIntcapability(capability intcapability) {
+        this.intcapability = intcapability;
     }
 }
 

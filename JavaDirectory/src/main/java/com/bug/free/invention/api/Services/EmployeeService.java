@@ -3,12 +3,14 @@ package com.bug.free.invention.api.Services;
 import com.bug.free.invention.api.Models.Employee;
 import com.bug.free.invention.api.Models.IncorrectPermissonException;
 import com.bug.free.invention.api.controllers.DBConfig;
+import org.springframework.stereotype.Component;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+@Component
 public class EmployeeService {
 
     private EmployeeRepository repository;

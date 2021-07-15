@@ -1,20 +1,23 @@
 package com.bug.free.invention.api.Services;
 
-import com.bug.free.invention.api.Models.Band;
-import org.springframework.stereotype.Service;
+import com.bug.free.invention.api.Models.band;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 import java.sql.*;
 import java.util.*;
 
-@Service
-public class BandLevelService {
+@Component
+public class BandService {
+    @Autowired
     private final BandRepository repository;
 
-    public BandLevelService(BandRepository repository) {
+    public BandService(BandRepository repository) {
         this.repository = repository;
     }
 
-    public List<Band> getAllBands() {
+    public List<band> getAllBands() {
 //        List<Band> band = new ArrayList<Band>();
 //        repository.findAll().forEach(band1 -> band.add(band1));
 //        return band;
@@ -25,7 +28,7 @@ public class BandLevelService {
         return repository.findBandLevelByBandID(bandID);
     }
 
-    public Optional<Band> getBandLevelByBandName(String bandName) throws SQLException {
+    public Optional<band> getBandLevelByBandName(String bandName) throws SQLException {
         return repository.findBandLevelByBandName(bandName);
     }
 

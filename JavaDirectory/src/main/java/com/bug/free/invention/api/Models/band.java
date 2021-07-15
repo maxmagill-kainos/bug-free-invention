@@ -1,33 +1,33 @@
 package com.bug.free.invention.api.Models;
 
-import javax.persistence.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.*;
+
 
 import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.Objects;
 
 @Entity
-@Table(value = "band")
-public class Band {
+@Table(name = "band")
+public class band {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(value = "bandID")
+    @Column(name = "bandID")
     int bandID;
-    @Column(value = "bandName")
+    @Column(name = "bandName")
     String bandName;
-    @Column(value = "bandLevel")
+    @Column(name = "bandLevel")
     int bandLevel;
-    @Column(value = "bandTraining")
+    @Column(name = "bandTraining")
     String bandTraining;
-    @Column(value = "bandCompetencies")
+    @Column(name = "bandCompetencies")
     String bandCompetencies;
-    @Column(value = "bandResponsibilites")
+    @Column(name = "bandResponsibilites")
     String bandResponsibilities;
 
-    public Band() {}
+    public band() {}
 
 //    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilities) {
 //        this.bandID = bandID;
@@ -90,7 +90,7 @@ public class Band {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Band band = (Band) o;
+        band band = (com.bug.free.invention.api.Models.band) o;
         return bandID == band.bandID && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilities, band.bandResponsibilities);
     }
 
