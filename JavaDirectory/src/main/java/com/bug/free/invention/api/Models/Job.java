@@ -7,13 +7,12 @@ import javax.persistence.Id;
 public class Job {
     @Id int jobID;
     String jobTitle;
-    //String jobSpec;
     int bandID;
     int capabilityID;
     String bandName;
     String capabilityName;
     int bandlevel;
-    //String specSummary;
+  
     String familyName;
 
     public Job(){};
@@ -63,14 +62,6 @@ public class Job {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
-
-//    public String getJob_Spec() {
-//        return jobSpec;
-//    }
-
-//    public void setJob_Spec(String jobSpec) {
-//        this.jobSpec = jobSpec;
-//    }
 
     public int getBandID() {
         return bandID;
