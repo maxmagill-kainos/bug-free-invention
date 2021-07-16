@@ -255,6 +255,6 @@ dist
 
 .DS_Store
 
-
-
-JavaDirectory/.classpath
+.classpath
+.project
+.settings/

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 
 
 
-public class jobRolesPageTest extends FunctionalTest {
+public class JobRolesPageTest extends FunctionalTest {
 
     @Test
     public void getJobRolesTableTest() {

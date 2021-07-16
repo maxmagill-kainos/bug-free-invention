@@ -10,6 +10,7 @@ const { encrypt, decrypt } = require('../node/cryptography');
 //Setup POST data access
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 
 //Setup Nunjucks
@@ -46,6 +47,7 @@ app.get('/JobsTable', async function (req, res) {
    console.log('Request processed'); 
    const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
    const data = await response.json();
+   console.log(data);
    res.render('listJobRoles', {jobData: data});
 });
 
@@ -56,7 +58,6 @@ app.get('/JobsSpec', async function (req, res) {
    const data = await response.text();
    res.redirect(data);
 }); 
-
 
 app.post('/login', async function (req, res) { 
    session_variables = req.session;

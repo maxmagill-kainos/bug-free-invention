@@ -1,6 +1,10 @@
 <!doctype html>
 {% extends 'layout-template.njk'%}
 
+{# {% block css %}
+<link rel="stylesheet" type="text/css" href="/style/style.css" />
+{% endblock %} #}
+
 {% block content %}
 <html lang="en">
     <title>Kainos - Job List</title> 
@@ -24,12 +28,12 @@
                         </thead>
                         <tbody>
                             {% for role in jobData %}
-                                <tr id ="{{role.job_ID}}">
-                                <td id ="jobTitleCell{{role.job_ID}}">{{role.job_Title}}</td>
-                                <td id ="jobCapabilityCell{{role.job_ID}}">{{role.capability_name}}</td>
-                                <td id ="jobBandNameCell{{role.job_ID}}">{{role.band_Name}}</td>
-                                <td id ="jobBandLevelCell{{role.job_ID}}">{{role.band_Level}}</td>
-                                <td id ="jobFamilyNameCell{{role.job_ID}}">{{role.family_Name}}</td>
+                                <tr id ="{{role.jobID}}">
+                                <td id ="jobTitleCell{{role.jobID}}">{{role.jobTitle}}</td>
+                                <td id ="jobCapabilityCell{{role.jobID}}">{{role.capabilityName}}</td>
+                                <td id ="jobBandNameCell{{role.jobID}}">{{role.bandName}}</td>
+                                <td id ="jobBandLevelCell{{role.jobID}}">{{role.bandLevel}}</td>
+                                <td id ="jobFamilyNameCell{{role.jobID}}">{{role.familyName}}</td>
                             </tr>
                                 {% endfor %}
                         </tbody>
