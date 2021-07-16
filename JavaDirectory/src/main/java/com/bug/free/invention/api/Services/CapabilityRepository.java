@@ -13,9 +13,6 @@ public interface CapabilityRepository extends CrudRepository<capability,Integer>
 
     List<capability> findAll();
 
-    //    @Query("SELECT bandLevel from Band WHERE bandID = ?1")
-   // Optional<Integer> findcapabilityID(int capabilityID) throws SQLException;
-
     Optional<capability> findCapabilityNameByCapabilityID(int capabilityID) throws SQLException;
 
 

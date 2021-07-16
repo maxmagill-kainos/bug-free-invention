@@ -4,9 +4,9 @@ import com.bug.free.invention.api.Models.Band;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
-import java.sql.*;
-import java.util.*;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BandService {
@@ -18,9 +18,6 @@ public class BandService {
     }
 
     public List<Band> getAllBands() {
-//        List<Band> band = new ArrayList<Band>();
-//        repository.findAll().forEach(band1 -> band.add(band1));
-//        return band;
         return (List<Band>) repository.findAll();
     }
 

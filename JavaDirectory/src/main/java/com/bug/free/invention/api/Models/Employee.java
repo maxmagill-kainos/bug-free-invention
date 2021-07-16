@@ -14,15 +14,15 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(value = "employeeID")
-    int id;
+    private int id;
     @Column(value = "fName")
-    String firstName ;
+    private String firstName ;
     @Column(value = "lName")
-    String lastName;
+    private String lastName;
     @Column(value = "uniqueID")
-    String UUID;
+    private String UUID;
     @Column(value = "isAdmin")
-    boolean isAdmin;
+    private boolean isAdmin;
 
     public Employee() {
     }

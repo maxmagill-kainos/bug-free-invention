@@ -23,8 +23,8 @@ function PopupWithSummary(QuickSummary){
         <td>{{job.intcapability.capabilityName}}</td>
         <td>{{job.intJobSummary.summaryText}}</td>
         <td>
-        <input type="text" name="SpecSummaryInput" value="{{job.spec_Summary}}">
-        <input name="JobID" value="{{job.job_ID}}" type="hidden">
+        <input type="text" name="SpecSummaryInput" value="{{job.jobSpec}}">
+        <input name="JobID" value="{{job.jobID}}" type="hidden">
         </td>
         <td>
         <input type="submit" value="Submit New Job Summary">

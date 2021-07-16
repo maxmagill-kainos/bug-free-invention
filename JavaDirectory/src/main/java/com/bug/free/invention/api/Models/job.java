@@ -11,17 +11,17 @@ import javax.persistence.*;
 public class job {
     @Column(name = "jobID")
     @Id
-    int jobID;
+    private int jobID;
     @Column(name = "jobTitle")
-    String jobTitle;
+    private String jobTitle;
     @Column(name = "jobSpec")
-    String jobSpec;
+    private String jobSpec;
     @Column(name = "jobFamilyID")
-    int jobFamilyID;
+    private int jobFamilyID;
     @Column(name = "bandID")
-    int bandID = 1;
+    private int bandID = 1;
     @Column(name = "capabilityID")
-    int capabilityID = 1;
+    private int capabilityID = 1;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private Band intband;

@@ -13,11 +13,11 @@ public class jobSummary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(value = "summaryID")
-    int summaryID;
+    private int summaryID;
     @Column(value = "summaryText")
-    String summaryText;
+    private String summaryText;
     @Column(value = "jobID")
-    int jobID;
+    private int jobID;
 
     public jobSummary() {
     }

@@ -9,8 +9,8 @@ public class ApiApplication {
 	public static void main(String[] args) {
 		try {
 			SpringApplication.run(ApiApplication.class, args);
-		} catch (Exception E) {
-			E.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

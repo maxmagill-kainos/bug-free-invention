@@ -13,17 +13,17 @@ public class Band {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(value = "bandID")
-    int bandID;
+    private int bandID;
     @Column(value = "bandName")
-    String bandName;
+    private String bandName;
     @Column(value = "bandLevel")
-    int bandLevel;
+    private int bandLevel;
     @Column(value = "bandTraining")
-    String bandTraining;
+    private String bandTraining;
     @Column(value = "bandCompetencies")
-    String bandCompetencies;
+    private String bandCompetencies;
     @Column(value = "bandResponsibilites")
-    String bandResponsibilites;
+    private String bandResponsibilites;
     public Band() {}
     public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
         this.bandID = bandID;
@@ -73,7 +73,7 @@ public class Band {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BandD bandD = (BandD) o;
+        Band bandD = (Band) o;
         return bandID == bandD.bandID && bandLevel == bandD.bandLevel && Objects.equals(bandName, bandD.bandName) && Objects.equals(bandTraining, bandD.bandTraining) && Objects.equals(bandCompetencies, bandD.bandCompetencies) && Objects.equals(bandResponsibilites, bandD.bandResponsibilites);
     }
     @Override

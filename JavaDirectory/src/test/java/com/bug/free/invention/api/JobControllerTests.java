@@ -1,25 +1,27 @@
 package com.bug.free.invention.api;
 import com.bug.free.invention.api.controllers.DBConfig;
 import org.json.JSONException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Objects;
 import java.util.concurrent.Exchanger;
 
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class JobControllerTests {
     @LocalServerPort
@@ -28,7 +30,7 @@ public class JobControllerTests {
     HttpHeaders headers = new HttpHeaders();
 
 
-    @Before
+    @BeforeEach
     public void setup() {
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
         restTemplate.exchange(createURLWithPort("/students"), HttpMethod.POST, entity, String.class);
