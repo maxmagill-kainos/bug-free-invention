@@ -25,12 +25,9 @@ public class FunctionalTest {
     }
 
     @AfterEach
-    public void cleanUp() {
+    public void tearDown() {
         driver.manage().deleteAllCookies();
+        driver.quit();
     }
 
-    @AfterEach
-    public void tearDown() {
-        //driver.close();
-    }
 }

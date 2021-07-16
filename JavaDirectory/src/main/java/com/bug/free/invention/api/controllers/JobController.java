@@ -3,6 +3,7 @@ package com.bug.free.invention.api.controllers;
 import com.bug.free.invention.api.Models.Job;
 import com.bug.free.invention.api.Services.JobService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,8 +55,6 @@ import java.util.stream.StreamSupport;
         }
     }
 
-    ;
-
     @GetMapping("/jobRoles")
     public List<Job> getJobRoles() {
         try {
@@ -69,7 +68,27 @@ import java.util.stream.StreamSupport;
         }
     }
 
+    @PostMapping(value = "/updateJobRole", consumes = "application/json")
+    public void updateJobRole(@RequestBody String jobDetails){
+        System.out.println("test");
+        JSONObject jobDetailsJSON = new JSONObject(jobDetails);
+        try(Connection DatabaseConnection = DBConfig.getConnection()){
+            String dbQuery = "UPDATE `job` SET jobTitle = ? , job.bandID = (SELECT band.bandID FROM band WHERE band.bandName = ?), job.jobFamilyID = (SELECT jobFamily.jobFamilyID FROM jobFamily WHERE jobFamily.jobFamilyTitle = ?), job.capabilityID = (SELECT capability.capabilityID FROM capability WHERE capability.capabilityName = ?)  WHERE jobID = ? ;";
+            PreparedStatement updateJobTable = DatabaseConnection.prepareStatement(dbQuery);
+            updateJobTable.setString(1, String.valueOf(jobDetailsJSON.get("jobTitle")));
+            updateJobTable.setString(2, String.valueOf(jobDetailsJSON.get("bandName")));
+            updateJobTable.setString(3, String.valueOf(jobDetailsJSON.get("familyName")));
+            updateJobTable.setString(4, String.valueOf(jobDetailsJSON.get("capabilityName")));
+            updateJobTable.setString(5, String.valueOf(jobDetailsJSON.get("jobID")));
+            System.out.println(updateJobTable.toString());
+            updateJobTable.executeUpdate();
+        }
+        catch (Exception e){
+            e.printStackTrace();
 
+        }
+
+    }
 /*    @GetMapping("/jobSpec")
     public String getJobSpecLink(@RequestParam Integer JobID) {
         try {

@@ -34,6 +34,6 @@ public class LoginFormTest extends FunctionalTest {
         loginPage.enterLoginDetails("john.smith","password123");
         loginPage.submitFail();
         boolean result = loginPage.checkFailedLogin();
-        assertTrue("Signin was successful",result);
+        Assertions.assertTrue(result, "Signin was successful");
     }
 }

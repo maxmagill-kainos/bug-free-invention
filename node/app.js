@@ -10,7 +10,7 @@ const { encrypt, decrypt } = require('../node/cryptography');
 //Setup POST data access
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.static(__dirname + '/public'));
 
 //Setup Nunjucks
 const nunjucks = require('nunjucks'); 
@@ -46,7 +46,6 @@ app.get('/JobsTable', async function (req, res) {
    console.log('Request processed'); 
    const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
    const data = await response.json();
-   console.log(data);
    res.render('listJobRoles', {jobData: data , isAdmin: session_variables.isAdmin});
 });
 
@@ -57,6 +56,23 @@ app.get('/JobsSpec', async function (req, res) {
    const response = await fetch('http://localhost:8080/api/jobs/jobSpec?JobID='+req.query.jobClicked,{method:'GET',headers:{}})
    const data = await response.text();
    res.redirect(data);
+}); 
+
+app.post('/updateJobRole', async function (req, res) { 
+   var body = req.body;
+   if(body.jobTitle.length > 5 && body.capabilityName.length != 0 && body.bandLevel > 0 &&
+       body.bandName.length > 0 && body.familyName != 'Select Family Name' && body.familyName.length > 0){
+   const rawResponse = await fetch('http://localhost:8080/api/jobs/updateJobRole', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({jobID: body.jobID, jobTitle: body.jobTitle.trim(), capabilityName: body.capabilityName.trim(),
+                          bandName: body.bandName.trim(), bandLevel: body.bandLevel, familyName: body.familyName.trim()})
+  })
+  res.json({message : "Updated Successfully", successful : true});
+}
+else{
+   res.json({message : "Updated Rejected", successful : false});
+}
 }); 
 
 
