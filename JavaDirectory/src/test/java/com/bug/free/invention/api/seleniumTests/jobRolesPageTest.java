@@ -1,10 +1,11 @@
 package com.bug.free.invention.api.seleniumTests;
 import com.bug.free.invention.api.framework.FunctionalTest;
 import com.bug.free.invention.api.pages.jobRolesPage;
-import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+
+
 
 public class jobRolesPageTest extends FunctionalTest {
 
@@ -14,7 +15,7 @@ public class jobRolesPageTest extends FunctionalTest {
 
         jobRolesPage jobRolesPage = new jobRolesPage(driver);
 
-        assertTrue(jobRolesPage.isInitialised());
+        Assertions.assertTrue(jobRolesPage.isInitialised());
     }
 
     @Test
@@ -23,7 +24,7 @@ public class jobRolesPageTest extends FunctionalTest {
 
         jobRolesPage jobRolesPage = new jobRolesPage(driver);
 
-        assertNotNull("This is job title cell is null",jobRolesPage.getJobTitleCellText());
+        Assertions.assertNotNull(jobRolesPage.getJobTitleCellText(),"This is job title cell is null");
     }
 
     @Test
@@ -32,7 +33,7 @@ public class jobRolesPageTest extends FunctionalTest {
 
         jobRolesPage jobRolesPage = new jobRolesPage(driver);
 
-        assertNotNull("This is job Capability cell is null",jobRolesPage.getJobCapabilityCellText());
+        Assertions.assertNotNull(jobRolesPage.getJobCapabilityCellText(),"This is job Capability cell is null");
     }
     @Test
     public void jobRolesJobBandNameCellIsNotNull(){
@@ -40,7 +41,7 @@ public class jobRolesPageTest extends FunctionalTest {
 
         jobRolesPage jobRolesPage = new jobRolesPage(driver);
 
-        assertNotNull("This is job Band name cell is null",jobRolesPage.getJobBandNameCellText());
+        Assertions.assertNotNull(jobRolesPage.getJobBandNameCellText(),"This is job Band name cell is null");
     }
     @Test
     public void jobRolesJobBandLevelCellIsNotNull(){
@@ -48,7 +49,7 @@ public class jobRolesPageTest extends FunctionalTest {
 
         jobRolesPage jobRolesPage = new jobRolesPage(driver);
 
-        assertNotNull("This is job Band Level cell is null",jobRolesPage.getJobBandLevelCellText());
+        Assertions.assertNotNull(jobRolesPage.getJobBandLevelCellText(),"This is job Band Level cell is null");
     }
     @Test
     public void jobRolesJobFamilyNameCellIsNotNull(){
@@ -56,7 +57,7 @@ public class jobRolesPageTest extends FunctionalTest {
 
         jobRolesPage jobRolesPage = new jobRolesPage(driver);
 
-        assertNotNull("This is job Family name cell is null",jobRolesPage.getJobFamilyCellText());
+        Assertions.assertNotNull(jobRolesPage.getJobFamilyCellText(),"This is job Family name cell is null");
     }
 
 }
