@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS jobSummary;
+DROP TABLE IF EXISTS job;
+DROP TABLE IF EXISTS jobFamily;
+DROP TABLE IF EXISTS capability;
+DROP TABLE IF EXISTS band;
 CREATE TABLE capability(
     capabilityID TINYINT PRIMARY KEY AUTO_INCREMENT,
     capabilityName varchar (40) NOT NULL
@@ -30,6 +36,7 @@ CREATE TABLE job(
     FOREIGN KEY (`jobFamilyID`) REFERENCES `jobFamily`(`jobFamilyID`),
     FOREIGN KEY (`capabilityID`) REFERENCES `capability`(`capabilityID`)
 );
+
 CREATE TABLE jobSummary(
 	summaryID int NOT NULL,
     summaryText text(200) NOT NULL,

@@ -12,6 +12,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.concurrent.Exchanger;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class JobControllerTests {
+public class JobControllerTest {
     @LocalServerPort
     private int port;
     TestRestTemplate restTemplate = new TestRestTemplate();
@@ -40,6 +41,7 @@ public class JobControllerTests {
 
 
     @Test
+    @Transactional
     public void CanJobSpecBeEditedValidInputs(){
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>("{\n" +
@@ -54,6 +56,7 @@ public class JobControllerTests {
         assertTrue(actual.equals("Submitted"));
     }
     @Test
+    @Transactional
     public void CanJobSpecBeEditedInValidInputs(){
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>("{\n" +
@@ -66,6 +69,7 @@ public class JobControllerTests {
         assertTrue(actual.equals("Unsuccessful String submit")||actual.equals("not submitted"));
     }
     @Test
+    @Transactional
     public void CanJobSpecBeEditedInValidInputsSpecialCharacters(){
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>("{\n" +
@@ -80,6 +84,7 @@ public class JobControllerTests {
         assertTrue(actual.equals("Invalid String"));
     }
     @Test
+    @Transactional
     public void DoesJobTableReturnData() throws JSONException {
         HttpEntity<String> entity = new HttpEntity<String>(null,headers);
         ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/jobs/jobRoles"),HttpMethod.GET,entity,String.class);
@@ -89,6 +94,7 @@ public class JobControllerTests {
         JSONAssert.assertEquals(expected, response.getBody(), false);
     }
     @Test
+    @Transactional
     public void DoesJobLinkReturnValidInput(){
         HttpEntity<String> entity = new HttpEntity<String>(null,headers);
         ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/jobs/jobSpec?JobID=2"),HttpMethod.GET,entity,String.class);
@@ -97,6 +103,7 @@ public class JobControllerTests {
 
     }
     @Test
+    @Transactional
     public void DoesJobLinkReturnWhenValueIsGreaterThanTable(){
         HttpEntity<String> entity = new HttpEntity<String>(null,headers);
         ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/jobs/jobSpec?JobID=9999999"),HttpMethod.GET,entity,String.class);
@@ -106,6 +113,7 @@ public class JobControllerTests {
 
     }
     @Test
+    @Transactional
     public void DoesJobLinkRejectOnIncorrectData(){
         HttpEntity<String> entity = new HttpEntity<String>(null,headers);
         ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/jobs/jobSpec?JobID=Hellooo"),HttpMethod.GET,entity,String.class);

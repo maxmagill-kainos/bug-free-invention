@@ -28,7 +28,7 @@ public class DBConfig {
     public static boolean TestMode(){
 
         DatabaseID = "teamC_Josh";
-        url = "jdbc:h2:mem:teamC_josh;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL;DATABASE_TO_UPPER=false;IGNORECASE=TRUE";
+        url = "jdbc:h2:mem:teamC_josh;MODE=MYSQL;DATABASE_TO_UPPER=false;IGNORECASE=TRUE";
         Username = "sa";
         Password ="";
         System.out.println("in Test Mode : "+Username);

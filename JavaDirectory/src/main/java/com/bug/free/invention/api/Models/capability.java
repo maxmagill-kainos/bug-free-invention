@@ -11,7 +11,7 @@ public class capability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(value = "capabilityID")
-    private int capabilityID;
+    int capabilityID;
     @Column(value = "capabilityName")
     private String capabilityName;
     public capability() {}
