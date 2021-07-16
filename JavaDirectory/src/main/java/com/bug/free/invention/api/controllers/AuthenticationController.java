@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 @RestController
 @RequestMapping("/api/login")
-public class US024 {
+public class AuthenticationController {
 
     @PostMapping(value = "/AuthLogin", consumes = "application/json")
     public String validateLogin(@RequestBody String authDetails){
@@ -20,7 +20,7 @@ public class US024 {
             validateUserLogin.setString(1, String.valueOf(userDetails.get("Email")));
             validateUserLogin.setString(2, String.valueOf(userDetails.get("Password")));
             ResultSet results = validateUserLogin.executeQuery();
-            while(results.next()){
+            if (results.next()) {
                 return "{\"employeeID\": \"" + results.getString("employeeID") + "\", \"isAdmin\": \""+ results.getString("isAdmin")+ "\"}";
             }
         }

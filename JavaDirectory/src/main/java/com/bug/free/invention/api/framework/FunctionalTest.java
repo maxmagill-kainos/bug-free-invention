@@ -2,9 +2,8 @@ package com.bug.free.invention.api.framework;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -17,19 +16,17 @@ public class FunctionalTest {
     protected static WebDriver driver;
     protected final static String browserVersion = System.getProperty(BROWSER_VERSION);
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         WebDriverManager.chromedriver().browserVersion(browserVersion).setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @After
-    public void cleanUp() {
+    @AfterAll
+    public static void cleanUp() {
         driver.manage().deleteAllCookies();
     }
-
-    @AfterClass
     public static void tearDown() {
         driver.close();
     }

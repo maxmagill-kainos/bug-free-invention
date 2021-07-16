@@ -1,12 +1,12 @@
 package com.bug.free.invention.api.seleniumTests;
 import com.bug.free.invention.api.framework.FunctionalTest;
 import com.bug.free.invention.api.pages.jobRolesPage;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class jobRolesPageTest extends FunctionalTest {
+public class JobRolesPageTest extends FunctionalTest {
 
     @Test
     public void getJobRolesTableTest() {
@@ -23,7 +23,7 @@ public class jobRolesPageTest extends FunctionalTest {
 
         jobRolesPage jobRolesPage = new jobRolesPage(driver);
 
-        assertNotNull("This is job title cell is null",jobRolesPage.getJobTitleCellText());
+        assertNotNull("The job title cell is null",jobRolesPage.getJobTitleCellText());
     }
 
     @Test

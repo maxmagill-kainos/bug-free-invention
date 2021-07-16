@@ -1,3 +1,4 @@
+
 app.get('/JobsTable', async function (req, res) { 
     console.log('Request processed'); 
     const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
@@ -5,3 +6,4 @@ app.get('/JobsTable', async function (req, res) {
     console.log(response)
     res.send('<p>'+data+'</p>');
  }); 
+ 

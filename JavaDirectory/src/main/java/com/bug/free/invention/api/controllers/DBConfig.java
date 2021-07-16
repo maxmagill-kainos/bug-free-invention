@@ -6,21 +6,17 @@ import java.sql.SQLException;
 
 public class DBConfig {
 
-    private  static String Username = "";
-    private static String Password = "" ;
-    private static String host = "academy2020.cpc8rvmbbd9k.eu-west-2.rds.amazonaws.com";
+    private static final String Username = "tCadmin";
+    private static final String Password = "teamCpassword" ;
+    private static final String host = "academy2020.cpc8rvmbbd9k.eu-west-2.rds.amazonaws.com";
 
-    public DBConfig(){
-
-    }
-
-    public static Connection getConnection(){
+    public static Connection getConnection() throws SQLException {
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://"+ host + "/teamCteam_Josh?useSSL=false", Username, Password);
             return conn;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 }
