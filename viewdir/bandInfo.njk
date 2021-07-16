@@ -1,0 +1,47 @@
+<!doctype html>
+{% extends 'layout-template.njk'%}
+
+{% block content %}
+<html lang="en">
+    <title>Kainos - Band Info</title> 
+        <div class="container">
+            <div class="row">
+                <div class = "col-sm">
+                    <h1>List of Bands and Info</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <table id="myTable" class="table highlight stripped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Band Name</th>
+                                <th scope="col">Band Level</th>
+                                <th scope="col">Band Training</th>
+                                <th scope="col">Expected Competencies</th>
+                                <th scope="col">Expected Responsibilities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for role in bandData %}
+                                <tr id = "{{role.bandID}}">
+                                <td id = "bandNameCell{{role.bandID}}">{{role.bandName}}</td>
+                                <td id = "bandLevelCell{{role.bandID}}">{{role.bandLevel}}</td>
+                                <td id = "bandTrainingCell{{role.bandID}}">{{role.bandTraining}}</td>
+                                <td id = "bandCompetenciesCell{{role.bandID}}">{{role.bandCompetencies}}</td>
+                                <td id = "bandResponsibilitiesCell{{role.bandID}}">{{role.bandResponsibilites}}</td>
+                            </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>
+
+
+
+{% endblock%}

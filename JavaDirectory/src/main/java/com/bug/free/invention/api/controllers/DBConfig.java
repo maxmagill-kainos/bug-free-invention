@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DBConfig {
 
-    private  static String Username = "";
-    private static String Password = "";
+    private  static String Username = "Colm";
+    private static String Password = "tempPwd!";
     private static String host = "academy2020.cpc8rvmbbd9k.eu-west-2.rds.amazonaws.com";
 
     public DBConfig(){
