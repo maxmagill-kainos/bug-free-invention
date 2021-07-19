@@ -11,7 +11,7 @@ jobs:
 
       before_install:
         - cd JavaDirectory/
-        - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+        - google-chrome-stable --headless --disable-gpu --verbose --remote-debugging-port=9222 http://localhost &
 
     - language : node_js
       node_js : 14.17.1
