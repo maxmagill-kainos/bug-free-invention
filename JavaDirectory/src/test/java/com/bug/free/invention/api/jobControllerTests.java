@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class JobControllerTests {
+public class jobControllerTests {
     @LocalServerPort
     private int port;
     TestRestTemplate restTemplate = new TestRestTemplate();

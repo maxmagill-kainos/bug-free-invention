@@ -71,7 +71,7 @@ app.post('/updateJobRole', async function (req, res) {
   res.json({message : "Updated Successfully", successful : true});
 }
 else{
-   res.json({message : "Updated Rejected", successful : false});
+   res.json({message : "Update Rejected", successful : false});
 }
 }); 
 

@@ -4,20 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Job {
+public class job {
     @Id int jobID;
     String jobTitle;
-    //String jobSpec;
     int bandID;
     int capabilityID;
     String bandName;
     String capabilityName;
     int bandlevel;
-    //String specSummary;
+  
     String familyName;
 
-    public Job(){};
-    public Job(int jobID, String jobTitle, int bandID, String bandName, int bandLevel, int capabilityID, String capabilityName, String familyName) {
+    public job(){};
+    public job(int jobID, String jobTitle, int bandID, String bandName, int bandLevel, int capabilityID, String capabilityName, String familyName) {
         this.jobID = jobID;
         this.jobTitle = jobTitle;
 
@@ -63,14 +62,6 @@ public class Job {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
-
-//    public String getJob_Spec() {
-//        return jobSpec;
-//    }
-
-//    public void setJob_Spec(String jobSpec) {
-//        this.jobSpec = jobSpec;
-//    }
 
     public int getBandID() {
         return bandID;

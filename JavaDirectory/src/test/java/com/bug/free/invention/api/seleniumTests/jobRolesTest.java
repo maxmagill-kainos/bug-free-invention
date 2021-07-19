@@ -13,13 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class JobRolesTest extends FunctionalTest {
-
-
-
-
-    public static class jobRolesPageTest extends FunctionalTest {
-
+public class jobRolesTest extends FunctionalTest {
 
         public JobRolesPage login(String username, String password){
             driver.get("http://localhost:6555");
@@ -115,4 +109,4 @@ public class JobRolesTest extends FunctionalTest {
             Assertions.assertFalse(check);
         }
     }
-}
+
