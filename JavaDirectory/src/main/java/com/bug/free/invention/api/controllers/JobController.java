@@ -1,6 +1,6 @@
 package com.bug.free.invention.api.controllers;
 
-import com.bug.free.invention.api.Models.Job;
+import com.bug.free.invention.api.Models.job;
 import com.bug.free.invention.api.Services.JobService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONObject;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -34,7 +33,7 @@ import java.util.stream.StreamSupport;
             System.out.println(JobSpec);
             System.out.println(JobID);
             try {
-                String dbQuery = "UPDATE JobSummary SET Summary_Text = ? WHERE `Job_ID`=?;";
+                String dbQuery = "UPDATE jobSummary SET summaryText = ? WHERE `jobID`=?;";
                 Connection DatabaseConnection = DBConfig.getConnection();
                 PreparedStatement SubmitSpecForJob = DatabaseConnection.prepareStatement(dbQuery);
                 SubmitSpecForJob.setString(1, JobSpec);
@@ -56,15 +55,15 @@ import java.util.stream.StreamSupport;
     }
 
     @GetMapping("/jobRoles")
-    public List<Job> getJobRoles() {
+    public List<job> getJobRoles() {
         try {
-            List<Job> Jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
-            return  Jobs;
+            List<job> jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
+            return jobs;
 
         } catch (Exception e) {
-            List<Job> Jobs = new ArrayList<Job>();
+            List<job> jobs = new ArrayList<job>();
             e.printStackTrace();
-            return Jobs;
+            return jobs;
         }
     }
 

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Job {
+public class job {
     @Id int jobID;
     String jobTitle;
     int bandID;
@@ -15,8 +15,8 @@ public class Job {
   
     String familyName;
 
-    public Job(){};
-    public Job(int jobID, String jobTitle, int bandID, String bandName, int bandLevel, int capabilityID, String capabilityName, String familyName) {
+    public job(){};
+    public job(int jobID, String jobTitle, int bandID, String bandName, int bandLevel, int capabilityID, String capabilityName, String familyName) {
         this.jobID = jobID;
         this.jobTitle = jobTitle;
 
