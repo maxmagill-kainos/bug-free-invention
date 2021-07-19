@@ -1,14 +1,11 @@
 package com.bug.free.invention.api.Services;
 
-import com.bug.free.invention.api.Models.Employee;
 import com.bug.free.invention.api.Models.capability;
-import com.bug.free.invention.api.Models.job;
 import com.bug.free.invention.api.controllers.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

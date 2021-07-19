@@ -1,6 +1,5 @@
 package com.bug.free.invention.api.Services;
 
-import com.bug.free.invention.api.Models.Band;
 import com.bug.free.invention.api.Models.capability;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

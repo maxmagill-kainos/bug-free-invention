@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Table(value = "employee")
-public class Employee {
+public class employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(value = "employeeID")
@@ -24,10 +24,10 @@ public class Employee {
     @Column(value = "isAdmin")
     private boolean isAdmin;
 
-    public Employee() {
+    public employee() {
     }
 
-    public Employee(int id, String firstName, String lastName, String UUID, boolean isAdmin) {
+    public employee(int id, String firstName, String lastName, String UUID, boolean isAdmin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

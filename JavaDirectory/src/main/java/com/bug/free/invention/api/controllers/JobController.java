@@ -4,7 +4,6 @@ import com.bug.free.invention.api.Models.*;
 import com.bug.free.invention.api.Services.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
@@ -83,13 +82,13 @@ import java.util.stream.StreamSupport;
     @GetMapping("/jobRoles")
     public List<job> getJobRoles() {
         try {
-            List<Band> bands = StreamSupport.stream(bandService.getAllBands().spliterator(),false).collect(Collectors.toList());
+            List<Band> Bands = StreamSupport.stream(bandService.getAllBands().spliterator(),false).collect(Collectors.toList());
             List<capability> capabilities = StreamSupport.stream(capabilityService.retrieveAllCapabilites().spliterator(),false).collect(Collectors.toList());
             List<job> jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
             List<jobSummary> summaries= StreamSupport.stream(summaryService.retrieveAllJobSummaries().spliterator(),false).collect(Collectors.toList());
             //stream method abandoned
             for(job jobobj : jobs){
-                Band foundBand = bands.stream().filter(a -> a.getBandID() == jobobj.getBandID()).collect(Collectors.toList()).get(0);
+                Band foundBand = Bands.stream().filter(a -> a.getBandID() == jobobj.getBandID()).collect(Collectors.toList()).get(0);
                 capability foundCapability = capabilities.stream().filter(a -> a.getCapabilityID() == jobobj.getCapabilityID()).collect(Collectors.toList()).get(0);
                 System.out.println("Trying to Match "+jobobj.getJobID());
                 jobSummary foundSummary = summaries.stream().filter(a -> a.getJobID() == jobobj.getJobID()).collect(Collectors.toList()).get(0);

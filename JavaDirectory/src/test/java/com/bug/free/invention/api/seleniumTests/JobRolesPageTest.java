@@ -1,14 +1,19 @@
 package com.bug.free.invention.api.seleniumTests;
+import com.bug.free.invention.api.controllers.DBConfig;
 import com.bug.free.invention.api.framework.FunctionalTest;
 import com.bug.free.invention.api.pages.jobRolesPage;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 
 
 public class JobRolesPageTest extends FunctionalTest {
-
+    @BeforeEach
+    public void setup(){
+        DBConfig.TestMode();
+    }
     @Test
     public void getJobRolesTableTest() {
         driver.get("http://localhost:6555/JobsTable");
