@@ -1,7 +1,9 @@
 language: java
 jdk: openjdk15
 addons:
-    chrome: stable
+     apt:
+        packages:
+          - google-chrome-stable
 cache:
   directories: $HOME/.m2
 
