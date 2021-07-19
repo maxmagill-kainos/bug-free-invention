@@ -1,8 +1,10 @@
 language: java
 jdk: openjdk15
-
+addons:
+    chrome: stable
 cache:
   directories: $HOME/.m2
 
 before_install:
   - cd JavaDirectory/
+
