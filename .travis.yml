@@ -1,22 +1,21 @@
-matrix:
-include:
- 
-  - language: java
-    jdk: openjdk15
-    addons:
-        apt:
-            packages:
-              - google-chrome-stable
-    cache:
-      directories: $HOME/.m2
+jobs:
+  include:  
+    - language: java
+      jdk: openjdk15
+      addons:
+          apt:
+              packages:
+                - google-chrome-stable
+      cache:
+        directories: $HOME/.m2
 
-    before_install:
-      - cd JavaDirectory/
-      - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+      before_install:
+        - cd JavaDirectory/
+        - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
-  - language : node_js
-   node_js : 14.17.1
-    before_install:
-      - cd node/
-      - npm install
-      - npm start
+    - language : node_js
+      node_js : 14.17.1
+      before_install:
+        - cd node/
+        - npm install
+        - npm start
