@@ -1,22 +1,44 @@
 package com.bug.free.invention.api.controllers;
 
+import org.apache.catalina.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConfig {
+    private  static String Username = "";
+    private static String Password = "" ;
+    private static String host = "";
+    private static String DatabaseID = "";
+    public static String url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
+    public DBConfig(){
 
-    private static final String Username = "";
-    private static final String Password = "" ;
-    private static final String host = "";
+    }
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection(){
         try{
-            Connection conn = DriverManager.getConnection("jdbc:mysql://"+ host + "/teamCteam_Josh?useSSL=false", Username, Password);
+            Connection conn = DriverManager.getConnection(url, Username, Password);
             return conn;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
         }
     }
+    public static boolean TestMode(){
+
+        DatabaseID = "teamC_Josh";
+        url = "jdbc:h2:mem:teamC_josh;MODE=MYSQL;DATABASE_TO_UPPER=false;IGNORECASE=TRUE";
+        Username = "sa";
+        Password ="";
+        System.out.println("in Test Mode : "+Username);
+        return true;
+    }
+    public static boolean ProdMode(){
+        DatabaseID = "";
+        Username = "";
+        Password = "";
+        url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
+        return true;
+    };
 }
