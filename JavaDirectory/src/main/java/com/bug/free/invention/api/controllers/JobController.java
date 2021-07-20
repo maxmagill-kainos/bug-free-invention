@@ -54,7 +54,6 @@ import java.util.stream.StreamSupport;
                 PreparedStatement SubmitSpecForJob = databaseConnection.prepareStatement(dbQuery);
                 SubmitSpecForJob.setString(1, JobSpec);
                 SubmitSpecForJob.setInt(2, JobID);
-                databaseConnection.commit();
 
                 System.out.println(SubmitSpecForJob.toString());
                 int ReturnedValueInsert = SubmitSpecForJob.executeUpdate();
@@ -72,7 +71,7 @@ import java.util.stream.StreamSupport;
             }
         }
         catch (NullPointerException IncorrectParameter) {
-            //IncorrectParameter.printStackTrace();
+            IncorrectParameter.printStackTrace();
             return "Unsuccessful String submit";
 
         }

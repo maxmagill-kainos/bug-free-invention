@@ -109,18 +109,21 @@ app.post('/login', function (req, res) {
 async function SubmitSpecForJob(req,res){
    console.log(req.body)
    let JSONSubmitObject ={
-      JobSpec : req.body.SpecSummaryInput,
-      JobID : parseInt(req.body.JobID),
-      UniqueIdentifier: session_variables.UniqueIdentifier,
-      employeeID:session_variables.employeeID,
+      newJobSpecSummary : req.body.SpecSummaryInput,
+      jobID : parseInt(req.body.JobID),
+      UniqueIdentifier: "uhsdiufh8h3r487hifd",
+      employeeID:2
    };
    console.log(JSON.stringify(JSONSubmitObject));
+   
    const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
-   console.log(PostCallToJava.json())
+   console.log(PostCallToJava.text())
+   return
 }
 
 app.post('/SubmitSpecForJob',async function(req,res){
    SubmitSpecForJob(req,res);
+   res.redirect('/JobsTable')
 });
 
 
