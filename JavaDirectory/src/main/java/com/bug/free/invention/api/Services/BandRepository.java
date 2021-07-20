@@ -8,14 +8,8 @@ import java.sql.SQLException;
 import java.util.Optional;
 @Repository
 public interface BandRepository extends CrudRepository<Band, Integer> {
-
     Optional<Band> findBandLevelByBandID(Integer bandID) throws SQLException;
 
     Optional<Band> findBandLevelByBandName(String bandName) throws SQLException;
 
-//    void deleteBandByBandID(int bandID);
-
-//    Optional<Integer> findBandResponsibilitesByBandId(int bandID);
-//
-//    Optional<String> findBandResponsibilitesByBandName(String bandName);
 }

@@ -17,7 +17,7 @@ public class Band {
     @Column(value = "bandName")
     String bandName;
     @Column(value = "bandLevel")
-    int bandLevel;
+    Integer bandLevel;
     @Column(value = "bandTraining")
     String bandTraining;
     @Column(value = "bandCompetencies")
@@ -27,7 +27,7 @@ public class Band {
 
 //    public Band() {}
 
-    public Band(Integer bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
+    public Band(Integer bandID, String bandName, Integer bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
         this.bandID = bandID;
         this.bandName = bandName;
         this.bandLevel = bandLevel;
@@ -52,7 +52,7 @@ public class Band {
     public int getBandLevel() {
         return bandLevel;
     }
-    public void setBandLevel(int bandLevel) {
+    public void setBandLevel(Integer bandLevel) {
         this.bandLevel = bandLevel;
     }
     public String getBandTraining() {

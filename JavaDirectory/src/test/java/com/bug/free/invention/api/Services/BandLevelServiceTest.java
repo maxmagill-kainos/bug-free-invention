@@ -28,16 +28,15 @@ class BandLevelServiceTest {
     @DisplayName("Should get list with all bands")
     void shouldGetListWithAllBands() {
         List<Band> band = service.getAllBands();
-        assertEquals(9, band.size());
-        assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Appreciate")));
+        assertEquals(8, band.size());
+        assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Apprentice")));
         assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Trainee")));
         assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Associate")));
         assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Senior")));
         assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Consultant")));
         assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Manager")));
-        assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Principle")));
+        assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Principal")));
         assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("Leadership Community")));
-        assertTrue(band.stream().anyMatch(b -> b.getBandName().equals("whatever")));
     }
 
     @Test
@@ -56,20 +55,50 @@ class BandLevelServiceTest {
     @Test
     @DisplayName("Should find bandLevel by bandName")
     void shouldFindBandLevelByBandName() throws SQLException {
-        assertEquals(Optional.of(1), service.getBandLevelByBandName("Appreciate"));
+        assertEquals(Optional.of(1), service.getBandLevelByBandName("Apprentice"));
         assertEquals(Optional.of(2), service.getBandLevelByBandName("Trainee"));
         assertEquals(Optional.of(3), service.getBandLevelByBandName("Associate"));
         assertEquals(Optional.of(4), service.getBandLevelByBandName("Senior"));
         assertEquals(Optional.of(5), service.getBandLevelByBandName("Consultant"));
         assertEquals(Optional.of(6), service.getBandLevelByBandName("Manager"));
-        assertEquals(Optional.of(7), service.getBandLevelByBandName("Principle"));
+        assertEquals(Optional.of(7), service.getBandLevelByBandName("Principal"));
         assertEquals(Optional.of(8), service.getBandLevelByBandName("Leadership Community"));
-        assertEquals(Optional.of(127), service.getBandLevelByBandName("whatever"));
     }
 
     @Test
     @DisplayName("Should throw IllegalArgumentException when passed null value")
     void testNullChecksBandName() {
         assertThrows(IllegalArgumentException.class, () -> service.getBandLevelByBandName(null));
+    }
+
+    @Test
+    @DisplayName("Should throw an exception if band was not deleted")
+    void shouldThrowAnExceptionIfBandWasNotDeleted() {
+        assertThrows(IllegalArgumentException.class, () -> service.deleteBandByBandID(56));
+    }
+
+    @Test
+    @DisplayName("Should throw an exception if band was not found")
+    void shouldThrowAnExceptionIfBandWasNotFound() {
+        assertThrows(IllegalArgumentException.class, () -> service.deleteBandByBandID(678));
+    }
+
+    @Test
+    @DisplayName("Should add a band")
+    void  shouldAddABand() {
+        Band band = new Band(9, "Whatever", 45, "Whatever", "Whatever", "Whatever");
+       service.addBand(band);
+       service.deleteBandByBandID(9);
+    }
+
+    @Test
+    @DisplayName("Should delete a band")
+    void shouldDeleteABand() {
+        Integer bandID = 10;
+        Band band = new Band(bandID, "Whatever", 25, "Whatever", "Whatever", "Whatever");
+        service.addBand(band);
+        service.deleteBandByBandID(bandID);
+        Optional<Band> deletedBand = this.service.getBandByBandID(bandID);
+        assertEquals(deletedBand.isEmpty(), true);
     }
 }
