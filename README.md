@@ -6,7 +6,7 @@ What could possibly go wrong?
 ## Running the project
 To begin running the project:
  - `cd` into the root directory of the project
- - Run `node app/node.js`
+ - Run `node node/app.js`
  - The terminal window will start running the node endpoint, do not close this.
  - In intellij, run the springboot project in the java directory.
  - Navigate to `localhost:6555`
