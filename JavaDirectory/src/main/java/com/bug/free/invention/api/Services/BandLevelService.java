@@ -2,20 +2,15 @@ package com.bug.free.invention.api.Services;
 
 import com.bug.free.invention.api.Models.Band;
 import com.bug.free.invention.api.controllers.DBConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.*;
 import java.util.*;
 
 @Service
 public class BandLevelService {
-    Logger logger = LoggerFactory.getLogger(BandLevelService.class);
     private final BandRepository repository;
+
     public BandLevelService(BandRepository repository) {
         this.repository = repository;
     }
@@ -60,18 +55,11 @@ public class BandLevelService {
             }
     }
 
-//    @Transactional
-//    @Query("INSERT into band (bandID, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilites) VALUES (?, ?, ?, ?, ?, ?)")
     public void addBand(Band band) {
         try (Connection connect = DBConfig.getConnection()) {
             PreparedStatement statement = connect.prepareStatement(
                     "INSERT into band (bandID, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilites) " +
                             "VALUES (?, ?, ?, ?, ?, ?)");
-//            PreparedStatement statement = connect.prepareStatement(
-//                    "INSERT into band (bandID, bandName, bandLevel, bandTraining, bandCompetencies, bandResponsibilites) " +
-//                            "VALUES (" + band.getBandID() + "," + band.getBandName() + "," +
-//                            band.getBandLevel() + "," + band.getBandTraining() + "," + band.getBandCompetencies() +
-//                            "," + band.getBandResponsibilites() + ")");
             statement.setInt(1, band.getBandID());
             statement.setString(2, band.getBandName());
             statement.setInt(3, band.getBandLevel());
@@ -85,6 +73,5 @@ public class BandLevelService {
         } catch (SQLException e) {
             throw new IllegalArgumentException("Unable to connect to database", e);
         }
-        repository.save(band);
     }
 }
