@@ -12,7 +12,6 @@ import java.util.List;
 
 @Component
 public class JobService {
-    //Load From Database
     @Autowired
     private JobRepository repository;
 
@@ -42,14 +41,8 @@ public class JobService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       // return args -> {};
     }
 
-//    public String GetJobSpecLink(Integer JobID){
-//         populateJobRoles();
-//         return  repository.findById(JobID).get().getJob_Spec();
-//
-//    };
 
     public Iterable<job> retrieveAllJobRoles(){
         populateJobRoles();
