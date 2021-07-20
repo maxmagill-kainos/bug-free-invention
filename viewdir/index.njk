@@ -1,6 +1,74 @@
+{% extends "layout-template.njk" %}
+
+{%block pageTitle%}
+    Login
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/style/style.css" />
+{% endblock %}
+
 {% block content%}
-<h1>{{ email }}</h1>
-<form action='/logout' method="GET">
-    <input type="submit" value="Logout" />
-</form>
-{% endblock%}
+    <head>
+        <title>Kainos - Home</title>
+    </head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col s4">
+                    <a href="http://localhost:6555/JobsTable">
+                        <div id="panel" class="card-panel hoverable">
+                            <div class="row white-text">
+                                <div class="col s4">
+                                <i class="material-icons">work</i>
+                                </div>
+                                <div class="col s8">
+                                    <p>Jobs</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                    <div class="card-panel hoverable">
+                        <div id="panel" class="row white-text">
+                            <div class="col s4">
+                                <i class="material-icons">filter_list</i>
+                            </div>
+                            <div class="col s8">
+                                <p>Roles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div id="panel" class="card-panel hoverable">
+                        <div class="row white-text">
+                            <div class="col s4">
+                                <i class="material-icons">show_chart</i>
+                            </div>
+                            <div class="col s8">
+                                <p>Band</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="panel" class="card-panel hoverable">
+                        <div class="row white-text">
+                            <div class="col s4">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="col s8">
+                                <p>Employee</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    {% endblock%}
+
+    {% block admin%}
+
+        {% endblock%}

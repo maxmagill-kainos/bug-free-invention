@@ -1,13 +1,53 @@
-{% block content%}
-{% if error %}
-<h3>{{ error }}</h3>
-{% endif %}
-<form action="/login" method="POST">
-  <label for="email">Email:</label><br>
-  <input type="text" id="email" name="email"><br>
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password"><br><br>
-  <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Kainos - Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% endblock %}
+    <base href="/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/style/style.css" crossorigin="anonymous">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpg" href="https://www.kainos.com/favicon.png"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row" id="row-id">
+        <div class="col s3"></div>
+        <div class="col s6">
+          <div id="main-panel" class="card-panel">
+            {% block login%}
+              {% block logo %}
+                <center><img id="kainos-header" src="https://bit.ly/3hqOeO9"></center>
+              {% endblock %}
+              {% if error %}
+                <center>
+                  <p class="red-text text-lighten-2">{{ error }}</p>
+                </center>
+              {% endif %}
+              <form action="/login" method="POST">
+                <div class="input-field">
+                  <input type="text" id="email" name="email">
+                  <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                  <input type="password" id="password" name="password">
+                  <label for="password">Password</label>
+                </div>
+                <center>
+                  <button class="btn waves-effect waves-light kainos-green"  type="submit">Login<i class="material-icons right">send</i>
+                </center>
+                </button>
+              </form>
+            {% endblock %}
+          </div>
+        </div>
+        <div class="col s3"></div>
+      </div>
+    </div>
+  </body>
+</html>

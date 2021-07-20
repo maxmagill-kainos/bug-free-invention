@@ -1,8 +1,16 @@
-language: java
-jdk: openjdk15
+jobs:
+  include:  
+    - language: java
+      jdk: openjdk15
+      addons:
+          apt:
+            sources:
+               - google-chrome
+              packages:
+                - google-chrome-stable
+      cache:
+        directories: $HOME/.m2
 
-cache:
-  directories: $HOME/.m2
-
-before_install:
-  - cd JavaDirectory/
+      before_install:
+        - cd JavaDirectory/
+        - google-chrome-stable --headless --disable-gpu --verbose --disable-dev-shm-usage --remote-debugging-port=9222 http://0.0.0.0:8080 &
