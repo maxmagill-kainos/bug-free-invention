@@ -27,11 +27,6 @@ public class JobService {
             List<job> savedJobs = new ArrayList<>();
             Statement statement = DBConfig.getConnection().createStatement();
             System.out.println(DBConfig.url);
-            String dbQuerys = "Show tables";
-            ResultSet res = statement.executeQuery(dbQuerys);
-            while (res.next()){
-                System.out.println(res.getString(1));
-            }
             String dbQuery = "SELECT * FROM job";
 
 
@@ -42,9 +37,10 @@ public class JobService {
                 jobs.add(TempJob);
 
             }
+            HasRunBefore = true;
             Iterable<job> itrJobs = repository.saveAll(jobs);
             itrJobs.forEach(savedJobs::add);
-            HasRunBefore = true;
+
 
         } catch (Exception e) {
             e.printStackTrace();

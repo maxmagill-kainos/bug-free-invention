@@ -19,7 +19,6 @@ public class BandLevelService {
         List<Band> band = new ArrayList<Band>();
         repository.findAll().forEach(band1 -> band.add(band1));
         return band;
-//        return repository.findAll();
     }
     public Optional<Integer> getBandLevelByBandID(int bandID) throws SQLException {
         return repository.findBandLevelByBandID(bandID);

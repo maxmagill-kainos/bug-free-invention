@@ -23,9 +23,9 @@ public class JobSummaryService {
 
     public void populateJobSummary(){
         String dbQuery = "SELECT * FROM jobSummary";
-        try(Connection DatabaseConnection = DBConfig.getConnection()){
+        try(Connection databaseConnection = DBConfig.getConnection()){
 
-            ResultSet results = DatabaseConnection.createStatement().executeQuery(dbQuery);
+            ResultSet results = databaseConnection.createStatement().executeQuery(dbQuery);
             while(results.next()){
                 repository.save(new jobSummary(results.getInt("summaryID"),results.getString("summaryText"), results.getInt("jobID")));
             }

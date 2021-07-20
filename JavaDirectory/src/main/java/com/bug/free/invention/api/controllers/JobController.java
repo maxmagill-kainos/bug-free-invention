@@ -39,7 +39,7 @@ import java.util.stream.StreamSupport;
                 return "False Login";
             };
 
-            String JobSpec = objectNode.get("jobSpec").asText();
+            String JobSpec = objectNode.get("newJobSpecSummary").asText();
             System.out.println(JobSpec);
             if (JobSpec.matches("[a-zA-Z ]+") == false) {
                 return "Invalid String";
@@ -50,11 +50,11 @@ import java.util.stream.StreamSupport;
             System.out.println(JobID);
             try {
                 String dbQuery = "UPDATE jobSummary SET summaryText = ? WHERE jobID=?;";
-                Connection DatabaseConnection = DBConfig.getConnection();
-                PreparedStatement SubmitSpecForJob = DatabaseConnection.prepareStatement(dbQuery);
+                Connection databaseConnection = DBConfig.getConnection();
+                PreparedStatement SubmitSpecForJob = databaseConnection.prepareStatement(dbQuery);
                 SubmitSpecForJob.setString(1, JobSpec);
                 SubmitSpecForJob.setInt(2, JobID);
-                DatabaseConnection.commit();
+                databaseConnection.commit();
 
                 System.out.println(SubmitSpecForJob.toString());
                 int ReturnedValueInsert = SubmitSpecForJob.executeUpdate();
@@ -91,7 +91,6 @@ import java.util.stream.StreamSupport;
             for(job jobobj : jobs){
                 Band foundBand = bands.stream().filter(a -> a.getBandID() == jobobj.getBandID()).collect(Collectors.toList()).get(0);
                 capability foundCapability = capabilities.stream().filter(a -> a.getCapabilityID() == jobobj.getCapabilityID()).collect(Collectors.toList()).get(0);
-                System.out.println("Trying to Match "+jobobj.getJobID());
                 jobSummary foundSummary = summaries.stream().filter(a -> a.getJobID() == jobobj.getJobID()).collect(Collectors.toList()).get(0);
                 System.out.println(foundSummary);
                 try {

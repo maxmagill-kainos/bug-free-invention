@@ -24,8 +24,8 @@ public class EmployeeService {
 
     public String LogInEmployee(String username, String password){
         String dbQuery = "SELECT * FROM `employee` WHERE `username` = ? AND `userPassword` = ? LIMIT 1;";
-        try(Connection DatabaseConnection = DBConfig.getConnection()){
-            PreparedStatement validateUserLogin = DatabaseConnection.prepareStatement(dbQuery);
+        try(Connection databaseConnection = DBConfig.getConnection()){
+            PreparedStatement validateUserLogin = databaseConnection.prepareStatement(dbQuery);
             validateUserLogin.setString(1,username);
             validateUserLogin.setString(2, password);
             ResultSet results = validateUserLogin.executeQuery();

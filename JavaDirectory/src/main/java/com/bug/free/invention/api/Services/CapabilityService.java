@@ -23,9 +23,9 @@ public class CapabilityService {
 
     public void populateCapability(){
         String dbQuery = "SELECT * FROM `capability`";
-        try(Connection DatabaseConnection = DBConfig.getConnection()){
+        try(Connection databaseConnection = DBConfig.getConnection()){
 
-            ResultSet results = DatabaseConnection.createStatement().executeQuery(dbQuery);
+            ResultSet results = databaseConnection.createStatement().executeQuery(dbQuery);
             while(results.next()){
                 System.out.println(results.getInt(1));
                 repository.save(new capability(results.getInt("capabilityID"),results.getString("capabilityName")));
