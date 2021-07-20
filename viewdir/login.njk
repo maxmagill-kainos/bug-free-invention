@@ -26,12 +26,12 @@
           {% endif %}
           <form action="/login" method="POST">
             <div class="input-field">
-              <input type="text" id="username" name="email" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">
-              <label for="email">Email</label>
+              <input type="text" id="username" name="email" autocomplete="off" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">
+              <label for="email" style="color: #283583">Email</label>
             </div>
             <div class="input-field">
               <input type="password" id="password" name="password" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">
-              <label for="password">Password</label>
+              <label for="password" style="color: #283583">Password</label>
             </div>
             <center>
               <button id="submitButton" class="btn waves-effect waves-light" type="submit" style="background-color: #61A83F">Login<i class="material-icons right">send</i>

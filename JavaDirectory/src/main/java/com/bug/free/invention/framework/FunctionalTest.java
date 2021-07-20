@@ -19,14 +19,14 @@ public class FunctionalTest {
     protected static WebDriver driver;
     protected final static String browserVersion = System.getProperty(BROWSER_VERSION);
 
-    @BeforeAll
+    @BeforeEach
     public void setUp() {
         WebDriverManager.chromedriver().browserVersion(browserVersion).setup();
         driver =  new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @AfterAll
+    @AfterEach
     public void tearDown() {
         driver.manage().deleteAllCookies();
         driver.quit();
