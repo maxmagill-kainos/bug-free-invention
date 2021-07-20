@@ -12,7 +12,6 @@ import java.util.List;
 
 @Component
 public class JobService {
-    //Load From Database
     @Autowired
     private JobRepository repository;
     @Autowired

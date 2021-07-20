@@ -8,7 +8,6 @@ CREATE TABLE capability(
     capabilityID TINYINT PRIMARY KEY AUTO_INCREMENT,
     capabilityName varchar (40) NOT NULL
 );
-
 CREATE TABLE jobFamily(
     jobFamilyID TINYINT PRIMARY KEY AUTO_INCREMENT,
     jobFamilyTitle varchar (40) NOT NULL,

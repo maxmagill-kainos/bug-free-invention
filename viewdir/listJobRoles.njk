@@ -1,0 +1,331 @@
+<!doctype html>
+{% extends 'layout-template.njk'%}
+
+{% block content %}
+    <html lang="en">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script type="text/javascript" src="http://localhost:6555/js/pageInation.js"></script>
+        <title>Kainos - Job List</title>
+        <body>
+            <main>
+                <div class="container">
+                    <div class="row">
+                        <div class = "col-sm">
+                            <h1 class="thin">List of Job Roles</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header">
+                                    <i class="material-icons">filter_drama</i>Add Job Role</div>
+                                <div class="collapsible-body">
+                                    <div class="row">
+                                        <div class="input-field col s2">
+                                            <input id="jobTitleFieldAdd" type="text" class="validate">
+                                            <label for="jobTitleFieldAdd">Job Title</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <table id="myTable" class="table highlight stripped centered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Job Title</th>
+                                        <th scope="col">Capability Name</th>
+                                        <th scope="col">Band Name</th>
+                                        <th scope="col">Band Level</th>
+                                        <th scope="col">Family Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for role in jobData %}
+                                        <tr id="{{role.jobID}}">
+                                            <td id="jobTitleCell{{role.jobID}}">{{role.jobTitle}}</td>
+                                            <td id="jobCapabilityCell{{role.jobID}}">{{role.capabilityName}}</td>
+                                            <td id="jobBandNameCell{{role.jobID}}">{{role.bandName}}</td>
+                                            <td id="jobBandLevelCell{{role.jobID}}">{{role.bandLevel}}</td>
+                                            <td id="jobFamilyNameCell{{role.jobID}}">{{role.familyName}}</td>
+                                            {% if isAdmin == 1%}
+                                                <td id="edit{{role.jobID}}">
+                                                    <i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editRole({{role.jobID}})">edit</i>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="col-md-12 center text-center">
+                                <span class="left" id="total_reg"></span>
+                                <ul class="pagination pager" id="myPager"></ul>
+                            </div>
+                        </div>
+                        <div class="col s12 m2 l2"></div>
+
+                    </div>
+                </div>
+            </main>
+        </body>
+    </html>
+
+    {% if isAdmin == 1%}
+        <script>
+            function editRole(roleID) {
+                {% set capabiltiesList, bandNameList = [] %}
+                var familyNameDict = {}{% for role in jobData %}
+                    if (familyNameDict['{{role.familyName}}'] == undefined) {
+                        familyNameDict['{{role.familyName}}'] = '{{role.capabilityName}}';
+                    }
+                {% endfor %}
+                var jobTitle = document.getElementById("jobTitleCell" + roleID);
+                var capabilityName = document.getElementById("jobCapabilityCell" + roleID);
+                var bandName = document.getElementById("jobBandNameCell" + roleID);
+                var bandLevel = document.getElementById("jobBandLevelCell" + roleID);
+                var familyName = document.getElementById("jobFamilyNameCell" + roleID);
+                var edit = document.getElementById("edit" + roleID);
+                bandLevel.style.color = '#283583';
+
+                jobTitle.innerHTML = '<input id="jobTitleEdit' + roleID + '" placeholder="' + jobTitle.innerText + '" type="text" value="' + jobTitle.innerText + '" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+                capabilityName.innerHTML = '<div class="input-field col s12" id="capabilityEdit' + roleID + '" onchange="updateFamilyNameList(' + roleID + ')"><select><option id="capabilityEditDefault' + roleID + '"value="' + capabilityName.innerText + '" disabled selected>' + capabilityName.innerText + '</option>' +
+                {% for role in jobData %}
+                    {% if role.capabilityName not in capabiltiesList %}
+                        {% if capabilityName.innerHTML not in role.capabilityName %}
+                            {% set capabiltiesList = (capabiltiesList.push(role.capabilityName), capabiltiesList) %}
+                            ' <option value="{{role.capabilityName}}">{{role.capabilityName}} </option>' +
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                '</select><label>Select Capability Name</label></div>'
+                bandName.innerHTML = '<div class="input-field col s12" id="bandNameEdit' + roleID + '" onchange="updateBandLevel(' + roleID + ')"><select><option id="bandNameEditDefault' + roleID + '"value="' + bandName.innerText + '" disabled selected>' + bandName.innerText + '</option>' +{% for role in jobData %}
+                    {% if role.bandName not in bandNameList %}
+                        {% if bandName.innerText not in role.bandName %}
+                            {% set bandNameList = (bandNameList.push(role.bandName), bandNameList) %}
+                            ' <option value="{{role.bandName}}">{{role.bandName}} </option>' +
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                '</select><label>Select Band Name</label></div>'
+
+                var familyNameOptions = "";
+                var defaultCapabilityName = document
+                    .getElementById("capabilityEditDefault" + roleID)
+                    .value;
+                if (defaultCapabilityName.includes('&')) {
+                    defaultCapabilityName = defaultCapabilityName.replace('&', '&amp;')
+                }
+                for (const [key, value] of Object.entries(familyNameDict)) {
+                    if (value == defaultCapabilityName) {
+                        if (familyNameOptions.includes(key)) {} else {
+                            familyNameOptions += '<option value="' + key + '">' + key + '</option>'
+                        }
+                    }
+                }
+                familyName.innerHTML = '<div class="input-field col s12" id="familyNameEdit' + roleID + '"><select><option id="familyNameEditDefault' + roleID + '"value="' + familyName.innerText + '" disabled selected>' + familyName.innerText + '</option>' + familyNameOptions + '</select><label>Select Family Name</label></div>'
+
+                edit.innerHTML = '<div class="row">' + '<div class="col s6">' + '<a id="checkButton' + roleID + '"class="waves-effect waves-light btn-small-flat" onclick ="submitEdit(' + roleID + ')">' + '<i class="material-icons green-text text-lighten-1" style="font-size: 25px ; cursor: pointer">check</i>' + '</a>' + '</div><div class="col s6"></div></div>' + '<div class="row">' + '<div class="col s6">' + '<a class="waves-effect waves-light btn-small-flat" onclick="cancelEdit(' + roleID + ')">' + '<i class="material-icons red-text text-lighten-1" style="font-size: 25px ; cursor: pointer">cancel</i></a></div><div class="col s6"></div></div>'
+
+                $(document).ready(function () {
+                    $('select').formSelect();
+                    $('.select-dropdown').css({"color": "#283583", "border-bottom": "1px solid #283583"});
+                    $('.select-wrapper ul li > span').css({"color": "#283583"});
+                    // Old way
+                    // $('select').material_select();
+                });
+            }
+
+            function cancelEdit(roleID) {
+                var jobTitle = document.getElementById("jobTitleCell" + roleID);
+                var capabilityName = document.getElementById("jobCapabilityCell" + roleID);
+                var bandName = document.getElementById("jobBandNameCell" + roleID);
+                var bandLevel = document.getElementById("jobBandLevelCell" + roleID)
+                var familyName = document.getElementById("jobFamilyNameCell" + roleID);
+                var edit = document.getElementById("edit" + roleID);
+                jobTitle.innerHTML = document
+                    .getElementById("jobTitleEdit" + roleID)
+                    .placeholder;
+                capabilityName.innerHTML = document
+                    .getElementById("capabilityEditDefault" + roleID)
+                    .value;
+                bandName.innerHTML = document
+                    .getElementById("bandNameEditDefault" + roleID)
+                    .value;
+                updateBandLevel(roleID);
+                bandLevel.style.color = "black";
+                familyName.innerHTML = document
+                    .getElementById("familyNameEditDefault" + roleID)
+                    .value;
+                edit.innerHTML = '<i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editRole(' + roleID + ')">edit</i>'
+            }
+
+            function updateBandLevel(roleID) {
+                var dict = {};
+                {% for role in jobData %}
+                    dict["{{role.bandName}}"] = {{role.bandLevel}};
+                {% endfor %}
+                if (document.getElementById('bandNameEdit' + roleID) == null) {
+                    var bandName = document
+                        .getElementById('jobBandNameCell' + roleID)
+                        .innerText;
+                    document
+                        .getElementById('jobBandLevelCell' + roleID)
+                        .innerText = dict[bandName];
+                } else {
+                    var bandName = document
+                        .getElementById('bandNameEdit' + roleID)
+                        .getElementsByClassName("selected")[0]
+                        .innerText;
+                    document
+                        .getElementById('jobBandLevelCell' + roleID)
+                        .innerText = dict[bandName];
+                }
+            }
+
+            function updateFamilyNameList(roleID) {
+
+                var familyNameDict = {}{% for role in jobData %}
+                    if (familyNameDict['{{role.familyName}}'] == undefined) {
+                        familyNameDict['{{role.familyName}}'] = '{{role.capabilityName}}';
+                    }
+                {% endfor %}
+
+                var familyName = document.getElementById("jobFamilyNameCell" + roleID);
+                var defaultFamilyName = document
+                    .getElementById('familyNameEditDefault' + roleID)
+                    .value;
+                var familyNameOptions = "";
+                var capabilityName = document
+                    .getElementById('capabilityEdit' + roleID)
+                    .getElementsByClassName("selected")[0]
+                    .innerText;
+                if (capabilityName.includes('&')) {
+                    capabilityName = capabilityName.replace('&', '&amp;')
+                }
+                for (const [key, value] of Object.entries(familyNameDict)) {
+                    if (value == capabilityName) {
+                        if (familyNameOptions.includes(key)) {} else {
+                            familyNameOptions += '<option value="' + key + '">' + key + '</option>'
+                        }
+                    }
+                }
+                familyName.innerHTML = '<div class="input-field col s12" id="familyNameEdit' + roleID + '"><select><option id="familyNameEditDefault' + roleID + '"value="' + defaultFamilyName + '" disabled selected>Select Family Name</option>' + familyNameOptions + '</select><label>Select Family Name</label></div>'
+
+                $(document).ready(function () {
+                    $('select').formSelect();
+                    $('.select-dropdown').css({"color": "#283583", "border-bottom": "1px solid #283583"});
+                    $('.select-wrapper ul li > span').css({"color": "#283583"});
+                    // Old way
+                    // $('select').material_select();
+
+                });
+
+            }
+            function submitEdit(roleID) {
+                var data = {}
+                data.jobID = roleID;
+                data.jobTitle = document
+                    .getElementById('jobTitleEdit' + roleID)
+                    .value;
+                data.capabilityName = document
+                    .getElementById('capabilityEdit' + roleID)
+                    .getElementsByClassName("selected")[0]
+                    .innerText;
+                data.bandName = document
+                    .getElementById('bandNameEdit' + roleID)
+                    .getElementsByClassName("selected")[0]
+                    .innerText;
+                data.bandLevel = document
+                    .getElementById('jobBandLevelCell' + roleID)
+                    .innerText
+                data.familyName = document
+                    .getElementById('familyNameEdit' + roleID)
+                    .getElementsByClassName("selected")[0]
+                    .innerText;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/updateJobRole",
+                    data: data,
+                    datatype: "json",
+                    success: function (result) {
+                        if (result.successful) {
+                            M.toast({html: result.message, classes: 'rounded green lighten-1', displayLength: 1250});
+                            var jobTitleCell = document.getElementById("jobTitleCell" + roleID);
+                            var capabilityNameCell = document.getElementById("jobCapabilityCell" + roleID);
+                            var bandNameCell = document.getElementById("jobBandNameCell" + roleID);
+                            var bandLevelCell = document.getElementById("jobBandLevelCell" + roleID);
+                            var familyNameCell = document.getElementById("jobFamilyNameCell" + roleID);
+                            var edit = document.getElementById("edit" + roleID);
+                            bandLevelCell.style.color = "black";
+                            jobTitleCell.innerHTML = document
+                                .getElementById("jobTitleEdit" + roleID)
+                                .value;
+                            capabilityNameCell.innerHTML = data.capabilityName;
+                            bandNameCell.innerHTML = data.bandName;
+                            familyNameCell.innerHTML = data.familyName;
+                            edit.innerHTML = '<i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editRole(' + roleID + ')">edit</i>'
+                        } else {
+                            M.toast({html: result.message, classes: 'rounded red lighten-1', displayLength: 1250});
+                            cancelEdit(roleID);
+                            return;
+                        }
+                    },
+                    error: function (result) {}
+                });
+            }
+
+            function getCapabilityNames(){
+            {%set capabilitiesList = []%}
+            var returnString = "";
+            {% for role in jobData %}
+                    {% if role.capabilityName not in capabiltiesList %}
+                        {% if capabilityName.innerHTML not in role.capabilityName %}
+                            {% set capabiltiesList = (capabiltiesList.push(role.capabilityName), capabiltiesList) %}
+                            returnString += ' <option value="{{role.capabilityName}}">{{role.capabilityName}} </option>';
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                return returnString;
+            }
+            document.addEventListener('keydown', function (e) {
+                switch (e.keyCode) {
+                    case 37:
+                        var key = document.getElementsByClassName('prev_link')[0];
+                        if (key.style.display != 'none') {
+                            key.click();
+                        }
+                        break;
+                    case 39:
+                        var key = document.getElementsByClassName('next_link')[0];
+                        if (key.style.display != 'none') {
+                            key.click();
+                        }
+                        break;
+                }
+            });
+
+            $(document).ready(function () {
+                $('.collapsible').collapsible();
+                $('.collapsible-body').css({"padding-top":"0","padding-bottom":"0"});
+            });
+
+            console.log(getCapabilityNames());
+        </script>
+
+    {% endif %}
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').pageMe({pagerSelector: '#myPager', activeColor: 'blue', showPrevNext: true, hidePageNumbers: false, perPage: 10});
+        });
+    </script>
+    {% endblock%}

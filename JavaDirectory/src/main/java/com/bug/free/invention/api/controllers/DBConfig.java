@@ -10,7 +10,7 @@ public class DBConfig {
     private  static String Username = "";
     private static String Password = "" ;
     private static String host = "";
-    private static String DatabaseID = "";
+    private static String DatabaseID = "teamCteam_Josh";
     public static String url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
     public DBConfig(){
 
