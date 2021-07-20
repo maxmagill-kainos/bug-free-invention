@@ -88,15 +88,5 @@ import java.util.stream.StreamSupport;
         }
 
     }
-/*    @GetMapping("/jobSpec")
-    public String getJobSpecLink(@RequestParam Integer JobID) {
-        try {
-            return JobService.GetJobSpecLink(JobID);
-        } catch (Exception e) {
-            return "https://www.kainos.com";
-        }
-    }*/
-
-
 }
 

@@ -95,25 +95,15 @@ public class job {
         this.familyName = familyName;
     }
 
-    //    public String getSpec_Summary() {
-//        return specSummary;
-//    }
-
-//    public void setSpec_Summary(String specSummary) {
-//        this.specSummary = specSummary;
-//    }
-
     @Override
     public String toString() {
         return "Job{" +
                 "jobID=" + jobID +
                 ", jobTitle='" + jobTitle + '\'' +
-//                ", jobSpec='" + jobSpec + '\'' +
                 ", bandID=" + bandID +
                 ", capabilityID=" + capabilityID +
                 ", bandName='" + bandName + '\'' +
                 ", capabilityName='" + capabilityName + '\'' +
-//                ", specSummary='" + specSummary + '\'' +
                 '}';
     }
 }
