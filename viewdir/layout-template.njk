@@ -1,0 +1,72 @@
+{% block navbar %}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/jpg" href="https://www.kainos.com/favicon.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/style/style.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+<nav class="z-depth-3 dark-blue">
+    <div class="nav-wrapper container dark-blue">
+        <a href="/index" class="brand-logo">
+            <img src="https://i.ibb.co/y43Xwry/Kainos-Logo-Index.png" height=50px
+                                                 style="margin-top: 4%">
+        </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="#">Placeholder</a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-light btn kainos-green" href="/logout">Logout</a>
+                </li>
+            </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content%}
+{% endblock%}
+
+{% block footer%}
+<footer class="page-footer z-depth-3 dark-blue">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text"></h5>
+                <p class="grey-text text-lighten-4"></p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Contact Information</h5>
+                <ul>
+                    <li>
+                        <p>Phone No: 028 9057 1100</p>
+                    </li>
+                    <li>
+                        <p class="grey-text text-lighten-3">Address: 4-6 Upper Cresent</p>
+                    </li>
+                    <li>
+                        <p class="grey-text text-lighten-3">City: Belfast</p>
+                    </li>
+                    <li>
+                        <p class="grey-text text-lighten-3">Postcode: BT7 1NT</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Kainos Software Limited © 2021
+        </div>
+    </div>
+</footer>
+
+{% endblock%}

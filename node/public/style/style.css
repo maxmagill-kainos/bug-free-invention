@@ -1,0 +1,44 @@
+.container{
+    margin-top: 2%;
+}
+
+#panel{
+    background-color: #61A83F ;
+    margin-top: 10%;
+}
+
+.material-icons{
+    font-size: 37.5pt;
+}
+
+.white-text{
+    margin: auto;
+}
+
+#row-id{
+    margin-top: 10%;
+}
+
+#kainos-header{
+    height: 100px;
+}
+
+#email {
+    color: #283583 ; 
+    border-bottom: 1px solid #283583; 
+    box-shadow: none;
+}
+
+#password {
+    color: #283583 ; 
+    border-bottom: 1px solid #283583; 
+    box-shadow: none;
+}
+
+.dark-blue{
+    background-color: #113e71;
+}
+
+.kainos-green{
+    background-color: #61A83F;
+}
