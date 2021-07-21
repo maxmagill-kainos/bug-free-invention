@@ -28,6 +28,9 @@ import java.util.stream.StreamSupport;
     private CapabilityService capabilityService;
     @Autowired
     private JobSummaryService summaryService;
+    @Autowired
+    private JobFamilyService jobFamilyService;
+
 
     @PostMapping(value = "/submitJobSpec", consumes = "application/json", produces = "application/json")
     public String JobSpecSubmit(@RequestBody ObjectNode objectNode) {
@@ -86,11 +89,13 @@ import java.util.stream.StreamSupport;
             List<capability> capabilities = StreamSupport.stream(capabilityService.retrieveAllCapabilites().spliterator(),false).collect(Collectors.toList());
             List<job> jobs = StreamSupport.stream(JobService.retrieveAllJobRoles().spliterator(),false).collect(Collectors.toList());
             List<jobSummary> summaries= StreamSupport.stream(summaryService.retrieveAllJobSummaries().spliterator(),false).collect(Collectors.toList());
+            List<jobFamily> families= StreamSupport.stream(jobFamilyService.retrieveAllJobFamilies().spliterator(),false).collect(Collectors.toList());
             //stream method abandoned
             for(job jobobj : jobs){
                 Band foundBand = bands.stream().filter(a -> a.getBandID() == jobobj.getBandID()).collect(Collectors.toList()).get(0);
                 capability foundCapability = capabilities.stream().filter(a -> a.getCapabilityID() == jobobj.getCapabilityID()).collect(Collectors.toList()).get(0);
                 jobSummary foundSummary = summaries.stream().filter(a -> a.getJobID() == jobobj.getJobID()).collect(Collectors.toList()).get(0);
+                jobFamily foundFamily = families.stream().filter(a -> a.getJobFamilyID() == jobobj.getJobFamilyID()).collect(Collectors.toList()).get(0);
                 System.out.println(foundSummary);
                 try {
                     jobobj.setIntband(foundBand);
@@ -103,6 +108,9 @@ import java.util.stream.StreamSupport;
                 }catch (Exception e){}
                 try {
                     jobobj.setIntJobSummary(foundSummary);
+                }catch (Exception e){}
+                try {
+                    jobobj.setIntFamily(foundFamily);
                 }catch (Exception e){}
             }
 
@@ -136,6 +144,15 @@ import java.util.stream.StreamSupport;
 
         }
 
+    }
+
+    @GetMapping("/jobSpec")
+    public String getJobSpecLink(@RequestParam Integer JobID) {
+        try {
+            return JobService.GetJobSpecLink(JobID);
+        } catch (Exception e) {
+            return "https://www.kainos.com";
+        }
     }
 }
 

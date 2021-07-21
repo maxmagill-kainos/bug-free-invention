@@ -50,10 +50,10 @@
                                     {% for role in jobData %}
                                         <tr id="{{role.jobID}}">
                                             <td id="jobTitleCell{{role.jobID}}">{{role.jobTitle}}</td>
-                                            <td id="jobCapabilityCell{{role.jobID}}">{{role.capabilityName}}</td>
-                                            <td id="jobBandNameCell{{role.jobID}}">{{role.bandName}}</td>
-                                            <td id="jobBandLevelCell{{role.jobID}}">{{role.bandLevel}}</td>
-                                            <td id="jobFamilyNameCell{{role.jobID}}">{{role.familyName}}</td>
+                                            <td id="jobCapabilityCell{{role.jobID}}">{{role.intcapability.capabilityName}}</td>
+                                            <td id="jobBandNameCell{{role.jobID}}">{{role.intband.bandName}}</td>
+                                            <td id="jobBandLevelCell{{role.jobID}}">{{role.intband.bandLevel}}</td>
+                                            <td id="jobFamilyNameCell{{role.jobID}}">{{role.intFamily.jobFamilyTitle}}</td>
                                             {% if isAdmin == 1%}
                                                 <td id="edit{{role.jobID}}">
                                                     <i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editRole({{role.jobID}})">edit</i>
@@ -81,8 +81,8 @@
             function editRole(roleID) {
                 {% set capabiltiesList, bandNameList = [] %}
                 var familyNameDict = {}{% for role in jobData %}
-                    if (familyNameDict['{{role.familyName}}'] == undefined) {
-                        familyNameDict['{{role.familyName}}'] = '{{role.capabilityName}}';
+                    if (familyNameDict['{{role.intFamily.jobFamilyTitle}}'] == undefined) {
+                        familyNameDict['{{role.intFamily.jobFamilyTitle}}'] = '{{role.intcapability.capabilityName}}';
                     }
                 {% endfor %}
                 var jobTitle = document.getElementById("jobTitleCell" + roleID);
@@ -96,20 +96,20 @@
                 jobTitle.innerHTML = '<input id="jobTitleEdit' + roleID + '" placeholder="' + jobTitle.innerText + '" type="text" value="' + jobTitle.innerText + '" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
                 capabilityName.innerHTML = '<div class="input-field col s12" id="capabilityEdit' + roleID + '" onchange="updateFamilyNameList(' + roleID + ')"><select><option id="capabilityEditDefault' + roleID + '"value="' + capabilityName.innerText + '" disabled selected>' + capabilityName.innerText + '</option>' +
                 {% for role in jobData %}
-                    {% if role.capabilityName not in capabiltiesList %}
-                        {% if capabilityName.innerHTML not in role.capabilityName %}
-                            {% set capabiltiesList = (capabiltiesList.push(role.capabilityName), capabiltiesList) %}
-                            ' <option value="{{role.capabilityName}}">{{role.capabilityName}} </option>' +
+                    {% if role.intcapability.capabilityName not in capabiltiesList %}
+                        {% if capabilityName.innerHTML not in role.intcapability.capabilityName %}
+                            {% set capabiltiesList = (capabiltiesList.push(role.intcapability.capabilityName), capabiltiesList) %}
+                            ' <option value="{{role.intcapability.capabilityName}}">{{role.intcapability.capabilityName}} </option>' +
                         {% endif %}
                     {% endif %}
                 {% endfor %}
 
                 '</select><label>Select Capability Name</label></div>'
                 bandName.innerHTML = '<div class="input-field col s12" id="bandNameEdit' + roleID + '" onchange="updateBandLevel(' + roleID + ')"><select><option id="bandNameEditDefault' + roleID + '"value="' + bandName.innerText + '" disabled selected>' + bandName.innerText + '</option>' +{% for role in jobData %}
-                    {% if role.bandName not in bandNameList %}
-                        {% if bandName.innerText not in role.bandName %}
-                            {% set bandNameList = (bandNameList.push(role.bandName), bandNameList) %}
-                            ' <option value="{{role.bandName}}">{{role.bandName}} </option>' +
+                    {% if role.intband.bandName not in bandNameList %}
+                        {% if bandName.innerText not in role.intband.bandName %}
+                            {% set bandNameList = (bandNameList.push(role.intband.bandName), bandNameList) %}
+                            ' <option value="{{role.intband.bandName}}">{{role.intband.bandName}} </option>' +
                         {% endif %}
                     {% endif %}
                 {% endfor %}
@@ -170,7 +170,7 @@
             function updateBandLevel(roleID) {
                 var dict = {};
                 {% for role in jobData %}
-                    dict["{{role.bandName}}"] = {{role.bandLevel}};
+                    dict["{{role.intband.bandName}}"] = {{role.intband.bandLevel}};
                 {% endfor %}
                 if (document.getElementById('bandNameEdit' + roleID) == null) {
                     var bandName = document
@@ -193,8 +193,8 @@
             function updateFamilyNameList(roleID) {
 
                 var familyNameDict = {}{% for role in jobData %}
-                    if (familyNameDict['{{role.familyName}}'] == undefined) {
-                        familyNameDict['{{role.familyName}}'] = '{{role.capabilityName}}';
+                    if (familyNameDict['{{role.intFamily.jobFamilyTitle}}'] == undefined) {
+                        familyNameDict['{{role.intFamily.jobFamilyTitle}}'] = '{{role.intcapability.capabilityName}}';
                     }
                 {% endfor %}
 
@@ -287,10 +287,10 @@
             {%set capabilitiesList = []%}
             var returnString = "";
             {% for role in jobData %}
-                    {% if role.capabilityName not in capabiltiesList %}
-                        {% if capabilityName.innerHTML not in role.capabilityName %}
-                            {% set capabiltiesList = (capabiltiesList.push(role.capabilityName), capabiltiesList) %}
-                            returnString += ' <option value="{{role.capabilityName}}">{{role.capabilityName}} </option>';
+                    {% if role.intcapability.capabilityName not in capabiltiesList %}
+                        {% if capabilityName.innerHTML not in role.intcapability.capabilityName %}
+                            {% set capabiltiesList = (capabiltiesList.push(role.intcapability.capabilityName), capabiltiesList) %}
+                            returnString += ' <option value="{{role.intcapability.capabilityName}}">{{role.intcapability.capabilityName}} </option>';
                         {% endif %}
                     {% endif %}
                 {% endfor %}

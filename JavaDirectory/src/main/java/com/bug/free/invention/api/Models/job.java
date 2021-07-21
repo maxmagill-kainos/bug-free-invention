@@ -27,6 +27,9 @@ public class job {
     private Band intband;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
+    private jobFamily intFamily;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private capability intcapability;
     @Transient
     private jobSummary intJobSummary;
@@ -126,6 +129,14 @@ public class job {
 
     public void setIntJobSummary(jobSummary intJobSummary) {
         this.intJobSummary = intJobSummary;
+    }
+
+    public jobFamily getIntFamily() {
+        return intFamily;
+    }
+
+    public void setIntFamily(jobFamily intFamily) {
+        this.intFamily = intFamily;
     }
 
     @Override

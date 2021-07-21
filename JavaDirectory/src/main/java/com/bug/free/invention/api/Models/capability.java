@@ -35,4 +35,6 @@ public class capability {
     public void setCapabilityName(String capabilityName) {
         this.capabilityName = capabilityName;
     }
+
+
 }
