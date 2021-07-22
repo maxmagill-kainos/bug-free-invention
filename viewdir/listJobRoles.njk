@@ -57,7 +57,11 @@
                                             <td id="jobBandNameCell{{role.jobID}}">{{role.intband.bandName}}</td>
                                             <td id="jobBandLevelCell{{role.jobID}}">{{role.intband.bandLevel}}</td>
                                             <td id="jobFamilyNameCell{{role.jobID}}">{{role.intFamily.jobFamilyTitle}}</td>
+                                            {% if role.intJobSummary.summaryText != "Please Define" %}
                                             <td id="jobSummaryCell{{role.jobID}}">{{role.intJobSummary.summaryText}}</td>
+                                            {% else%}
+                                            <td id="jobSummaryCell{{role.jobID}}"></td>
+                                            {% endif %}
                                             <td id="jobSpecCell{{role.jobID}}">
                                             {% if role.jobSpec.length != 0 %}
                                                 <a class="waves-effect waves-light btn" target="_blank" href="{{role.jobSpec}}" style="background-color: #61A83F">Spec</a>
