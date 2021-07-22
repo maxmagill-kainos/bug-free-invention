@@ -3,6 +3,7 @@ package com.bug.free.invention.api.controllers;
 import com.bug.free.invention.api.Models.*;
 import com.bug.free.invention.api.Services.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
@@ -129,7 +130,7 @@ import java.util.stream.StreamSupport;
     }
 
     @PostMapping(value = "/updateJobRole", consumes = "application/json")
-    public void updateJobRole(@RequestBody String jobDetails){
+    public void updateJobRole(@RequestBody String jobDetails) throws JSONException {
         System.out.println("test");
         JSONObject jobDetailsJSON = new JSONObject(jobDetails);
         try(Connection DatabaseConnection = DBConfig.getConnection()){

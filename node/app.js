@@ -60,14 +60,25 @@ app.get('/JobsTable', async function (req, res) {
    res.render('listJobRoles', { jobData: data, isAdmin: 1 });// session_variables.isAdmin});
 });
 
-app.post('/updateBand', async function (req, res) {
+app.put('/updateBand', async function (req, res) {
    var body = req.body;
    if (body.bandName.length > 5 && body.bandLevel != 0 && body.bandTraining.length > 0 &&
       body.bandCompetencies.length > 0 && body.bandResponsibilites.length > 0) {
+         const rawResponse = await fetch('http://localhost:8080/bandLevel/updateBand/' + body.bandID, {
+         method: 'PUT',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            bandID: body.bandID, bandName: body.bandName.trim(), bandLevel: body.bandLevel.trim(),
+            bandTraining: body.bandTraining.trim(), bandCompetencies: body.bandCompetencies.trim(), bandResponsibilites: body.bandResponsibilites.trim()
+         })
+      })
+
       console.log(req.body.bandName);
       res.json({ message: "Updated Successfully", successful: true });
    }
+   else{
    res.json({ message: "Updated Failed", successful: false });
+   }
 });
 
 app.get('/bandLevel', async function (req, res) {
