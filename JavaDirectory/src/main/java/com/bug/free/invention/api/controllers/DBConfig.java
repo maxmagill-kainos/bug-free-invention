@@ -7,9 +7,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConfig {
-    private  static String Username = "";
-    private static String Password = "" ;
-    private static String host = "";
+    private  static String Username = "tCadmin";
+    private static String Password = "teamCpassword" ;
+    private static String host = "academy2020.cpc8rvmbbd9k.eu-west-2.rds.amazonaws.com";
     private static String DatabaseID = "teamCteam_Josh";
     public static String url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
     public DBConfig(){
@@ -35,9 +35,9 @@ public class DBConfig {
         return true;
     }
     public static boolean ProdMode(){
-        DatabaseID = "";
-        Username = "";
-        Password = "";
+        DatabaseID = "teamCteam_josh";
+        Username = "tCadmin";
+        Password = "teamCpassword";
         url = "jdbc:mysql://"+ host + "/"+DatabaseID+"?useSSL=false";
         return true;
     };

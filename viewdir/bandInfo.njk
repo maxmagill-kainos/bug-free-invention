@@ -2,8 +2,14 @@
 {% extends 'layout-template.njk'%}
 
 {% block content %}
-<html lang="en">
-    <title>Kainos - Band Info</title> 
+    <html lang="en">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script type="text/javascript" src="http://localhost:6555/js/pageInation.js"></script>
+        <title>Kainos - Band Info</title>
         <div class="container">
             <div class="row">
                 <div class = "col-sm">
@@ -23,25 +29,188 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for role in bandData %}
+                            {% for band in bandData %}
                                 <tr id = "{{role.bandID}}">
-                                <td id = "bandNameCell{{role.bandID}}">{{role.bandName}}</td>
-                                <td id = "bandLevelCell{{role.bandID}}">{{role.bandLevel}}</td>
-                                <td id = "bandTrainingCell{{role.bandID}}">{{role.bandTraining}}</td>
-                                <td id = "bandCompetenciesCell{{role.bandID}}">{{role.bandCompetencies}}</td>
-                                <td id = "bandResponsibilitiesCell{{role.bandID}}">{{role.bandResponsibilites}}</td>
-                            </tr>
-                                {% endfor %}
+                                    <td id = "bandNameCell{{band.bandID}}">{{band.bandName}}</td>
+                                    <td id = "bandLevelCell{{band.bandID}}">{{band.bandLevel}}</td>
+                                    <td id = "bandTrainingCell{{band.bandID}}">{{band.bandTraining}}</td>
+                                    <td id = "bandCompetenciesCell{{band.bandID}}">{{band.bandCompetencies}}</td>
+                                    <td id = "bandResponsibilitiesCell{{band.bandID}}">{{band.bandResponsibilites}}</td>
+                                    {% if isAdmin == 1%}
+                                        <td id="edit{{band.bandID}}">
+                                            <i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editBand({{band.bandID}})">edit</i>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
+                    <div class="col-md-12 center text-center">
+                        <span class="left" id="total_reg"></span>
+                        <ul class="pagination pager" id="myPager"></ul>
+                    </div>
                 </div>
-
+                <div class="col s12 m2 l2"></div>
             </div>
-        </div>
 
-    </body>
+        </div>
+    </div>
+
+</body>
 </html>
 
+{% if isAdmin == 1%}
+<script>
+
+    function editBand(bandID) {
+        var bandName = document.getElementById("bandNameCell" + bandID);
+        var bandLevel = document.getElementById("bandLevelCell" + bandID);
+
+        var bandTraining = document.getElementById("bandTrainingCell" + bandID);
+
+        var bandCompetencies = document.getElementById("bandCompetenciesCell" + bandID);
+        var bandResponsibilites = document.getElementById("bandResponsibilitiesCell" + bandID);
+
+        var edit = document.getElementById("edit" + bandID);
+        bandLevel.style.color = '#283583';
+
+        bandName.innerHTML = '<input id="BandNameEdit' + bandID + '" placeholder="' + bandName.innerText + '" type="text" value="' + bandName.innerText + '" name="bandResponsibilites" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+        bandLevel.innerHTML = '<input id="BandLevelEdit' + bandID + '" placeholder="' + bandLevel.innerText + '" type="number" value="' + bandLevel.innerText + '" name="bandLevel" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+        bandTraining.innerHTML = '<input id="BandTrainingEdit' + bandID + '" placeholder="' + bandTraining.innerText + '" type="text" value="' + bandTraining.innerText + '" name="bandTraining" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+        bandCompetencies.innerHTML = '<input id="BandCompetenciesEdit' + bandID + '" placeholder="' + bandCompetencies.innerText + '" type="text" value="' + bandCompetencies.innerText + '" name="bandCompetencies" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+        bandResponsibilites.innerHTML = '<input id="BandResponsibilitesEdit' + bandID + '" placeholder="' + bandResponsibilites.innerText + '" type="text" value="' + bandResponsibilites.innerText + '" name="bandResponsibilites" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
+
+        edit.innerHTML = '<div class="row">' + '<div class="col s6">' + '<a id="checkButton' + bandID + '"class="waves-effect waves-light btn-small-flat" onclick ="submitEdit(' + bandID + ')">' + '<i class="material-icons green-text text-lighten-1" style="font-size: 25px ; cursor: pointer">check</i>' + '</a>' + '</div><div class="col s6"></div></div>' + '<div class="row">' + '<div class="col s6">' + '<a class="waves-effect waves-light btn-small-flat" onclick="cancelEdit(' + bandID + ')">' + '<i class="material-icons red-text text-lighten-1" style="font-size: 25px ; cursor: pointer">cancel</i></a></div><div class="col s6"></div></div>'
+    }
+
+    function cancelEdit(bandID) {
+        var bandName = document.getElementById("bandNameCell" + bandID);
+        var bandLevel = document.getElementById("bandLevelCell" + bandID);
+
+        var bandTraining = document.getElementById("bandTrainingCell" + bandID);
+
+        var bandCompetencies = document.getElementById("bandCompetenciesCell" + bandID);
+        var bandResponsibilites = document.getElementById("bandResponsibilitiesCell" + bandID);
+
+        var edit = document.getElementById("edit" + bandID);
+        bandName.innerHTML = document
+            .getElementById("BandNameEdit" + bandID)
+            .placeholder;
+        bandLevel.innerHTML = document
+            .getElementById("BandLevelEdit" + bandID)
+            .placeholder;
+        bandTraining.innerHTML = document
+            .getElementById("BandTrainingEdit" + bandID)
+            .placeholder;
+        bandCompetencies.innerHTML = document
+            .getElementById("BandCompetenciesEdit" + bandID)
+            .placeholder;
+        bandResponsibilites.innerHTML = document
+            .getElementById("BandResponsibilitesEdit" + bandID)
+            .placeholder;
+
+        edit.innerHTML = '<i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editBand(' + bandID + ')">edit</i>'
+    }
 
 
+    function submitEdit(bandID) {
+                var data = {}
+                data.bandID = bandID;
+                data.bandName = document
+                    .getElementById('BandNameEdit' + bandID)
+                    .value;
+                data.bandLevel = document
+                    .getElementById('BandLevelEdit' + bandID)
+                    .value;
+                data.bandTraining = document
+                    .getElementById('BandTrainingEdit' + bandID)
+                    .value;
+                data.bandCompetencies = document
+                    .getElementById('BandCompetenciesEdit' + bandID)
+                    .value;
+                data.bandResponsibilites = document
+                    .getElementById('BandResponsibilitesEdit' + bandID)
+                    .value;
+            
+                $.ajax({
+                    type: "POST",
+                    url: "/updateBand",
+                    data: data,
+                    datatype: "json",
+                    success: function (result) {
+                        if (result.successful) {
+                            M.toast({html: result.message, classes: 'rounded green lighten-1', displayLength: 1250});
+                            var bandNameCell = document.getElementById("bandNameCell" + bandID);
+                            var bandLevelCell = document.getElementById("bandLevelCell" + bandID);
+                            var bandTrainingCell = document.getElementById("bandTrainingCell" + bandID);
+                            var bandCompetenciesCell = document.getElementById("bandCompetenciesCell" + bandID);
+                            var bandResponsibilitiesCell = document.getElementById("bandResponsibilitiesCell" + bandID);
+                            var edit = document.getElementById("edit" + bandID);
+                            bandNameCell.innerHTML = document
+                                .getElementById("BandNameEdit" + bandID)
+                                .value;
+                            bandLevelCell.innerHTML = document
+                                .getElementById("BandLevelEdit" + bandID)
+                                .value;
+                            bandTrainingCell.innerHTML = document
+                                .getElementById("BandTrainingEdit" + bandID)
+                                .value;
+                            bandCompetenciesCell.innerHTML = document
+                                .getElementById("BandCompetenciesEdit" + bandID)
+                                .value;
+                            bandResponsibilitiesCell.innerHTML = document
+                                .getElementById("BandResponsibilitesEdit" + bandID)
+                                .value;
+                            edit.innerHTML = '<i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editBand(' + bandID + ')">edit</i>'
+                        } else {
+                            M.toast({html: result.message, classes: 'rounded red lighten-1', displayLength: 1250});
+                            cancelEdit(bandID);
+                            return;
+                        }
+                    },
+                    error: function (result) {}
+                });
+
+            }
+</script>
+
+{% endif %}
+
+<script>
+$(document).ready(function () {
+    $('#myTable').pageMe({pagerSelector: '#myPager', activeColor: 'blue', showPrevNext: true, hidePageNumbers: false, perPage: 10});
+
+});
+document.addEventListener('keydown', function (e) {
+
+    switch (e.keyCode) {
+
+        case 37:
+
+            var key = document.getElementsByClassName('prev_link')[0];
+
+            if (key.style.display != 'none') {
+
+                key.click();
+
+            }
+
+            break;
+
+        case 39:
+
+            var key = document.getElementsByClassName('next_link')[0];
+
+            if (key.style.display != 'none') {
+
+                key.click();
+
+            }
+
+            break;
+
+    }
+
+});
+</script>
 {% endblock%}
