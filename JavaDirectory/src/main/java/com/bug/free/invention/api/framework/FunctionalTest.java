@@ -23,7 +23,8 @@ public class FunctionalTest {
 
     @AfterEach
     public void tearDown() {
-        driver.manage().deleteAllCookies();driver.close();
+        driver.manage().deleteAllCookies();
+        driver.close();
     }
 
 }

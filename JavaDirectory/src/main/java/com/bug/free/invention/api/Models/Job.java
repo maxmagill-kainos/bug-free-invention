@@ -8,8 +8,8 @@ public class Job {
     @Id int Job_ID;
     String Job_Title;
     String Job_Spec;
-    int Band_ID;
-    int Capability_ID;
+    private int Band_ID;
+    private int Capability_ID;
     String Band_Name;
     String Capability_Name;
     String Spec_Summary;
