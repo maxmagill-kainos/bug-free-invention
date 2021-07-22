@@ -13,19 +13,21 @@ public class Band {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(value = "bandID")
-    private int bandID;
+    Integer bandID;
     @Column(value = "bandName")
     private String bandName;
     @Column(value = "bandLevel")
-    private int bandLevel;
+    Integer bandLevel;
     @Column(value = "bandTraining")
     private String bandTraining;
     @Column(value = "bandCompetencies")
     private String bandCompetencies;
     @Column(value = "bandResponsibilites")
-    private String bandResponsibilites;
-    public Band() {}
-    public Band(int bandID, String bandName, int bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
+    String bandResponsibilites;
+
+//    public Band() {}
+
+    public Band(Integer bandID, String bandName, Integer bandLevel, String bandTraining, String bandCompetencies, String bandResponsibilites) {
         this.bandID = bandID;
         this.bandName = bandName;
         this.bandLevel = bandLevel;
@@ -33,10 +35,12 @@ public class Band {
         this.bandCompetencies = bandCompetencies;
         this.bandResponsibilites = bandResponsibilites;
     }
-    public int getBandID() {
+
+    public Integer getBandID() {
         return bandID;
     }
-    public void setBandID(int bandID) {
+
+    public void setBandID(Integer bandID) {
         this.bandID = bandID;
     }
     public String getBandName() {
@@ -48,7 +52,7 @@ public class Band {
     public int getBandLevel() {
         return bandLevel;
     }
-    public void setBandLevel(int bandLevel) {
+    public void setBandLevel(Integer bandLevel) {
         this.bandLevel = bandLevel;
     }
     public String getBandTraining() {
@@ -63,9 +67,11 @@ public class Band {
     public void setBandCompetencies(String bandCompetencies) {
         this.bandCompetencies = bandCompetencies;
     }
+
     public String getBandResponsibilites() {
         return bandResponsibilites;
     }
+
     public void setBandResponsibilities(String bandResponsibilites) {
         this.bandResponsibilites = bandResponsibilites;
     }
@@ -73,8 +79,8 @@ public class Band {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Band bandD = (Band) o;
-        return bandID == bandD.bandID && bandLevel == bandD.bandLevel && Objects.equals(bandName, bandD.bandName) && Objects.equals(bandTraining, bandD.bandTraining) && Objects.equals(bandCompetencies, bandD.bandCompetencies) && Objects.equals(bandResponsibilites, bandD.bandResponsibilites);
+        Band band = (Band) o;
+        return bandID == band.bandID && bandLevel == band.bandLevel && Objects.equals(bandName, band.bandName) && Objects.equals(bandTraining, band.bandTraining) && Objects.equals(bandCompetencies, band.bandCompetencies) && Objects.equals(bandResponsibilites, band.bandResponsibilites);
     }
     @Override
     public int hashCode() {

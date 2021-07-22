@@ -12,21 +12,32 @@ import java.util.Optional;
 public class BandService {
     @Autowired
     private final BandRepository repository;
+    @Autowired
+    private final EmployeeService employeeService;
 
-    public BandService(BandRepository repository) {
+    public BandService(BandRepository repository, EmployeeService employeeService) {
         this.repository = repository;
+        this.employeeService = employeeService;
     }
 
     public List<Band> getAllBands() {
         return (List<Band>) repository.findAll();
     }
 
-    public Optional<Integer> getBandLevelByBandID(int bandID) throws SQLException {
-        return repository.findBandLevelByBandID(bandID);
+    public Optional<Integer> getBandLevelByBandID(Integer bandID) throws SQLException {
+        if (bandID == null) {
+            throw new IllegalArgumentException("bandID can not be null");
+        } else
+            return repository.findBandLevelByBandID(bandID)
+                    .map(band -> band.getBandLevel());
     }
 
-    public Optional<Band> getBandLevelByBandName(String bandName) throws SQLException {
-        return repository.findBandLevelByBandName(bandName);
+    public Optional<Integer> getBandLevelByBandName(String bandName) throws SQLException {
+        if (bandName == null) {
+            throw new IllegalArgumentException("bandName can not be null");
+        } else
+            return repository.findBandLevelByBandName(bandName)
+                    .map(band -> band.getBandLevel());
     }
 
 }
