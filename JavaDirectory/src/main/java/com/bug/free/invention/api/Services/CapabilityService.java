@@ -27,7 +27,7 @@ public class CapabilityService {
 
             ResultSet results = databaseConnection.createStatement().executeQuery(dbQuery);
             while(results.next()){
-                System.out.println(results.getInt(1));
+                //System.out.println(results.getInt(1));
                 repository.save(new capability(results.getInt("capabilityID"),results.getString("capabilityName")));
             }
             isPopulated=true;

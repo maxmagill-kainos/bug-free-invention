@@ -34,16 +34,21 @@ import java.util.stream.StreamSupport;
 
     @PostMapping(value = "/submitJobSpec", consumes = "application/json", produces = "application/json")
     public String JobSpecSubmit(@RequestBody ObjectNode objectNode) {
+        System.out.println("Job Spec Submit 37");
         try {
+            System.out.println("Job Spec Submit 39");
+            System.out.println(objectNode);
             String UniqueIdentifier = objectNode.get("UniqueIdentifier").asText();
             int EmployeeID = objectNode.get("employeeID").asInt();
             if(EmployeeService.IsEmployeeValidAdmin(UniqueIdentifier,EmployeeID) ==false){
+                System.out.println("Job Spec Submit 43");
                 return "False Login";
             };
 
-            String JobSpec = objectNode.get("newJobSpecSummary").asText();
-            System.out.println(JobSpec);
+            String JobSpec = objectNode.get("jobSpec").asText();
+            //System.out.println(JobSpec);
             if (JobSpec.matches("[a-zA-Z ]+") == false) {
+                System.out.println("Job Spec Submit 50");
                 return "Invalid String";
             }
 
@@ -56,8 +61,7 @@ import java.util.stream.StreamSupport;
                 PreparedStatement SubmitSpecForJob = databaseConnection.prepareStatement(dbQuery);
                 SubmitSpecForJob.setString(1, JobSpec);
                 SubmitSpecForJob.setInt(2, JobID);
-                databaseConnection.commit();
-
+                //databaseConnection.commit();
                 System.out.println(SubmitSpecForJob.toString());
                 int ReturnedValueInsert = SubmitSpecForJob.executeUpdate();
                 if (ReturnedValueInsert == 1) {
@@ -74,7 +78,7 @@ import java.util.stream.StreamSupport;
             }
         }
         catch (NullPointerException IncorrectParameter) {
-            //IncorrectParameter.printStackTrace();
+            IncorrectParameter.printStackTrace();
             return "Unsuccessful String submit";
 
         }
@@ -96,7 +100,7 @@ import java.util.stream.StreamSupport;
                 capability foundCapability = capabilities.stream().filter(a -> a.getCapabilityID() == jobobj.getCapabilityID()).collect(Collectors.toList()).get(0);
                 jobSummary foundSummary = summaries.stream().filter(a -> a.getJobID() == jobobj.getJobID()).collect(Collectors.toList()).get(0);
                 jobFamily foundFamily = families.stream().filter(a -> a.getJobFamilyID() == jobobj.getJobFamilyID()).collect(Collectors.toList()).get(0);
-                System.out.println(foundSummary);
+                //System.out.println(foundSummary);
                 try {
                     jobobj.setIntband(foundBand);
 

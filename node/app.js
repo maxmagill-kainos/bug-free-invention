@@ -37,7 +37,21 @@ app.get('/', function(req, res){
       res.render('login');
    }
 })
-
+async function SubmitSpecForJob(jobSpec,jobID){
+   
+   console.log("Submit for spec")
+   let JSONSubmitObject ={
+      jobSpec : jobSpec,
+      jobID : jobID,
+      UniqueIdentifier: session_variables.uniqueIdentifier,
+      employeeID:session_variables.employeeID,
+   };
+   console.log(JSON.stringify(JSONSubmitObject));
+   const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
+   console.log(PostCallToJava)
+   
+   return PostCallToJava.text()
+}
 app.get('/index', function (req, res) { 
    res.redirect('/')
 }); 
@@ -46,7 +60,7 @@ app.get('/JobsTable', async function (req, res) {
    console.log('Request processed'); 
    const response = await fetch('http://localhost:8080/api/jobs/jobRoles',{method:'GET',headers:{}})
    const data = await response.json();
-   console.log(data)
+   //console.log(data)
    session_variables.isAdmin =1;
    res.render('listJobRoles', {jobData: data , isAdmin:1});// session_variables.isAdmin});
 });
@@ -70,14 +84,16 @@ app.get('/JobsSpec', async function (req, res) {
 app.post('/updateJobRole', async function (req, res) { 
    var body = req.body;
    if(body.jobTitle.length > 5 && body.capabilityName.length != 0 && body.bandLevel > 0 &&
-       body.bandName.length > 0 && body.familyName != 'Select Family Name' && body.familyName.length > 0){
+       body.bandName.length > 0 && body.familyName != 'Select Family Name' && body.familyName.length > 0 && body.jobSummary.length >0){
    const rawResponse = await fetch('http://localhost:8080/api/jobs/updateJobRole', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({jobID: body.jobID, jobTitle: body.jobTitle.trim(), capabilityName: body.capabilityName.trim(),
                           bandName: body.bandName.trim(), bandLevel: body.bandLevel, familyName: body.familyName.trim()})
   })
+  SubmitSpecForJob(body.jobSummary,body.jobID);
   res.json({message : "Updated Successfully", successful : true});
+  
 }
 else{
    res.json({message : "Update Rejected", successful : false});
@@ -93,10 +109,11 @@ app.post('/login', async function (req, res) {
     body: JSON.stringify({Email: req.body.email, Password: encrypt(req.body.password)})
   })
   const responseData = await rawResponse.json()
-
+console.log(responseData)
    if(responseData.employeeID){
       session_variables.employeeID = responseData.employeeID;
       session_variables.isAdmin = responseData.isAdmin;
+      session_variables.uniqueIdentifier=responseData.uniqueIdentifier;
       res.redirect('index');
    }
    else{
@@ -104,18 +121,7 @@ app.post('/login', async function (req, res) {
    }
 }); 
 
-async function SubmitSpecForJob(req,res){
-   console.log(req.body)
-   let JSONSubmitObject ={
-      JobSpec : req.body.SpecSummaryInput,
-      JobID : parseInt(req.body.JobID),
-      UniqueIdentifier: session_variables.UniqueIdentifier,
-      employeeID:session_variables.employeeID,
-   };
-   console.log(JSON.stringify(JSONSubmitObject));
-   const PostCallToJava = await fetch("http://localhost:8080/api/jobs/submitJobSpec",{method:'POST',body:JSON.stringify(JSONSubmitObject),headers:{ 'Content-Type': 'application/json' }})
-   console.log(PostCallToJava.json())
-}
+
 
 app.post('/SubmitSpecForJob',async function(req,res){
    SubmitSpecForJob(req,res);

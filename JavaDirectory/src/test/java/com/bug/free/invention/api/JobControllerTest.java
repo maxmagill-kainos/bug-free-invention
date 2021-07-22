@@ -45,7 +45,7 @@ public class JobControllerTest {
     public void CanJobSpecBeEditedValidInputs(){
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>("{\n" +
-                "    \"newJobSpecSummary\":\"dsfdssdf\",\n" +
+                "    \"jobSpec\":\"dsfdssdf\",\n" +
                 "    \"jobID\":2,\n" +
                 "    \"UniqueIdentifier\":\"uhsdiufh8h3r487hifd\",\n" +
                 "    \"employeeID\":2\n" +
@@ -73,7 +73,7 @@ public class JobControllerTest {
     public void CanJobSpecBeEditedInValidInputsSpecialCharacters(){
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>("{\n" +
-                "    \"newJobSpecSummary\":\";)--Test Job Input\",\n" +
+                "    \"jobSpec\":\";)--Test Job Input\",\n" +
                 "    \"jobID\":2,\n" +
                 "    \"UniqueIdentifier\":\"uhsdiufh8h3r487hifd\",\n" +
                 "    \"employeeID\":2\n" +

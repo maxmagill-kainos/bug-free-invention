@@ -1,6 +1,9 @@
 package com.bug.free.invention.api.controllers;
 
+import com.bug.free.invention.api.Models.Employee;
+import com.bug.free.invention.api.Services.EmployeeService;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Connection;
@@ -10,10 +13,16 @@ import java.sql.ResultSet;
 @RestController
 @RequestMapping("/api/login")
 public class LoginAuth {
-
+    @Autowired
+    private EmployeeService newEmployeeService;
     @PostMapping(value = "/AuthLogin", consumes = "application/json")
-    public String validateLogin(@RequestBody String authDetails){
+    public String validateLogin(@RequestBody String authDetails) {
         JSONObject userDetails = new JSONObject(authDetails);
+        String username = String.valueOf(userDetails.get("Email"));
+        String password = String.valueOf(userDetails.get("Password"));
+        return newEmployeeService.LogInEmployee(username, password);
+        /*
+
         String dbQuery = "SELECT `employeeID`,`isAdmin` FROM `employee` WHERE `username` = ? AND `userPassword` = ? LIMIT 1;";
         try(Connection DatabaseConnection = DBConfig.getConnection()){
             PreparedStatement validateUserLogin = DatabaseConnection.prepareStatement(dbQuery);
@@ -29,5 +38,8 @@ public class LoginAuth {
 
         }
         return "{\"response\": \"Incorrect Username or Password\"}";
+    }
+    */
+
     }
 }

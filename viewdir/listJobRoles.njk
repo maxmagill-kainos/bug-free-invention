@@ -44,8 +44,10 @@
                                         <th scope="col">Band Name</th>
                                         <th scope="col">Band Level</th>
                                         <th scope="col">Family Name</th>
+                                        <th scope="col">Job Summary</th>
                                     </tr>
                                 </thead>
+                                 jobSpec: 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Job%20Specifications/Product/Job profile - Product Consultant​​​​​​​ (Consultant).pdf'
                                 <tbody>
                                     {% for role in jobData %}
                                         <tr id="{{role.jobID}}">
@@ -54,6 +56,8 @@
                                             <td id="jobBandNameCell{{role.jobID}}">{{role.intband.bandName}}</td>
                                             <td id="jobBandLevelCell{{role.jobID}}">{{role.intband.bandLevel}}</td>
                                             <td id="jobFamilyNameCell{{role.jobID}}">{{role.intFamily.jobFamilyTitle}}</td>
+                                            <td id="jobSummaryCell{{role.jobID}}">{{role.intJobSummary.summaryText}}</td>
+                                            <td id="jobSpecCell{{role.jobID}}"><</td>
                                             {% if isAdmin == 1%}
                                                 <td id="edit{{role.jobID}}">
                                                     <i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editRole({{role.jobID}})">edit</i>
@@ -86,15 +90,20 @@
                     }
                 {% endfor %}
                 var jobTitle = document.getElementById("jobTitleCell" + roleID);
+                var jobSummary = document.getElementById("jobSummaryCell" + roleID);
+
                 var capabilityName = document.getElementById("jobCapabilityCell" + roleID);
+
                 var bandName = document.getElementById("jobBandNameCell" + roleID);
                 var bandLevel = document.getElementById("jobBandLevelCell" + roleID);
+
                 var familyName = document.getElementById("jobFamilyNameCell" + roleID);
+
                 var edit = document.getElementById("edit" + roleID);
                 bandLevel.style.color = '#283583';
 
                 jobTitle.innerHTML = '<input id="jobTitleEdit' + roleID + '" placeholder="' + jobTitle.innerText + '" type="text" value="' + jobTitle.innerText + '" name="jobTitle" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
-                capabilityName.innerHTML = '<div class="input-field col s12" id="capabilityEdit' + roleID + '" onchange="updateFamilyNameList(' + roleID + ')"><select><option id="capabilityEditDefault' + roleID + '"value="' + capabilityName.innerText + '" disabled selected>' + capabilityName.innerText + '</option>' + {% for role in jobData %}
+                capabilityName.innerHTML = '<div class="input-field col s12" id="capabilityEdit' + roleID + '" onchange="updateFamilyNameList(' + roleID + ')"><select><option id="capabilityEditDefault' + roleID + '"value="' + capabilityName.innerText + '" disabled selected>' + capabilityName.innerText + '</option>' +{% for role in jobData %}
                     {% if role.intcapability.capabilityName not in capabiltiesList %}
                         {% if capabilityName.innerHTML not in role.intcapability.capabilityName %}
                             {% set capabiltiesList = (capabiltiesList.push(role.intcapability.capabilityName), capabiltiesList) %}
@@ -131,8 +140,9 @@
                 }
                 familyName.innerHTML = '<div class="input-field col s12" id="familyNameEdit' + roleID + '"><select><option id="familyNameEditDefault' + roleID + '"value="' + familyName.innerText + '" disabled selected>' + familyName.innerText + '</option>' + familyNameOptions + '</select><label>Select Family Name</label></div>'
 
-                edit.innerHTML = '<div class="row">' + '<div class="col s6">' + '<a id="checkButton' + roleID + '"class="waves-effect waves-light btn-small-flat" onclick ="submitEdit(' + roleID + ')">' + '<i class="material-icons green-text text-lighten-1" style="font-size: 25px ; cursor: pointer">check</i>' + '</a>' + '</div><div class="col s6"></div></div>' + '<div class="row">' + '<div class="col s6">' + '<a class="waves-effect waves-light btn-small-flat" onclick="cancelEdit(' + roleID + ')">' + '<i class="material-icons red-text text-lighten-1" style="font-size: 25px ; cursor: pointer">cancel</i></a></div><div class="col s6"></div></div>'
+                jobSummary.innerHTML = '<input id="jobSummaryEdit' + roleID + '" placeholder="' + jobSummary.innerText + '" type="text" value="' + jobSummary.innerText + '" name="jobSummary" style="color: #283583 ; border-bottom: 1px solid #283583; box-shadow: none">'
 
+                edit.innerHTML = '<div class="row">' + '<div class="col s6">' + '<a id="checkButton' + roleID + '"class="waves-effect waves-light btn-small-flat" onclick ="submitEdit(' + roleID + ')">' + '<i class="material-icons green-text text-lighten-1" style="font-size: 25px ; cursor: pointer">check</i>' + '</a>' + '</div><div class="col s6"></div></div>' + '<div class="row">' + '<div class="col s6">' + '<a class="waves-effect waves-light btn-small-flat" onclick="cancelEdit(' + roleID + ')">' + '<i class="material-icons red-text text-lighten-1" style="font-size: 25px ; cursor: pointer">cancel</i></a></div><div class="col s6"></div></div>'
                 $(document).ready(function () {
                     $('select').formSelect();
                     $('.select-dropdown').css({"color": "#283583", "border-bottom": "1px solid #283583"});
@@ -144,6 +154,7 @@
 
             function cancelEdit(roleID) {
                 var jobTitle = document.getElementById("jobTitleCell" + roleID);
+                var jobSummary = document.getElementById("jobSummaryCell" + roleID);
                 var capabilityName = document.getElementById("jobCapabilityCell" + roleID);
                 var bandName = document.getElementById("jobBandNameCell" + roleID);
                 var bandLevel = document.getElementById("jobBandLevelCell" + roleID)
@@ -151,6 +162,9 @@
                 var edit = document.getElementById("edit" + roleID);
                 jobTitle.innerHTML = document
                     .getElementById("jobTitleEdit" + roleID)
+                    .placeholder;
+                jobSummary.innerHTML = document
+                    .getElementById("jobSummaryEdit" + roleID)
                     .placeholder;
                 capabilityName.innerHTML = document
                     .getElementById("capabilityEditDefault" + roleID)
@@ -229,6 +243,7 @@
 
             }
             function submitEdit(roleID) {
+                console.log("test");
                 var data = {}
                 data.jobID = roleID;
                 data.jobTitle = document
@@ -249,7 +264,9 @@
                     .getElementById('familyNameEdit' + roleID)
                     .getElementsByClassName("selected")[0]
                     .innerText;
-
+                data.jobSummary = document
+                    .getElementById('jobSummaryEdit' + roleID)
+                    .value;
                 $.ajax({
                     type: "POST",
                     url: "/updateJobRole",
@@ -263,11 +280,16 @@
                             var bandNameCell = document.getElementById("jobBandNameCell" + roleID);
                             var bandLevelCell = document.getElementById("jobBandLevelCell" + roleID);
                             var familyNameCell = document.getElementById("jobFamilyNameCell" + roleID);
+                            var jobSummaryCell = document.getElementById("jobSummaryCell" + roleID); 
                             var edit = document.getElementById("edit" + roleID);
                             bandLevelCell.style.color = "black";
                             jobTitleCell.innerHTML = document
                                 .getElementById("jobTitleEdit" + roleID)
                                 .value;
+                            jobSummaryCell.innerHTML = document
+                                .getElementById("jobSummaryEdit" + roleID)
+                                .value;
+                            console.log(jobSummaryCell.innerHTML);
                             capabilityNameCell.innerHTML = data.capabilityName;
                             bandNameCell.innerHTML = data.bandName;
                             familyNameCell.innerHTML = data.familyName;
@@ -280,6 +302,7 @@
                     },
                     error: function (result) {}
                 });
+
             }
 
             function getCapabilityNames() {

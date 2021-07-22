@@ -32,9 +32,9 @@ public class EmployeeService {
             while(results.next()){
                 repository.save(new Employee(results.getInt("employeeID"),results.getString("fName"),results.getString("lName"),
                         results.getString("uniqueID"),results.getBoolean("isAdmin")));
-                return "{\"employeeID\": \"" + results.getString("employeeID") + "\", \"isAdmin\": \""+ results.getString("isAdmin")+ "\"}";
-            }
-        } catch (SQLException throwables) {
+                return "{\"employeeID\": \"" + results.getString("employeeID") + "\", \"isAdmin\": \"" + results.getString("isAdmin")+ "\",\"uniqueIdentifier\": \"" + results.getString("uniqueID")+"\"}";
+
+        }} catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return "{\"response\": \"Incorrect Username or Password\"}";
@@ -49,7 +49,7 @@ public class EmployeeService {
                 return true;
             }
             else {
-                System.out.println(EmployeeToCheck.toString());
+               // System.out.println(EmployeeToCheck.toString());
                 throw new IncorrectPermissonException("invalid login");
             }
 

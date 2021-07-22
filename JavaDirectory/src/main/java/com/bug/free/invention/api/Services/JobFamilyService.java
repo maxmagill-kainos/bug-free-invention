@@ -30,7 +30,7 @@ public class JobFamilyService {
             while(results.next()){
                 repository.save(new jobFamily(results.getInt("jobFamilyID"),results.getString("jobFamilyTitle"), results.getInt("capabilityID")));
             }
-            System.out.println("Am Populated");
+            //System.out.println("Am Populated");
             isPopulated=true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
