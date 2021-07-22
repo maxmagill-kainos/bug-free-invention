@@ -1,6 +1,7 @@
 package com.bug.free.invention.api.controllers;
 
 import com.bug.free.invention.api.Models.Band;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,5 +65,18 @@ class BandGetLevelControllerTest {
         Integer bandID = 9;
         mockMvc.perform(MockMvcRequestBuilders.delete("/bandLevel/deleteBand/" + bandID));
         verify(bandController, times(1)).deleteByBandID(bandID);
+    }
+
+    @Test
+    @DisplayName("Should call service to update a band by bandID")
+    void shouldCallServiceToUpdateBandByBandID() throws Exception {
+        Integer bandID = 2;
+        Band band = new Band(bandID, "Whateva", 33, "Whateva",
+                "Whateva","Whateva");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(band);
+            mockMvc.perform(MockMvcRequestBuilders.put("/bandLevel/updateBand/" + bandID).contentType(MediaType.APPLICATION_JSON)
+            .content(json)).andReturn();
+            verify(bandController, times(1)).updateBandByBandID(band, bandID);
     }
     }

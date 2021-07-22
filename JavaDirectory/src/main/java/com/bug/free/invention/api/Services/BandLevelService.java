@@ -74,4 +74,24 @@ public class BandLevelService {
             throw new IllegalArgumentException("Unable to connect to database", e);
         }
     }
+
+    public void updateBandByBandID(Band band) {
+        try (Connection connect = DBConfig.getConnection()) {
+            PreparedStatement statement = connect.prepareStatement("UPDATE band " +
+                    "SET bandName = ?, bandLevel = ?, bandTraining = ?, bandCompetencies = ?, bandResponsibilites = ?" +
+                    "WHERE bandID = ?");
+            statement.setString(2, band.getBandName());
+            statement.setInt(3, band.getBandLevel());
+            statement.setString(4, band.getBandTraining());
+            statement.setString(5, band.getBandCompetencies());
+            statement.setString(6, band.getBandResponsibilites());
+            statement.setInt(1, band.getBandID());
+            int howManyObjAffected = statement.executeUpdate();
+            if (howManyObjAffected == 0) {
+                throw new IllegalArgumentException("Band was not updated");
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("Unable to update band");
+        }
+    }
 }

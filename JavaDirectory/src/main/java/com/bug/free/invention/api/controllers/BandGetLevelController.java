@@ -48,6 +48,11 @@ public class BandGetLevelController {
     public void addBand(@RequestBody Band band) {
         service.addBand(band);
     }
+
+    @PutMapping(value = "/updateBand/{bandID}", consumes = "application/json", produces = "application/json")
+    public void updateBandByBandID(@RequestBody Band band, @PathVariable("bandID") Integer bandID) {
+        service.updateBandByBandID(band);
+    }
 }
 
 

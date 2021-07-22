@@ -101,4 +101,21 @@ class BandLevelServiceTest {
         Optional<Band> deletedBand = this.service.getBandByBandID(bandID);
         assertEquals(deletedBand.isEmpty(), true);
     }
+
+    @Test
+    @DisplayName("Should throw an exception if band was not updated")
+    void shouldThrowAnExceptionIfBandWasNotUpdated() {
+        Band band = new Band(2, "Whateva", 33, "Whateva",
+                "Whateva","Whateva");
+        assertThrows(IllegalArgumentException.class, () -> service.updateBandByBandID(band));
+    }
+
+    @Test
+    @DisplayName("Should update a band by bandID")
+    void shouldUpdateABandByBandID() {
+        Integer bandID = 2;
+        Band band = new Band(bandID, "Whateva", 33, "Whateva",
+                "Whateva","Whateva");
+        service.updateBandByBandID(band);
+    }
 }
