@@ -45,9 +45,10 @@
                                         <th scope="col">Band Level</th>
                                         <th scope="col">Family Name</th>
                                         <th scope="col">Job Summary</th>
+                                        <th scope="col">Job Specification</th>
+
                                     </tr>
                                 </thead>
-                                 jobSpec: 'https://kainossoftwareltd.sharepoint.com/:b:/r/people/Job%20Specifications/Product/Job profile - Product Consultant​​​​​​​ (Consultant).pdf'
                                 <tbody>
                                     {% for role in jobData %}
                                         <tr id="{{role.jobID}}">
@@ -57,7 +58,11 @@
                                             <td id="jobBandLevelCell{{role.jobID}}">{{role.intband.bandLevel}}</td>
                                             <td id="jobFamilyNameCell{{role.jobID}}">{{role.intFamily.jobFamilyTitle}}</td>
                                             <td id="jobSummaryCell{{role.jobID}}">{{role.intJobSummary.summaryText}}</td>
-                                            <td id="jobSpecCell{{role.jobID}}"><</td>
+                                            <td id="jobSpecCell{{role.jobID}}">
+                                            {% if role.jobSpec.length != 0 %}
+                                                <a class="waves-effect waves-light btn" target="_blank" href="{{role.jobSpec}}" style="background-color: #61A83F">Spec</a>
+                                            {% endif %}
+                                            </td>
                                             {% if isAdmin == 1%}
                                                 <td id="edit{{role.jobID}}">
                                                     <i class="material-icons grey-text text-lighten-1" style="font-size: 25px ; cursor: pointer" onclick="editRole({{role.jobID}})">edit</i>
@@ -280,7 +285,7 @@
                             var bandNameCell = document.getElementById("jobBandNameCell" + roleID);
                             var bandLevelCell = document.getElementById("jobBandLevelCell" + roleID);
                             var familyNameCell = document.getElementById("jobFamilyNameCell" + roleID);
-                            var jobSummaryCell = document.getElementById("jobSummaryCell" + roleID); 
+                            var jobSummaryCell = document.getElementById("jobSummaryCell" + roleID);
                             var edit = document.getElementById("edit" + roleID);
                             bandLevelCell.style.color = "black";
                             jobTitleCell.innerHTML = document
