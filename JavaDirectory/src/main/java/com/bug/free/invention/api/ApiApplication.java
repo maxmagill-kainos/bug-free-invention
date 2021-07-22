@@ -1,5 +1,6 @@
 package com.bug.free.invention.api;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiApplication.class, args);
+		try {
+			SpringApplication.run(ApiApplication.class, args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 }

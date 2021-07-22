@@ -1,0 +1,39 @@
+<script>
+function PopupWithSummary(QuickSummary){
+    alert(QuickSummary);
+}
+</script>
+
+{%block table%}
+<table>
+    <thead>
+        <tr>
+        <th>Job Title</th>
+        <th>Capability</th>
+        <th>Job Band</th>
+        <th> Spec Summary</th>
+        
+        </tr>
+    </thead>
+    {% for job in data %}
+    <form action="/SubmitSpecForJob" method ="POST">
+        <tr>
+        <td>{{job.jobTitle}}</td>
+        <td>{{job.intband.bandName}}</td>
+        <td>{{job.intcapability.capabilityName}}</td>
+        <td>{{job.intJobSummary.summaryText}}</td>
+        <td>
+        <input type="text" name="SpecSummaryInput" value="{{job.newJobSpecSummary}}">
+        <input name="JobID" value="{{job.jobID}}" type="hidden">
+        </td>
+        <td>
+        <input type="submit" value="Submit New Job Summary">
+        </td>
+        <td> <a href="/JobsSpec?jobClicked={{job.jobID}}"> View Main Job Spec</a> </td>
+        </tr>
+        </form>
+        {% endfor %}
+    
+</table>
+
+{% endblock %}
