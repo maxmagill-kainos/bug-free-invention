@@ -66,6 +66,14 @@ app.get('/JobsTable', async function (req, res) {
 });
 
 
+app.get('/bandLevel', async function (req, res) { 
+   console.log('Request processed'); 
+   const response = await fetch('http://localhost:8080/bandLevel',{method:'GET',headers:{}})
+   const data = await response.json();
+   console.log(data)
+   res.render('bandInfo',{bandData: data});
+}); 
+
 app.get('/bands', async function(req, res){
    console.log("Request processed");
    const response = await fetch('http://localhost:8080/api/demo/bands', {method: 'GET', headers:{}})
