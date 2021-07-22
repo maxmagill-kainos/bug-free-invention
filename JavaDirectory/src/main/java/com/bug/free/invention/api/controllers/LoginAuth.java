@@ -2,6 +2,7 @@ package com.bug.free.invention.api.controllers;
 
 import com.bug.free.invention.api.Models.Employee;
 import com.bug.free.invention.api.Services.EmployeeService;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class LoginAuth {
     @Autowired
     private EmployeeService newEmployeeService;
     @PostMapping(value = "/AuthLogin", consumes = "application/json")
-    public String validateLogin(@RequestBody String authDetails) {
+    public String validateLogin(@RequestBody String authDetails) throws JSONException {
         JSONObject userDetails = new JSONObject(authDetails);
         String username = String.valueOf(userDetails.get("Email"));
         String password = String.valueOf(userDetails.get("Password"));

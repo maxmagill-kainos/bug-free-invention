@@ -39,5 +39,5 @@ If for some reason you've lost your travis file, just make a new one in the root
 Once travis has run it's tests and they have all passed, the pull request will be good for review. If any of the tests fail, you will be required to inspect the travis page at [travis.com](https://travis-ci.com/github/MaxieMerge/bug-free-invention) and fix the erroring tests before it can be reviewed.
 
 # Endpoints
-TO document our backend endpoints on the Java side we have self documenting API's. The API Documnetation is available at our swagger [API Documentation](http://localhost:8080/swagger-ui/index.html). Only available when running the application.
+TO document our backend endpoints on the Java side we have self documenting API's. The API Documnetation is available at our swagger [API Documentation](http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/). Only available when running the application.
 TODO
