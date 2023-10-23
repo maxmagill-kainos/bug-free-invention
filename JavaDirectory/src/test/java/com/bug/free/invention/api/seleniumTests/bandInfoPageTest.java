@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Assertions;
 
 public class bandInfoPageTest extends FunctionalTest {
 
+    /**
+     * test comment here
+     */
+
+
     @Test
     public void getBandInfoPageTableTest() {
         driver.get("http://localhost:6555/bandLevel");
